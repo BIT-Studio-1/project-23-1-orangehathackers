@@ -7,22 +7,26 @@ namespace Game
     {
         static void Main(string[] args)
         {
-            string userInput = "null";
-            //gameStart();
-            while (userInput != "HELP")
+            string userInput = "null";      //userInput could be initiated inside game but its here so that can be ironed out
+            GameStart();        //Introduces the game once on start
+            while (true)        //This is the new help method code which breaks the while loop
             {
-                game(ref userInput);
+                //game(ref userInput);
+                userInput= Console.ReadLine();
+                Console.WriteLine("bad");
+                if (userInput == "HELP")
+                    break;
             }
-            helpConsole();
+            Help();
         }
-        static void gameStart()
+        static void GameStart()
         {
             Console.WriteLine("title");
             Thread.Sleep(2000);
             Console.Clear();
-            Console.WriteLine("world setup");
+            Console.WriteLine("world setup placeholder");
         }
-        static void helpConsole()
+        static void Help()
         {
             Console.WriteLine("Help method");
         }
