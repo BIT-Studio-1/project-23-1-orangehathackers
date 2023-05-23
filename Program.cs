@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 
 namespace Game
 {
@@ -6,7 +7,25 @@ namespace Game
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            gameStart();
+
+
+        }
+        static void gameStart()
+        {
+            Console.WriteLine("title");
+            Thread.Sleep(5000);
+            Console.Clear();
+            Console.WriteLine("world setup"):
+            Console.WriteLine("")
+        }
+        static void help()
+        {
+
+        }
+        static void inventory ()
+        {
+
         }
     }
 }
