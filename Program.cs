@@ -7,17 +7,21 @@ namespace Game
     {
         static void Main(string[] args)
         {
+            string userInput = "null";
             gameStart();
-            helpConsole();
+            while (userInput == "help")
+            {
+                helpConsole();
+            }
+            else
 
         }
         static void gameStart()
         {
             Console.WriteLine("title");
-            Thread.Sleep(5000);
+            Thread.Sleep(2000);
             Console.Clear();
             Console.WriteLine("world setup");
-            Console.WriteLine("");
         }
         static void helpConsole()
         {
@@ -25,14 +29,15 @@ namespace Game
             Console.WriteLine("Type help");
             string userInput = Console.ReadLine();
 
-            if (userInput == "help" || userInput == "HELP")
+            if (userInput == "HELP")
             {
                 Console.WriteLine("Instruction");
             }
-            static void inventory()
-            {
-
-            }
+        }
+        static void game(ref string userInput)
+        {
+            userInput= Console.ReadLine().ToUpper();
+            Console.WriteLine("game done");
         }
     }
 }
