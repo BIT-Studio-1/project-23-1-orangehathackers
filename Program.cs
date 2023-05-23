@@ -8,13 +8,12 @@ namespace Game
         static void Main(string[] args)
         {
             string userInput = "null";
-            gameStart();
-            while (userInput == "help")
+            //gameStart();
+            while (userInput != "HELP")
             {
-                helpConsole();
+                game(ref userInput);
             }
-            else
-
+            helpConsole();
         }
         static void gameStart()
         {
@@ -25,19 +24,13 @@ namespace Game
         }
         static void helpConsole()
         {
-            Console.WriteLine("If you want to get an instruction of the game");
-            Console.WriteLine("Type help");
-            string userInput = Console.ReadLine();
-
-            if (userInput == "HELP")
-            {
-                Console.WriteLine("Instruction");
-            }
+            Console.WriteLine("Help method");
         }
         static void game(ref string userInput)
         {
+            Console.WriteLine("Game method");
             userInput= Console.ReadLine().ToUpper();
-            Console.WriteLine("game done");
+            Console.WriteLine("Still in game method");
         }
     }
 }
