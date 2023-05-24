@@ -7,15 +7,12 @@ namespace Game
     {
         static void Main(string[] args)
         {
-            string userInput = "null";      //userInput could be initiated inside game but its here so that can be ironed out
+            string userInput = "";      //userInput could be initiated inside game but its here so that can be ironed out
             GameStart();        //Introduces the game once on start
-            while (true)        //This is the new help method code which breaks the while loop
+
+            while (userInput!="HELP")
             {
-                //game(ref userInput);
-                userInput= Console.ReadLine();
-                Console.WriteLine("bad");
-                if (userInput == "HELP")
-                    break;
+                Game(ref userInput);
             }
             Help();
         }
@@ -30,11 +27,10 @@ namespace Game
         {
             Console.WriteLine("Help method");
         }
-        static void game(ref string userInput)
+        static void Game(ref string userInput)
         {
             Console.WriteLine("Game method");
             userInput= Console.ReadLine().ToUpper();
-            Console.WriteLine("Still in game method");
         }
     }
 }
