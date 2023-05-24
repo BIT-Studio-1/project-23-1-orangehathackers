@@ -17,25 +17,27 @@ namespace Game
             //    Game(ref userInput);
             //}
             //Help();
+            GameStart();
+            Help();
+
+            Game();
+
             static void GameStart()
             {
-                Console.WriteLine("title");
+                Console.WriteLine("Description placeholder");
                 Thread.Sleep(2000);
                 Console.Clear();
-                Console.WriteLine("world setup placeholder");
             }
+
             static void Help()
             {
                 Console.WriteLine("If you want to get an instruction of the game");
                 Console.WriteLine("Type help");
-                string userInput = Console.ReadLine().ToUpper();
-
             }
 
-            static void Game(ref string userInput)
+            static void Game()
             {
-                userInput = Console.ReadLine().ToUpper();
-                Console.WriteLine("game done");
+                CentralChamber();
             }
 
             static void CentralChamber()
