@@ -37,8 +37,19 @@ namespace Game
 
             static void Game()
             {
+                Display_Introduction();
                 CentralChamber();
             }
+
+            static void Display_Introduction()
+            {
+                Console.WriteLine("Welcome!!!! to the Excavation Game.");
+                Console.WriteLine("You are an archaeologist exploring an ancient excavation site.");
+                Console.WriteLine("Your mission is to find a long lost artifact of great power.");
+                Console.WriteLine("Prepare yourself for an adventure filled with puzzles and mysteries!\n");
+            }
+
+
 
             static void CentralChamber()
             {
@@ -80,7 +91,7 @@ namespace Game
 
                 while (true)
                 {
-                    Console.Write("Please enter a direction: ");
+                    Console.Write("Door East.");
                     string playerDirection = Console.ReadLine().ToUpper();
 
                     if (playerDirection == "NORTH" || playerDirection == "N")
