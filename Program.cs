@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Numerics;
 using System.Threading;
 
 namespace Game
@@ -7,20 +8,13 @@ namespace Game
     {
         static void Main(string[] args)
         {
-            CentralChamber();
-            
-            //string userInput = "";      //userInput could be initiated inside game but its here so that can be ironed out
-            //GameStart();
-            //Help();
-            //while (userInput != "HELP")
-            //{
-            //    Game(ref userInput);
-            //}
-            //Help();
+            string userInput = "";
             GameStart();
+            while (userInput !="HELP")
+            {
+                Game();
+            }
             Help();
-
-            Game();
 
             static void GameStart()
             {
@@ -52,6 +46,7 @@ namespace Game
                     if (playerDirection == "NORTH" || playerDirection == "N")
                     {
                         ChamberOfShadow();
+                        userLocation = "ChamberOfShadow";
                         break;
                     }
                     else if (playerDirection == "SOUTH" || playerDirection == "S")
