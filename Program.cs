@@ -7,33 +7,51 @@ namespace Game
     {
         static void Main(string[] args)
         {
-            string userInput = "";      //userInput could be initiated inside game but its here so that can be ironed out
             GameStart();
             Help();
-            while (userInput != "HELP")
-            {
-                Game(ref userInput);
-            }
-            Help();
+
+            Game();
+
             static void GameStart()
             {
-                Console.WriteLine("title");
+                Console.WriteLine("Description placeholder");
                 Thread.Sleep(2000);
                 Console.Clear();
-                Console.WriteLine("world setup placeholder");
             }
+
             static void Help()
             {
                 Console.WriteLine("If you want to get an instruction of the game");
                 Console.WriteLine("Type help");
-                string userInput = Console.ReadLine().ToUpper();
-
             }
 
-            static void Game(ref string userInput)
+            static void Game()
             {
-                userInput = Console.ReadLine().ToUpper();
-                Console.WriteLine("game done");
+                string userLocation = "CentralChamber";
+                if (userLocation == "CentralChamber")
+                {
+                    CentralChamber();
+                }
+                else if (userLocation == "Library")
+                {
+                    Library();
+                }
+                else if (userLocation == "PuzzleRoom")
+                {
+                    PuzzleRoom();
+                }
+                else if (userLocation == "chamberOfShadow")
+                {
+                    chamberOfShadow();
+                }
+                else if (userLocation == "TreasureVault")
+                {
+                    TreasureVault();
+                }
+                else
+                {
+                    AltarRoom();
+                }
             }
 
             static void CentralChamber()
@@ -61,7 +79,7 @@ namespace Game
             {
 
             }
-            static void puzzleRoom()
+            static void PuzzleRoom()
             {
 
             }
@@ -69,11 +87,11 @@ namespace Game
             {
 
             }
-            static void treasureVault()
+            static void TreasureVault()
             {
 
             }
-            static void altarRoom()
+            static void AltarRoom()
             {
 
             }
