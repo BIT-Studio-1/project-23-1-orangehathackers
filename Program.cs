@@ -7,14 +7,16 @@ namespace Game
     {
         static void Main(string[] args)
         {
-            string userInput = "";      //userInput could be initiated inside game but its here so that can be ironed out
-            GameStart();
-            Help();
-            while (userInput != "HELP")
-            {
-                Game(ref userInput);
-            }
-            Help();
+            CentralChamber();
+            
+            //string userInput = "";      //userInput could be initiated inside game but its here so that can be ironed out
+            //GameStart();
+            //Help();
+            //while (userInput != "HELP")
+            //{
+            //    Game(ref userInput);
+            //}
+            //Help();
             static void GameStart()
             {
                 Console.WriteLine("title");
@@ -38,44 +40,199 @@ namespace Game
 
             static void CentralChamber()
             {
-                Console.WriteLine("Storyline");
+                Console.WriteLine("You are now in Central Chamber.");
 
                 while (true)
                 {
                     Console.Write("Please enter a direction: ");
                     string playerDirection = Console.ReadLine().ToUpper();
 
-                    if (playerDirection == "north")
+                    if (playerDirection == "NORTH" || playerDirection == "N")
                     {
-                        chamberOfShadow();
+                        ChamberOfShadow();
                         break;
                     }
-                    else if (playerDirection == "south")
+                    else if (playerDirection == "SOUTH" || playerDirection == "S")
                     {
                         Console.WriteLine("You can not go to south from here. Please try again");
+                    }
+                    else if (playerDirection == "EAST" || playerDirection == "E")
+                    {
+                        PuzzleRoom();
+                        break;
+                    }
+                    else if (playerDirection == "WEST" || playerDirection == "W")
+                    {
+                        Console.WriteLine("You can not go to west from here. Please try again");
+                    }
+                    else 
+                    {
+                        Console.WriteLine("Invalid answer. Please try again.");
                     }
                 }
 
             }
             static void Library()
             {
+                Console.WriteLine("You are now in Library.");
 
+                while (true)
+                {
+                    Console.Write("Please enter a direction: ");
+                    string playerDirection = Console.ReadLine().ToUpper();
+
+                    if (playerDirection == "NORTH" || playerDirection == "N")
+                    {
+                        Console.WriteLine("You can not go to north from here. Please try again");
+                    }
+                    else if (playerDirection == "SOUTH" || playerDirection == "S")
+                    {
+                        Console.WriteLine("You can not go to south from here. Please try again");
+                    }
+                    else if (playerDirection == "EAST" || playerDirection == "E")
+                    {
+                        ChamberOfShadow();
+                    }
+                    else if (playerDirection == "WEST" || playerDirection == "W")
+                    {
+                        Console.WriteLine("You can not go to west from here. Please try again");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid answer. Please try again.");
+                    }
+                }
             }
-            static void puzzleRoom()
+            static void PuzzleRoom()
             {
+                Console.WriteLine("You are now in Puzzle Room.");
 
+                while (true)
+                {
+                    Console.Write("Please enter a direction: ");
+                    string playerDirection = Console.ReadLine().ToUpper();
+
+                    if (playerDirection == "NORTH" || playerDirection == "N")
+                    {
+                        Console.WriteLine("You can not go to north from here. Please try again");
+                    }
+                    else if (playerDirection == "SOUTH" || playerDirection == "S")
+                    {
+                        Console.WriteLine("You can not go to south from here. Please try again");
+                    }
+                    else if (playerDirection == "EAST" || playerDirection == "E")
+                    {
+                        TreasureVault();
+                        break; 
+                    }
+                    else if (playerDirection == "WEST" || playerDirection == "W")
+                    {
+                        CentralChamber();
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid answer. Please try again.");
+                    }
+                }
             }
-            static void chamberOfShadow()
+            static void ChamberOfShadow()
             {
+                Console.WriteLine("You are now in Chamber Of Shadow.");
 
+                while (true)
+                {
+                    Console.Write("Please enter a direction: ");
+                    string playerDirection = Console.ReadLine().ToUpper();
+
+                    if (playerDirection == "NORTH" || playerDirection == "N")
+                    {
+                        Console.WriteLine("You can not go to north from here. Please try again");
+                    }
+                    else if (playerDirection == "SOUTH" || playerDirection == "S")
+                    {
+                        CentralChamber();
+                        break;
+                    }
+                    else if (playerDirection == "EAST" || playerDirection == "E")
+                    {
+                        AltarRoom();
+                        break;
+                    }
+                    else if (playerDirection == "WEST" || playerDirection == "W")
+                    {
+                        Library();
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid answer. Please try again.");
+                    }
+                }
             }
-            static void treasureVault()
+            static void TreasureVault()
             {
+                Console.WriteLine("You are now in Treasure Vault.");
 
+                while (true)
+                {
+                    Console.Write("Please enter a direction: ");
+                    string playerDirection = Console.ReadLine().ToUpper();
+
+                    if (playerDirection == "NORTH" || playerDirection == "N")
+                    {
+                        Console.WriteLine("You can not go to north from here. Please try again");
+                    }
+                    else if (playerDirection == "SOUTH" || playerDirection == "S")
+                    {
+                        Console.WriteLine("You can not go to south from here. Please try again");
+                    }
+                    else if (playerDirection == "EAST" || playerDirection == "E")
+                    {
+                        Console.WriteLine("You can not go to east from here. Please try again");
+                    }
+                    else if (playerDirection == "WEST" || playerDirection == "W")
+                    {
+                        PuzzleRoom();
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid answer. Please try again.");
+                    }
+                }
             }
-            static void altarRoom()
+            static void AltarRoom()
             {
+                Console.WriteLine("You are now in Altar Room.");
 
+                while (true)
+                {
+                    Console.Write("Please enter a direction: ");
+                    string playerDirection = Console.ReadLine().ToUpper();
+
+                    if (playerDirection == "NORTH" || playerDirection == "N")
+                    {
+                        Console.WriteLine("You can not go to north from here. Please try again");
+                    }
+                    else if (playerDirection == "SOUTH" || playerDirection == "S")
+                    {
+                        Console.WriteLine("You can not go to south from here. Please try again");
+                    }
+                    else if (playerDirection == "EAST" || playerDirection == "E")
+                    {
+                        Console.WriteLine("You can not go to east from here. Please try again");
+                    }
+                    else if (playerDirection == "WEST" || playerDirection == "W")
+                    {
+                        ChamberOfShadow();
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid answer. Please try again.");
+                    }
+                }
             }
         }
 
