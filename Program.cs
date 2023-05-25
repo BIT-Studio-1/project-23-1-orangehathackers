@@ -55,29 +55,28 @@ namespace Game
                 {
                     Console.Write("Please enter a direction: ");
                     string userInput = Console.ReadLine().ToUpper();
+                    //would be better to use a switch statement here instead of if/else
+                    // also, you can use [] after to check just the first letter so you dont have to check for both N and NORTH
+                    switch (userInput[0])
+                    {
+                        case 'N':
+                            ChamberOfShadow();
+                            break;
+                        case 'S':
+                            Console.WriteLine("You can not go to south from here. Please try again");
+                            break;
+                        case 'E':
+                            PuzzleRoom();
+                            break;
+                        case 'W':
+                            Console.WriteLine("You can not go to west from here. Please try again");
+                            break;
+                        default:
+                            Console.WriteLine("Invalid answer. Please try again.");
+                            break;
 
-                    if (userInput == "NORTH" || userInput == "N")
-                    {
-                        ChamberOfShadow();
-                        break;
                     }
-                    else if (userInput == "SOUTH" || userInput == "S")
-                    {
-                        Console.WriteLine("You can not go to south from here. Please try again");
-                    }
-                    else if (userInput == "EAST" || userInput == "E")
-                    {
-                        PuzzleRoom();
-                        break;
-                    }
-                    else if (userInput == "WEST" || userInput == "W")
-                    {
-                        Console.WriteLine("You can not go to west from here. Please try again");
-                    }
-                    else 
-                    {
-                        Console.WriteLine("Invalid answer. Please try again.");
-                    }
+
                 }
 
             }
