@@ -74,6 +74,10 @@ namespace Game
                     {
                         Console.WriteLine("You can not go to west from here. Please try again");
                     }
+                    else if (userInput == "HELP")
+                    {
+                        Help();
+                    }
                     else 
                     {
                         Console.WriteLine("Invalid answer. Please try again.");
@@ -143,6 +147,10 @@ namespace Game
                         CentralChamber();
                         break;
                     }
+                    else if (userInput == "HELP")
+                    {
+                        Help();
+                    }
                     else
                     {
                         Console.WriteLine("Invalid answer. Please try again.");
@@ -177,6 +185,10 @@ namespace Game
                         Library();
                         break;
                     }
+                    else if (userInput == "HELP")
+                    {
+                        Help();
+                    }
                     else
                     {
                         Console.WriteLine("Invalid answer. Please try again.");
@@ -209,6 +221,10 @@ namespace Game
                         PuzzleRoom();
                         break;
                     }
+                    else if (userInput == "HELP")
+                    {
+                        Help();
+                    }
                     else
                     {
                         Console.WriteLine("Invalid answer. Please try again.");
@@ -240,6 +256,10 @@ namespace Game
                     {
                         ChamberOfShadow();
                         break;
+                    }
+                    else if (userInput == "HELP")
+                    {
+                        Help();
                     }
                     else
                     {
