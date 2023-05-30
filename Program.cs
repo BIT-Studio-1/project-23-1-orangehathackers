@@ -33,7 +33,7 @@ namespace Game
         static void CentralChamber()
         {
             Console.WriteLine("You are now in Central Chamber.");
-
+            Console.WriteLine("There are doors to the north and east.");
             while (true)
             {
                 Console.Write("Please enter a direction: ");
@@ -97,7 +97,7 @@ namespace Game
         static void PuzzleRoom()
         {
             Console.WriteLine("You are now the puzzle room.");
-
+            Console.WriteLine("There are doors to the east and west");
             while (true)
             {
                 Console.Write("Please enter a direction: ");
@@ -105,7 +105,7 @@ namespace Game
                 switch (userInput[0])
                 {
                     case 'N':
-                        ChamberOfShadow();
+                        Console.WriteLine("You can not go to south from here. Please try again");
                         break;
                     case 'S':
                         Console.WriteLine("You can not go to south from here. Please try again");
@@ -131,11 +131,65 @@ namespace Game
         }
         static void TreasureVault()
         {
-
+            Console.WriteLine("You are now the puzzle room.");
+            Console.WriteLine("There is a door to the west");
+            while (true)
+            {
+                Console.Write("Please enter a direction: ");
+                string userInput = Console.ReadLine().ToUpper();
+                switch (userInput[0])
+                {
+                    case 'N':
+                        Console.WriteLine("You can not go to south from here. Please try again");
+                        break;
+                    case 'S':
+                        Console.WriteLine("You can not go to south from here. Please try again");
+                        break;
+                    case 'E':
+                        Console.WriteLine("You can not go to south from here. Please try again");
+                        break;
+                    case 'W':
+                        PuzzleRoom();
+                        break;
+                    case 'H':
+                        Help();
+                        break;
+                    default:
+                        Console.WriteLine("Invalid answer. Please try again.");
+                        break;
+                }
+            }
         }
         static void AltarRoom()
         {
-
+            Console.WriteLine("You are now the puzzle room.");
+            Console.WriteLine("There are doors to the east and west");
+            while (true)
+            {
+                Console.Write("Please enter a direction: ");
+                string userInput = Console.ReadLine().ToUpper();
+                switch (userInput[0])
+                {
+                    case 'N':
+                        Console.WriteLine("You can not go to south from here. Please try again");
+                        break;
+                    case 'S':
+                        Console.WriteLine("You can not go to south from here. Please try again");
+                        break;
+                    case 'E':
+                        Console.WriteLine("You can not go to east from here. Please try again");
+                        break;
+                    case 'W':
+                        ChamberOfShadow();
+                        break;
+                    case 'H':
+                        Help();
+                        break;
+                    default:
+                        Console.WriteLine("Invalid answer. Please try again.");
+                        break;
+                }
+            }
         }
         static void Main(string[] args)
         {
