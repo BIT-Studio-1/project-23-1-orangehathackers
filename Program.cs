@@ -24,7 +24,7 @@ namespace Game
         {
             Console.WriteLine("Instructions");
             Console.WriteLine("Enter commands to navigate between rooms and interact with the environment.");
-            Console.WriteLine("Use 'north', 'south', 'east' and 'west' to move in those respective directions.");
+            Console.WriteLine("Use "north", "south", "east" and "west" to move in those respective directions.");
             Console.WriteLine("Explore each room throughly to find items and solve puzzles.");
             Console.WriteLine("Collect useful items to help you progress in the game.");
             Console.WriteLine("Your ultimate goal is to discover the hidden artifact and claim it for yourself.");
@@ -40,19 +40,19 @@ namespace Game
                 string userInput = Console.ReadLine().ToUpper();
                 switch (userInput[0])
                 {
-                    case 'NORTH':
+                    case "NORTH":
                         ChamberOfShadow();
                         break;
-                    case 'SOUTH':
+                    case "SOUTH":
                         Console.WriteLine("You can not go to south from here. Please try again");
                         break;
-                    case 'EAST':
+                    case "EAST":
                         PuzzleRoom();
                         break;
-                    case 'WEST':
+                    case "WEST":
                         Console.WriteLine("You can not go to west from here. Please try again");
                         break;
-                    case 'HELP':
+                    case "HELP":
                         Help();
                         break;
                     default:
@@ -69,7 +69,7 @@ namespace Game
             Console.WriteLine("Stepping into the library, you are surrounded by shelves filled with dusty tomes and scrolls. The air is thick with the scent of ancient parchment. Sunlight filters through stained glass windows, illuminating a large desk at the center of the room. On it lies a game for you to win.");
             Console.WriteLine("There is a puzzle for you to solve in centre of the room");
             Console.WriteLine("It a drawing card game that you need to win the library keeper");
-            COnsole.WriteLine("The rule are:");
+            Console.WriteLine("The rule are:");
             Console.WriteLine("The card will be draw 3 time");
             Console.WriteLine("After 3 round it will calculate the total number of your card");
             Console.Write("Would you like to start the game: ");
@@ -90,32 +90,32 @@ namespace Game
             }
             else
             {
-            while (true)
-            {
-                Console.Write("Please enter a direction: ");
-                string userInput = Console.ReadLine().ToUpper();
-                switch (userInput[0])
+                while (true)
                 {
-                    case 'NORTH':
-                        Console.WriteLine("You can not go to south from here. Please try again");
-                        break;
-                    case 'SOUTH':
-                        Console.WriteLine("You can not go to south from here. Please try again");
-                        break;
-                    case 'EAST':
-                        ChamberOfShadow();
-                        break;
-                    case 'WEST':
-                        Console.WriteLine("You can not go to west from here. Please try again");
-                        break;
-                    case 'HELP':
-                        Help();
-                        break;
-                    default:
-                        Console.WriteLine("Invalid answer. Please try again.");
-                        break;
+                    Console.Write("Please enter a direction: ");
+                    string userInput = Console.ReadLine().ToUpper();
+                    switch (userInput)
+                    {
+                        case "NORTH":
+                            Console.WriteLine("You can not go to south from here. Please try again");
+                            break;
+                        case "SOUTH":
+                            Console.WriteLine("You can not go to south from here. Please try again");
+                            break;
+                        case "EAST":
+                            ChamberOfShadow();
+                            break;
+                        case "WEST":
+                            Console.WriteLine("You can not go to west from here. Please try again");
+                            break;
+                        case "HELP":
+                            Help();
+                            break;
+                        default:
+                            Console.WriteLine("Invalid answer. Please try again.");
+                            break;
+                    }
                 }
-            }
             }
         }
         static void PuzzleRoom()
@@ -126,21 +126,21 @@ namespace Game
             {
                 Console.Write("Please enter a direction: ");
                 string userInput = Console.ReadLine().ToUpper();
-                switch (userInput[0])
+                switch (userInput)
                 {
-                    case 'NORTH':
+                    case "NORTH":
                         Console.WriteLine("You can not go to south from here. Please try again");
                         break;
-                    case 'SOUTH':
+                    case "SOUTH":
                         Console.WriteLine("You can not go to south from here. Please try again");
                         break;
-                    case 'EAST':
+                    case "EAST":
                         ChamberOfShadow();
                         break;
-                    case 'WEST':
+                    case "WEST":
                         Console.WriteLine("You can not go to west from here. Please try again");
                         break;
-                    case 'HELP':
+                    case "HELP":
                         Help();
                         break;
                     default:
@@ -161,21 +161,21 @@ namespace Game
             {
                 Console.Write("Please enter a direction: ");
                 string userInput = Console.ReadLine().ToUpper();
-                switch (userInput[0])
+                switch (userInput)
                 {
-                    case 'NORTH':
+                    case "NORTH":
                         Console.WriteLine("You can not go to south from here. Please try again");
                         break;
-                    case 'SOUTH':
+                    case "SOUTH":
                         Console.WriteLine("You can not go to south from here. Please try again");
                         break;
-                    case 'EAST':
+                    case "EAST":
                         Console.WriteLine("You can not go to south from here. Please try again");
                         break;
-                    case 'WEST':
+                    case "WEST":
                         PuzzleRoom();
                         break;
-                    case 'HELP':
+                    case "HELP":
                         Help();
                         break;
                     default:
@@ -192,21 +192,21 @@ namespace Game
             {
                 Console.Write("Please enter a direction: ");
                 string userInput = Console.ReadLine().ToUpper();
-                switch (userInput[0])
+                switch (userInput)
                 {
-                    case 'NORTH':
+                    case "NORTH":
                         Console.WriteLine("You can not go to south from here. Please try again");
                         break;
-                    case 'SOUTH':
+                    case "SOUTH":
                         Console.WriteLine("You can not go to south from here. Please try again");
                         break;
-                    case 'EAST':
+                    case "EAST":
                         Console.WriteLine("You can not go to east from here. Please try again");
                         break;
-                    case 'WEST':
+                    case "WEST":
                         ChamberOfShadow();
                         break;
-                    case 'HELP':
+                    case "HELP":
                         Help();
                         break;
                     default:
@@ -219,3 +219,5 @@ namespace Game
         {
             GameStart();
         }
+    }
+}
