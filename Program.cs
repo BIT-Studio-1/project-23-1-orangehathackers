@@ -66,55 +66,48 @@ namespace Game
 
         }
         static void Library()
-        {
+        { 
             Console.Clear();
-            int totalPlayer = 0, totalKeeper;
             Console.WriteLine("Stepping into the library, you are surrounded by shelves filled with dusty tomes and scrolls. The air is thick with the scent of ancient parchment. Sunlight filters through stained glass windows, illuminating a large desk at the center of the room. On it lies a game for you to win.");
-            Console.WriteLine("There is a puzzle for you to solve in center of the room");
-            Console.WriteLine("It a drawing card game that you need to win the library keeper");
-            Console.WriteLine("The rule are:");
-            Console.WriteLine("The card will be draw 3 time");
-            Console.WriteLine("After 3 round it will calculate the total number of your card");
-            Console.Write("Would you like to start the game: ");
+            Console.WriteLine("There is a puzzle for you to solve.");
+            Console.Write(">> ");
             string userPuzzleAnswer = Console.ReadLine().ToUpper();
 
-            if (userPuzzleAnswer == "YES" || userPuzzleAnswer == "Y")
+            if (userPuzzleAnswer == "SOLVE")
             {
-                for (int i = 0; i <= 3; i++)
-                {
+            JumbleWord();
 
+                if (true)
+
+                {
+                    Console.WriteLine("You have solve the puzzle");
                 }
+                else
                 {
-                    Random rand = new Random();
-                    int player = rand.Next(1, 14);
-                    int libraryKeeper = rand.Next(1, 14);
-                    Console.WriteLine($"You got {player} point.");
-                    Console.WriteLine($"The library keeper got {libraryKeeper} point.");
-
-
+                    Console.WriteLine("You did solve the puzzle");
                 }
             }
             else
             {
                 while (true)
                 {
-                    Console.Write("Please enter a direction: ");
+                    Console.Write(">> ");
                     string userInput = Console.ReadLine().ToUpper();
-                    switch (userInput)
+                    switch (userInput[0])
                     {
-                        case "NORTH":
+                        case 'N':
                             Console.WriteLine("You can not go to south from here. Please try again");
                             break;
-                        case "SOUTH":
+                        case 'S':
                             Console.WriteLine("You can not go to south from here. Please try again");
                             break;
-                        case "EAST":
+                        case 'E':
                             ChamberOfShadow();
                             break;
-                        case "WEST":
+                        case 'W':
                             Console.WriteLine("You can not go to west from here. Please try again");
                             break;
-                        case "HELP":
+                        case 'H':
                             Help();
                             break;
                         default:
@@ -123,6 +116,38 @@ namespace Game
                     }
                 }
             }
+        }
+        static void JumbleWord()
+        {
+            string Word = PickWord();
+            string Jum = Jumbled(Word);
+            Console.Write($"{Jum} \n What is the word, you think it is: ");
+            string user_Choice = Console.ReadLine();
+        }
+        public static string PickWord()
+        {
+            Random rand = new Random();
+            string[] Words = { "boy" };
+            int temp = rand.Next(0, Words.Length);
+            string Pick = Words[temp];
+            return Pick;
+        }
+        public static string Jumbled(string input)
+        {
+            Random rand = new Random();
+            char[] chars = input.ToCharArray();
+            for (int i = 0; i < input.Length; i++)
+            {
+                int index1 = rand.Next(input.Length);
+                int index2 = rand.Next(input.Length);
+
+
+
+                char temp = chars[index1];
+                chars[index1] = chars[index2];
+                chars[index2] = temp;
+            }
+            return new string(chars);
         }
         static void PuzzleRoom()
         {
@@ -162,7 +187,8 @@ namespace Game
             Console.WriteLine("You are now in the chamber of shadow.");
             Console.WriteLine("It is too dark to see");
             string userInput=Console.ReadLine().ToUpper();
-            if 
+            if (inventory[1]==torch)
+
                 switch (userInput)
                 {
                     case "NORTH":
@@ -234,7 +260,7 @@ namespace Game
                 }
             }
         }
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             GameStart();
             string[] inventory = new string[3];
