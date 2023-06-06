@@ -7,6 +7,8 @@ namespace Game
 {
     internal class Program
     {
+        static string[] inventory = new string[3];
+        static int inventoryCount = 0;
         static void GameStart()
         {
             Console.WriteLine("Name placeholder");
@@ -33,9 +35,31 @@ namespace Game
             Console.WriteLine("Your ultimate goal is to discover the hidden artifact and claim it for yourself.");
             Console.WriteLine("Good Luck!!!!!");
         }
+        static void AddToInventory(string item)
+        {
+            if (inventoryCount < inventory.Length)
+            {
+                inventory[inventoryCount] = item;
+                inventoryCount++;
+            }
+            else
+            {
+                Console.WriteLine("Inventory is full! Cannot add more items.");
+            }
+        }
+        static bool HasItem(string item)
+        {
+            for (int i = 0; i < inventoryCount; i++)
+            {
+                if (inventory[i] == item)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
         static void CentralChamber()
         {
-            bool hasKey = false;
             bool pedestalActivated = false;
             bool puzzleSolved = false;
             string puzzleAnswer = "feather, eye, scarab, ankh";
@@ -66,7 +90,7 @@ namespace Game
                         }
                         break;
                     case "USE KEY ON PEDESTAL":
-                        if (!hasKey)
+                        if (!HasItem("Key"))
                         {
                             Console.WriteLine("You don't have a key to use on the pedestal.");
                         }
@@ -92,7 +116,7 @@ namespace Game
                             {
                                 puzzleSolved = true;
                                 Console.WriteLine("Congratulations!!! you have solved the puzzle and obtained the key.");
-                                hasKey = true;
+                                AddToInventory("Key");
                             }
                             else
                             {
@@ -105,7 +129,7 @@ namespace Game
                         }
                         break;
                     case "NORTH":
-                        if (hasKey)
+                        if (HasItem("Key"))
                         {
                             if (pedestalActivated)
                             {
@@ -132,6 +156,13 @@ namespace Game
                         break;
                     case "HELP":
                         Help();
+                        break;
+                    case "INVENTORY":
+                        Console.WriteLine("You have the following items in your inventory:");
+                        for (int i = 0; i < inventoryCount; i++)
+                        {
+                            Console.WriteLine(inventory[i]);
+                        }
                         break;
                     default:
                         Console.WriteLine("Invalid command. Please try again.");
@@ -244,7 +275,7 @@ namespace Game
                             Console.WriteLine("\nClue 1: \"I am the beginning and the end, the first and the last. Look for my value in the Fibonacci sequence.\"");
 
                             // Clue 2
-                            int clue2 = 10;
+                            int clue2 = 16;
                             Console.WriteLine("\nClue 2: \"Add the number of sides in a hexagon to the sum of the first three prime numbers.\"");
 
                             // Clue 3
@@ -288,6 +319,13 @@ namespace Game
                         break;
                     case "HELP":
                         Help();
+                        break;
+                    case "INVENTORY":
+                        Console.WriteLine("You have the following items in your inventory:");
+                        for (int i = 0; i < inventoryCount; i++)
+                        {
+                            Console.WriteLine(inventory[i]);
+                        }
                         break;
                     default:
                         Console.WriteLine("Invalid answer. Please try again.");
@@ -396,7 +434,6 @@ namespace Game
         static void ChamberOfShadow()
         {
             Console.Clear();
-            string[] inventory = new string[2];
             inventory[0] = "TORCH";
             Console.WriteLine("You are now in the chamber of shadow.");
             Console.WriteLine("It is too dark to see");
@@ -437,14 +474,72 @@ namespace Game
         static void TreasureVault()
         {
             Console.Clear();
-            Console.WriteLine("You are now the puzzle room.");
-            Console.WriteLine("There is a door to the west");
+            Console.WriteLine("You have entered the Treasure Vault.");
+            Console.WriteLine("The Treasure Vault is a vast chamber filled with glittering treasures and ancient artifacts.");
+            Console.WriteLine("The room is bathed in a soft golden light, illuminating the riches that surround you.");
+            Console.WriteLine("You notice a gentle flickering in the corner of your eye, hinting at something hidden within the shadows.");
+            Console.WriteLine("As you explore further, you spot an enchanting crystal radiating a soft blue light, captivating your attention.");
+            Console.WriteLine("Nearby, there is a pedestal with a lever and a locked chest, intriguing you with their mysterious aura.");
+            Console.WriteLine("You also have a vague sense that there might be something else of interest waiting to be discovered in this room.");
             while (true)
             {
-                Console.Write("Please enter a direction: ");
+                Console.Write("Please enter a command: ");
                 string userInput = Console.ReadLine().ToUpper();
                 switch (userInput)
                 {
+                    case "LOOK":
+                        Console.WriteLine("You see a multitude of precious gems, golden artifacts, and mysterious relics.");
+                        Console.WriteLine("You see a pedestal with a lever and a locked chest.");
+                        Console.WriteLine("Among the treasures, there is a mysterious object concealed within the dimly lit corners.");
+                        break;
+                    case "EXAMINE CHEST":
+                        Console.WriteLine("The chest is made of solid iron and secured with a heavy lock. It seems to be waiting for a key.");
+                        break;
+                    case "USE KEY ON CHEST":
+                        if (HasItem("Key"))
+                        {
+                            Console.WriteLine("You unlock the chest with the key. Inside, you find a glowing artifact.");
+                            Console.WriteLine("The artifact radiates a powerful energy, and you can sense its ancient origins.");
+                            Console.WriteLine("You carefully pick up the artifact and add it to your inventory.");
+                            AddToInventory("Artifact");
+                        }
+                        else
+                        {
+                            Console.WriteLine("You don't have the key to unlock the chest.");
+                        }
+                        break;
+                    case "EXAMINE PEDESTAL":
+                        Console.WriteLine("The pedestal has a lever that can be pulled.");
+                        break;
+                    case "PULL LEVER":
+                        Console.WriteLine("You pull the lever, and the room trembles slightly. The crystal in the center of the room glows brighter.");
+                        break;
+                    case "EXAMINE CRYSTAL":
+                        Console.WriteLine("The crystal is a powerful artifact that seems to be the source of the room's enchantment.");
+                        break;
+                    case "EXAMINE FLICKERING":
+                        if (HasItem("Torch"))
+                        {
+                            Console.WriteLine("You have already taken the torch.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("You observe a hint of warmth in the shadows, as if a flickering light awaits to be revealed.");
+                            Console.WriteLine("The allure of the hidden torch grows stronger, urging you to uncover its secrets.");
+                        }
+                        break;
+                    case "TAKE TORCH":
+                        if (HasItem("Torch"))
+                        {
+                            Console.WriteLine("You have already taken the torch.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Driven by an unexplained impulse, you reach into the shadows and grasp the enigmatic torch.");
+                            Console.WriteLine("You add the torch to your inventory, eager to discover its purpose.");
+                            AddToInventory("Torch");
+                        }
+                        break;
                     case "NORTH":
                         Console.WriteLine("You can not go to south from here. Please try again");
                         break;
@@ -459,6 +554,13 @@ namespace Game
                         break;
                     case "HELP":
                         Help();
+                        break;
+                    case "INVENTORY":
+                        Console.WriteLine("You have the following items in your inventory:");
+                        for (int i = 0; i < inventoryCount; i++)
+                        {
+                            Console.WriteLine(inventory[i]);
+                        }
                         break;
                     default:
                         Console.WriteLine("Invalid answer. Please try again.");
@@ -501,7 +603,6 @@ namespace Game
         public static void Main(string[] args)
         {
             GameStart();
-            string[] inventory = new string[3];
             CentralChamber();
             
         }
