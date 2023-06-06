@@ -184,7 +184,10 @@ namespace Game
         static void ChamberOfShadow()
         {
             Console.Clear();
+            string[] inventory = new string[2];
+            inventory[0] = "TORCH";
             Console.WriteLine("You are now in the chamber of shadow.");
+<<<<<<< HEAD
             Console.WriteLine("It is too dark to see");
             Console.Write(">> ");
             string userInput=Console.ReadLine().ToUpper();
@@ -207,7 +210,21 @@ namespace Game
                     default:
                         Console.WriteLine("Invalid answer. Please try again.");
                         break;
+=======
+            
+            string userInput=Console.ReadLine().ToUpper();
+            if (inventory[0] == "TORCH" || inventory[1] == "TORCH" || inventory[2] == "TORCH")
+            {
+                if (userInput=="USE TORCH")
+                {
+                    Console.WriteLine("the room is lit");
+>>>>>>> 95e37c3db55ab6b31636456d8d409345c417a5a9
                 }
+            }
+            else
+            {
+                Console.WriteLine("no torch");
+            }
         }
         static void TreasureVault()
         {
