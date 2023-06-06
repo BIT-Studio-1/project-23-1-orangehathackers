@@ -25,7 +25,8 @@ namespace Game
             Console.Clear();                                                                                                                                                                                                          
             Console.WriteLine("Instructions");
             Console.WriteLine("Enter commands to navigate between rooms and interact with the environment.");
-            Console.WriteLine("Use \"north\", \"south\", \"east\" and \"west\" to move in those respective directions.");
+            Console.WriteLine("Use 'north', 'south', 'east' and 'west' to move in those respective directions.");
+            Console.WriteLine("Use words like 'examine', 'use', 'look', 'solve' to interact with the items and environment.");
             Console.WriteLine("Explore each room throughly to find items and solve puzzles.");
             Console.WriteLine("Collect useful items to help you progress in the game.");
             Console.WriteLine("Your ultimate goal is to discover the hidden artifact and claim it for yourself.");
@@ -33,20 +34,91 @@ namespace Game
         }
         static void CentralChamber()
         {
+            bool hasKey = false;
+            bool pedestalActivated = false;
+            bool puzzleSolved = false;
+            string puzzleAnswer = "feather, eye, scarab, ankh";
             Console.Clear();
-            Console.WriteLine("You are now in Central Chamber.");
-            Console.WriteLine("There are doors to the north and east.");
+            Console.WriteLine("You are now in the Central Chamber.");
+            Console.WriteLine("The central chamber is the heart of the excavation site.");
+            Console.WriteLine("Ancient hieroglyphics cover the walls, depicting scenes of forgotten legends.");
+            Console.WriteLine("The room is dimly lit by flickering torches, casting eerie shadows.");
+            Console.WriteLine("An old stone pedestal sits in the center, as if waiting for something to be placed upon it.");
             while (true)
             {
-                Console.Write(">> ");
+                Console.Write("Please enter a command: ");
                 string userInput = Console.ReadLine().ToUpper();
+                Console.Clear();
                 switch (userInput)
                 {
-                    case "NORTH":
-                        ChamberOfShadow();
+                    case "LOOK":
+                        Console.WriteLine("You see an old stone pedestal and a mysterious inscription on the wall, that needs to be solved.");
                         break;
-                    case "SOUTH":
-                        Console.WriteLine("You can not go to south from here. Please try again");
+                    case "EXAMINE PEDESTAL":
+                        if (!pedestalActivated)
+                        {
+                            Console.WriteLine("You examine the stone pedestal and notice a small indentation that looks like it could fit a key.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("You have already activated the pedestal.");
+                        }
+                        break;
+                    case "USE KEY ON PEDESTAL":
+                        if (!hasKey)
+                        {
+                            Console.WriteLine("You don't have a key to use on the pedestal.");
+                        }
+                        else if (!pedestalActivated)
+                        {
+                            Console.WriteLine("You use the key to activate the pedestal. It emits a faint glow.");
+                            pedestalActivated = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("You have already activated the pedestal.");
+                        }
+                        break;
+                    case "SOLVE PUZZLE":
+                        if (!puzzleSolved)
+                        {
+                            Console.WriteLine("The wall is covered in ancient symbols and a series of levers nearby. Each symbol corresponds to a specific lever.");
+                            Console.WriteLine("The symbols are: Ankh, Feather, Scarab, Eye. To unlock the puzzle,");
+                            Console.WriteLine("you must decipher the correct order of symbols and pull the levers accordingly.");
+                            Console.WriteLine("What is the correct order? (Enter you answer seperated by a comma ',')");
+                            string userAnswer = Console.ReadLine().ToLower();
+                            if (userAnswer == puzzleAnswer)
+                            {
+                                puzzleSolved = true;
+                                Console.WriteLine("Congratulations!!! you have solved the puzzle and obtained the key.");
+                                hasKey = true;
+                            }
+                            else
+                            {
+                                Console.WriteLine("The puzzle remains unsolved.");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("You have already obtained the key.");
+                        }
+                        break;
+                    case "NORTH":
+                        if (hasKey)
+                        {
+                            if (pedestalActivated)
+                            {
+                                ChamberOfShadow();
+                            }
+                            else
+                            {
+                                Console.WriteLine("The door to the north is sealed. You need to find a key and place it on the pedestal.");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("The door to the north is sealed. You need to activate the pedestal first.");
+                        }
                         break;
                     case "EAST":
                         PuzzleRoom();
@@ -54,16 +126,17 @@ namespace Game
                     case "WEST":
                         Console.WriteLine("You can not go to west from here. Please try again");
                         break;
+                    case "SOUTH":
+                        Console.WriteLine("You can not go to south from here. Please try again");
+                        break;
                     case "HELP":
                         Help();
                         break;
                     default:
-                        Console.WriteLine("Invalid answer. Please try again.");
+                        Console.WriteLine("Invalid command. Please try again.");
                         break;
                 }
-
             }
-
         }
         static void Library()
         {
