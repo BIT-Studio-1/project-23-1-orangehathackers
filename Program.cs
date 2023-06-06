@@ -26,7 +26,7 @@ namespace Game
             Console.WriteLine("Instructions");
             Console.WriteLine("Enter commands to navigate between rooms and interact with the environment.");
             Console.WriteLine("Use 'north', 'south', 'east' and 'west' to move in those respective directions.");
-            Console.WriteLine("Use words like 'examine', 'use', 'look', 'solve' to interact with the items and environment.");
+            Console.WriteLine("Use words like 'examine', 'use', 'look', 'solve', 'climb', 'take' to interact with the items and environment.");
             Console.WriteLine("Explore each room throughly to find items and solve puzzles.");
             Console.WriteLine("Collect useful items to help you progress in the game.");
             Console.WriteLine("Your ultimate goal is to discover the hidden artifact and claim it for yourself.");
@@ -140,53 +140,67 @@ namespace Game
         }
         static void Library()
         {
+            bool pendant = true;
             string puzzleAnswer = "treasure";
             Console.Clear();
             Console.WriteLine("Stepping into the library, you are surrounded by shelves filled with dusty tomes and scrolls. The air is thick with the scent of ancient parchment. Sunlight filters through stained glass windows, illuminating a large desk at the center of the room. On it lies a game for you to win.");
             Console.WriteLine("There is a puzzle for you to solve.");
             Console.Write(">> ");
             string userPuzzleAnswer = Console.ReadLine().ToUpper();
+            string u = JumbleWord();
 
-            if (userPuzzleAnswer == "SOLVE")
-            {
-                string u = JumbleWord();
-                if (u == puzzleAnswer)
-                {
-                    Console.WriteLine("You have solve the puzzle");
-                }
-                else
-                {
-                    Console.WriteLine("You did solve the puzzle");
-                }
-            }
-            else
-            {
                 while (true)
                 {
                     Console.Write(">> ");
                     string userInput = Console.ReadLine().ToUpper();
-                    switch (userInput[0])
+                    switch (userInput)
                     {
-                        case 'N':
+                        case "NORTH":
                             Console.WriteLine("You can not go to south from here. Please try again");
                             break;
-                        case 'S':
+                        case "SOUTH":
                             Console.WriteLine("You can not go to south from here. Please try again");
                             break;
-                        case 'E':
+                        case "EAST":
                             ChamberOfShadow();
                             break;
-                        case 'W':
+                        case "WEST":
                             Console.WriteLine("You can not go to west from here. Please try again");
                             break;
-                        case 'H':
+                        case "HELP":
                             Help();
+                            break;
+                        case "SOLVE":
+                            if (u == puzzleAnswer)
+                            {
+                                Console.WriteLine("You have solve the puzzle. In the middle it appear a old wooden chest cover with dust.");
+                                Console.WriteLine("Inside the wooden chest show an old pendant laying on the bottom.");
+                                Console.WriteLine(">> ");
+                                string takingPendant = Console.ReadLine().ToUpper();
+                                if (takingPendant == "TAKE")
+                                {
+                                    Console.WriteLine("You have taken a pendant");
+                                    Console.WriteLine(">> ");
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("You did solve the puzzle!!!!!!!!!!!");
+                                Console.WriteLine("The dark mist appear, the room starting to shake, the wall starting crack.");
+                                Console.WriteLine("You try to escape, but the entry door got block.");
+                                Console.WriteLine("You see a ladder leading to the tunnel.");
+                                Console.WriteLine(">> ");
+                                string climbingLadder = Console.ReadLine().ToUpper();
+                                if (climbingLadder == "CLIMB")
+                                {
+
+                                }
+                            }
                             break;
                         default:
                             Console.WriteLine("Invalid answer. Please try again.");
                             break;
                     }
-                }
             }
         }
         static string JumbleWord()
