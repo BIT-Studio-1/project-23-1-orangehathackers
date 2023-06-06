@@ -66,7 +66,8 @@ namespace Game
 
         }
         static void Library()
-        { 
+        {
+            string puzzleAnswer = "treasure";
             Console.Clear();
             Console.WriteLine("Stepping into the library, you are surrounded by shelves filled with dusty tomes and scrolls. The air is thick with the scent of ancient parchment. Sunlight filters through stained glass windows, illuminating a large desk at the center of the room. On it lies a game for you to win.");
             Console.WriteLine("There is a puzzle for you to solve.");
@@ -75,8 +76,8 @@ namespace Game
 
             if (userPuzzleAnswer == "SOLVE")
             {
-                JumbleWord();
-                if (true)
+                string u = JumbleWord();
+                if (u == puzzleAnswer)
 
                 {
                     Console.WriteLine("You have solve the puzzle");
@@ -116,18 +117,18 @@ namespace Game
                 }
             }
         }
-        static void JumbleWord(string RandomWord)
+        static string JumbleWord()
         {
             string Word = PickWord();
             string Jum = Jumbled(Word);
             Console.Write($"{Jum} \n What is the word, you think it is: ");
             string user_Choice = Console.ReadLine();
-            return RandomWord;
+            return user_Choice;
         }
         public static string PickWord()
         {
             Random rand = new Random();
-            string[] Words = { "boy" };
+            string[] Words = { "treasure" };
             int temp = rand.Next(0, Words.Length);
             string Pick = Words[temp];
             return Pick;
@@ -187,7 +188,6 @@ namespace Game
             string[] inventory = new string[2];
             inventory[0] = "TORCH";
             Console.WriteLine("You are now in the chamber of shadow.");
-<<<<<<< HEAD
             Console.WriteLine("It is too dark to see");
             Console.Write(">> ");
             string userInput=Console.ReadLine().ToUpper();
@@ -210,15 +210,12 @@ namespace Game
                     default:
                         Console.WriteLine("Invalid answer. Please try again.");
                         break;
-=======
-            
-            string userInput=Console.ReadLine().ToUpper();
+                }
             if (inventory[0] == "TORCH" || inventory[1] == "TORCH" || inventory[2] == "TORCH")
             {
                 if (userInput=="USE TORCH")
                 {
                     Console.WriteLine("the room is lit");
->>>>>>> 95e37c3db55ab6b31636456d8d409345c417a5a9
                 }
             }
             else
