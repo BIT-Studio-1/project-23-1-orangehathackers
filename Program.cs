@@ -38,7 +38,7 @@ namespace Game
             Console.WriteLine("There are doors to the north and east.");
             while (true)
             {
-                Console.Write("Please enter a direction: ");
+                Console.Write(">> ");
                 string userInput = Console.ReadLine().ToUpper();
                 switch (userInput)
                 {
@@ -75,8 +75,7 @@ namespace Game
 
             if (userPuzzleAnswer == "SOLVE")
             {
-            JumbleWord();
-
+                JumbleWord();
                 if (true)
 
                 {
@@ -117,12 +116,13 @@ namespace Game
                 }
             }
         }
-        static void JumbleWord()
+        static void JumbleWord(string RandomWord)
         {
             string Word = PickWord();
             string Jum = Jumbled(Word);
             Console.Write($"{Jum} \n What is the word, you think it is: ");
             string user_Choice = Console.ReadLine();
+            return RandomWord;
         }
         public static string PickWord()
         {
@@ -156,7 +156,7 @@ namespace Game
             Console.WriteLine("There are doors to the east and west");
             while (true)
             {
-                Console.Write("Please enter a direction: ");
+                Console.Write("`>> ");
                 string userInput = Console.ReadLine().ToUpper();
                 switch (userInput)
                 {
@@ -186,13 +186,26 @@ namespace Game
             Console.Clear();
             Console.WriteLine("You are now in the chamber of shadow.");
             Console.WriteLine("It is too dark to see");
+            Console.Write(">> ");
             string userInput=Console.ReadLine().ToUpper();
-            if (inventory[1]==torch)
+            //if (inventory[1]==torch)
 
                 switch (userInput)
                 {
                     case "NORTH":
-
+                        Console.WriteLine("You can not go to south from here. Please try again");
+                        break;
+                    case "SOUTH":
+                        CentralChamber();
+                        break;
+                    case "WEST":
+                        Library();
+                        break;
+                    case "EAST":
+                        AltarRoom();
+                        break;
+                    default:
+                        Console.WriteLine("Invalid answer. Please try again.");
                         break;
                 }
         }
