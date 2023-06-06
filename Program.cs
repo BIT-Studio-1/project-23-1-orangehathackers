@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Numerics;
 using System.Threading;
 
@@ -138,6 +139,162 @@ namespace Game
                 }
             }
         }
+        static void PuzzleRoom()
+        {
+            Console.Clear();
+            Console.WriteLine("You are now in the puzzle room.");
+            Console.WriteLine("As you enter this room, you are greeted by a series of intricate puzzles.");
+            Console.WriteLine("The walls are adorned with enigmatic symbols, and the floor is marked with a pattern of tiles.");
+            Console.WriteLine("A riddle is etched onto a stone tablet, challenging you to unlock the room's secrets.");
+            bool puzzleSolved = false, allCorrect = true;
+            string puzzle1Answer = "Q";
+            string[] riddles = {
+                                    "I speak without a mouth and hear without ears. I have no body, but I come alive with the wind. What am I?",
+                                    "I have keys but no locks. I have space but no room. You can enter but can't go outside. What am I?",
+                                    "The more you take, the more you leave behind. What am I?",
+                                    "I can be cracked, made, told, and played. What am I?"
+                                   };
+            string[] answers = { "Echo", "Keyboard", "Footsteps", "Joke" };
+            string[] userAnswers = new string[4];
+            string[] symbols = { "STAR", "MOON", "SUN", "PLANET" };
+            string[] reflectedSymbols = { "RATS", "NOOM", "NUS", "TENALP" };
+            while (true)
+            {
+                Console.Write("Please enter a command: ");
+                string userInput = Console.ReadLine().ToUpper();
+                switch (userInput)
+                {
+                    case "SOLVE PUZZLE":
+                        if (!puzzleSolved)
+                        {
+                            Console.WriteLine("You will have to solve a series of 4 puzzles in order to enter the Treasure vault.");
+                            Console.Clear();
+                            Console.WriteLine("Puzzle 1:Missing Letter");
+                            Console.WriteLine("You come across a series of letters on the wall, but one letter is missing.");
+                            Console.WriteLine("The letters form a sequence, and you need to determine the missing letter to complete the sequence.");
+                            Console.WriteLine("B, D, G, I, L, N, __, S, V");
+                            Console.Write("Please enter the missing letter:");
+                            string userAnswer = Console.ReadLine().ToUpper();
+                            if (userAnswer == puzzle1Answer)
+                            {
+                                Console.WriteLine("Well Done! You solved the puzzle.");
+                                Console.WriteLine("On to the next one.");
+                            }
+                            else
+                            {
+                                Console.WriteLine("That's incorrect. Try again.");
+                                return;
+                            }
+                            Console.Clear();
+                            Console.WriteLine("\nPuzzle 2: Cryptic Riddles");
+                            Console.WriteLine("Solve the riddles to find the words.");
+                            for (int i = 0; i < riddles.Length; i++)
+                            {
+                                Console.WriteLine("\nRiddle " + (i + 1) + ":");
+                                Console.WriteLine(riddles[i]);
+
+                                Console.Write("Enter your answer: ");
+                                userAnswers[i] = Console.ReadLine().Trim().ToLower();
+                            }
+                            for (int i = 0; i < answers.Length; i++)
+                            {
+                                if (userAnswers[i] != answers[i].ToLower())
+                                {
+                                    allCorrect = false;
+                                    break;
+                                }
+                            }
+                            if (allCorrect)
+                            {
+                                Console.WriteLine("\nCongratulations! You solved all the riddles!");
+                                Console.WriteLine("Two down. Two to go!");
+                            }
+                            else
+                            {
+                                Console.WriteLine("\nSome of your answers are incorrect.");
+                                Console.WriteLine("Please review the riddles and try again.");
+                                return;
+                            }
+                            Console.Clear();
+                            Console.WriteLine("\nPuzzle 3: Mirror Reflection");
+                            Console.WriteLine("Rearrange the symbols based on their reflection in the mirror.");
+                            Console.WriteLine("Rearrange the following symbols based on their reflection:");
+                            for (int i = 0; i < symbols.Length; i++)
+                            {
+                                Console.WriteLine(symbols[i]);
+                            }
+
+                            string[] rearrangedSymbols = Console.ReadLine().ToUpper().Split(',');
+
+                            if (rearrangedSymbols.SequenceEqual(reflectedSymbols))
+                            {
+                                Console.WriteLine("Great job! You rearranged the symbols correctly.");
+                                Console.WriteLine("Just one more puzzle to go!");
+                            }
+                            else
+                            {
+                                Console.WriteLine("The symbols are not rearranged correctly. Keep trying.");
+                                return;
+                            }
+                            Console.Clear();
+                            Console.WriteLine("\nPuzzle 4: Cryptic Code");
+                            Console.WriteLine("Decipher the cryptic clues to find the code.");
+                            // Clue 1
+                            int clue1 = 1;
+                            Console.WriteLine("\nClue 1: \"I am the beginning and the end, the first and the last. Look for my value in the Fibonacci sequence.\"");
+
+                            // Clue 2
+                            int clue2 = 10;
+                            Console.WriteLine("\nClue 2: \"Add the number of sides in a hexagon to the sum of the first three prime numbers.\"");
+
+                            // Clue 3
+                            int clue3 = 38;
+                            Console.WriteLine("\nClue 3: \"I am the answer to life, the universe, and everything. Subtract the square root of 16.\"");
+
+                            Console.WriteLine("\nEnter the code:");
+
+                            int code = Convert.ToInt32(Console.ReadLine());
+
+                            if (code == clue1 * 1000 + clue2 * 10 + clue3)
+                            {
+                                Console.WriteLine("Congratulations! You've solved the cryptic code puzzle!");
+                                Console.WriteLine("All the puzzles are now solved.");
+                                puzzleSolved = true;
+
+                            }
+                            else
+                            {
+                                Console.WriteLine("That's not the correct code. Keep deciphering or try again.");
+                                return;
+                            }
+                        }
+                        else
+                            Console.WriteLine("All the puzzles are solved. You can now enter the Treasure Vault.");
+                        break;
+                    case "NORTH":
+                        Console.WriteLine("You can not go to south from here. Please try again");
+                        break;
+                    case "SOUTH":
+                        Console.WriteLine("You can not go to south from here. Please try again");
+                        break;
+                    case "EAST":
+                        if (puzzleSolved)
+                            TreasureVault();
+                        else
+                            Console.WriteLine("The door to the Treasure Vault is sealed. First solve all the puzzles to gain access.");
+                        break;
+                    case "WEST":
+                        CentralChamber();
+                        break;
+                    case "HELP":
+                        Help();
+                        break;
+                    default:
+                        Console.WriteLine("Invalid answer. Please try again.");
+                        break;
+                }
+            }
+        }
         static void Library()
         {
             bool pendant = true;
@@ -235,38 +392,6 @@ namespace Game
                 chars[index2] = temp;
             }
             return new string(chars);
-        }
-        static void PuzzleRoom()
-        {
-            Console.Clear();
-            Console.WriteLine("You are now the puzzle room.");
-            Console.WriteLine("There are doors to the east and west");
-            while (true)
-            {
-                Console.Write("`>> ");
-                string userInput = Console.ReadLine().ToUpper();
-                switch (userInput)
-                {
-                    case "NORTH":
-                        Console.WriteLine("You can not go to south from here. Please try again");
-                        break;
-                    case "SOUTH":
-                        Console.WriteLine("You can not go to south from here. Please try again");
-                        break;
-                    case "EAST":
-                        ChamberOfShadow();
-                        break;
-                    case "WEST":
-                        Console.WriteLine("You can not go to west from here. Please try again");
-                        break;
-                    case "HELP":
-                        Help();
-                        break;
-                    default:
-                        Console.WriteLine("Invalid answer. Please try again.");
-                        break;
-                }
-            }
         }
         static void ChamberOfShadow()
         {
