@@ -66,7 +66,8 @@ namespace Game
 
         }
         static void Library()
-        { 
+        {
+            string i = "boy";
             Console.Clear();
             Console.WriteLine("Stepping into the library, you are surrounded by shelves filled with dusty tomes and scrolls. The air is thick with the scent of ancient parchment. Sunlight filters through stained glass windows, illuminating a large desk at the center of the room. On it lies a game for you to win.");
             Console.WriteLine("There is a puzzle for you to solve.");
@@ -75,8 +76,8 @@ namespace Game
 
             if (userPuzzleAnswer == "SOLVE")
             {
-                JumbleWord();
-                if (true)
+                JumbleWord(user_Choice);
+                if (i == user_Choice)
 
                 {
                     Console.WriteLine("You have solve the puzzle");
@@ -187,43 +188,28 @@ namespace Game
             string[] inventory = new string[2];
             inventory[0] = "TORCH";
             Console.WriteLine("You are now in the chamber of shadow.");
-<<<<<<< HEAD
             Console.WriteLine("It is too dark to see");
             Console.Write(">> ");
-            string userInput=Console.ReadLine().ToUpper();
+            string userInput = Console.ReadLine().ToUpper();
             //if (inventory[1]==torch)
 
-                switch (userInput)
-                {
-                    case "NORTH":
-                        Console.WriteLine("You can not go to south from here. Please try again");
-                        break;
-                    case "SOUTH":
-                        CentralChamber();
-                        break;
-                    case "WEST":
-                        Library();
-                        break;
-                    case "EAST":
-                        AltarRoom();
-                        break;
-                    default:
-                        Console.WriteLine("Invalid answer. Please try again.");
-                        break;
-=======
-            
-            string userInput=Console.ReadLine().ToUpper();
-            if (inventory[0] == "TORCH" || inventory[1] == "TORCH" || inventory[2] == "TORCH")
+            switch (userInput)
             {
-                if (userInput=="USE TORCH")
-                {
-                    Console.WriteLine("the room is lit");
->>>>>>> 95e37c3db55ab6b31636456d8d409345c417a5a9
-                }
-            }
-            else
-            {
-                Console.WriteLine("no torch");
+                case "NORTH":
+                    Console.WriteLine("You can not go to south from here. Please try again");
+                    break;
+                case "SOUTH":
+                    CentralChamber();
+                    break;
+                case "WEST":
+                    Library();
+                    break;
+                case "EAST":
+                    AltarRoom();
+                    break;
+                default:
+                    Console.WriteLine("Invalid answer. Please try again.");
+                    break;
             }
         }
         static void TreasureVault()
