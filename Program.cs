@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Numerics;
 using System.Threading;
@@ -439,6 +440,8 @@ namespace Game
             Console.WriteLine("Dim, flickering lights barely illuminate the obscure corners of the room, casting eerie shadows that seem to dance and writhe along the walls.");
             Console.WriteLine("The darkness shrouds the chamber, leaving much to the imagination and evoking an unsettling sense of the unknown.");
             bool torchUsed = false;
+            bool artifactPlaced = false;
+            bool puzzleSolved = false;
             while (true)
             {
                 Console.Write("Please enter a command: ");
@@ -469,48 +472,68 @@ namespace Game
                         }
                         break;
                     case "USE KEY ON CABINET":
-                        if (HasItem("Key"))
+                        if (torchUsed)
                         {
-                            Console.WriteLine("You unlock the chest with the key. Inside, you find a glowing artifact.");
-                            Console.WriteLine("The artifact radiates a powerful energy, and you can sense its ancient origins.");
-                            Console.WriteLine("You carefully pick up the artifact and add it to your inventory.");
-                            AddToInventory("Artifact");
+                            if (HasItem("Key"))
+                            {
+                                Console.WriteLine("In the heart of the cabinet, an enigmatic mechanism catches your attention, its intricate design hinting at a greater purpose.");
+                                Console.WriteLine("A small slot within the mechanism awaits the placement of a mysterious artifact, teasing its significance.");
+                                Console.WriteLine("Beyond this intricate contraption lies a concealed door, promising a path to the unknown.");
+                                
+                            }
+                            else
+                            {
+                                Console.WriteLine("You don't have the key to unlock the chest.");
+                            }
                         }
                         else
                         {
-                            Console.WriteLine("You don't have the key to unlock the chest.");
-                        }
+                            Console.WriteLine("It's difficult to see the details in the dim light. Perhaps there's something that can help you illuminate the room.");
+                        } 
                         break;
                     case "EXAMINE CABINET":
-                        Console.WriteLine("The pedestal has a lever that can be pulled.");
-                        break;
-                    case "PULL LEVER":
-                        Console.WriteLine("You pull the lever, and the room trembles slightly. The crystal in the center of the room glows brighter.");
-                        break;
-                    case "EXAMINE CRYSTAL":
-                        Console.WriteLine("The crystal is a powerful artifact that seems to be the source of the room's enchantment.");
-                        break;
-                    case "EXAMINE FLICKERING":
-                        if (HasItem("Torch"))
+                        if (torchUsed)
                         {
-                            Console.WriteLine("You have already taken the torch.");
+                            Console.WriteLine("The cabinet stands tall and imposing against the chamber's wall,");
+                            Console.WriteLine("its surface adorned with intricate carvings, hinting at the mysteries concealed within.");
                         }
                         else
                         {
-                            Console.WriteLine("You observe a hint of warmth in the shadows, as if a flickering light awaits to be revealed.");
-                            Console.WriteLine("The allure of the hidden torch grows stronger, urging you to uncover its secrets.");
+                            Console.WriteLine("It's difficult to see the details in the dim light. Perhaps there's something that can help you illuminate the room.");
                         }
                         break;
-                    case "TAKE TORCH":
-                        if (HasItem("Torch"))
+                    case "PLACE ARTIFACT ON MECHANISM":
+                        if (torchUsed)
                         {
-                            Console.WriteLine("You have already taken the torch.");
+                            if (HasItem("Artifact"))
+                            {
+                                artifactPlaced = true;
+                                Console.WriteLine("As the artifact is carefully placed on the mechanism,");
+                                Console.WriteLine("the door to the far EAST of the chamber begins to shimmer with an ethereal glow, revealing a doorway to the final room.");
+                                Console.WriteLine("The door itself is made of ancient, weathered wood, adorned with mysterious symbols and engravings that seem to shift and rearrange as if alive.");
+                                Console.WriteLine("To unlock the door and gain access to the final room, a complex puzzle awaits the player.");
+                            }
                         }
                         else
                         {
-                            Console.WriteLine("Driven by an unexplained impulse, you reach into the shadows and grasp the enigmatic torch.");
-                            Console.WriteLine("You add the torch to your inventory, eager to discover its purpose.");
-                            AddToInventory("Torch");
+                            Console.WriteLine("It's difficult to see the details in the dim light. Perhaps there's something that can help you illuminate the room.");
+                        }
+                        break;
+                    case "SOLVE PUZZLE":
+                        if (torchUsed)
+                        {
+                            if (artifactPlaced)
+                            {
+                                Console.WriteLine("Puzzle needs to be put. I will do it tomorrow.");
+                            }
+                            else
+                            {
+                                Console.WriteLine("Activate the mechanism to access the puzzle.");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("It's difficult to see the details in the dim light. Perhaps there's something that can help you illuminate the room.");
                         }
                         break;
                     case "NORTH":
@@ -520,7 +543,14 @@ namespace Game
                         CentralChamber();
                         break;
                     case "EAST":
-                        AltarRoom();
+                        if (puzzleSolved)
+                        {
+                            AltarRoom();
+                        }
+                        else
+                        {
+                            Console.WriteLine("The access to the door is locked. You cannot go further.");
+                        }
                         break;
                     case "WEST":
                         if (torchUsed)
