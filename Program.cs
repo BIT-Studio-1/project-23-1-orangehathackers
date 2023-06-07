@@ -336,6 +336,9 @@ namespace Game
         }
         static void Library()
         {
+            string puzzleAnswerTreasure = "TREASURE HUNT";
+            string puzzleAnswerBook = "TAKE BOOK";
+            string puzzleAnswerPendant = "TAKE PENDANT";
             Console.Clear();
             Console.WriteLine("Stepping into the library, you are surrounded by shelves filled with dusty tomes and scrolls. The air is thick with the scent of ancient parchment. Sunlight filters through stained glass windows, illuminating a large desk at the center of the room. On it lies a game for you to win.");
             Console.WriteLine("On the right you see a ladder leading into the tunnel.");
@@ -364,27 +367,43 @@ namespace Game
                     case "SOLVE":
                         Console.WriteLine("The word are raseture nhtu ");
                         string solvePuzzle = Console.ReadLine().ToUpper();
-                        if (userInput != "TREASURE HUNT")
+                        if (solvePuzzle == puzzleAnswerTreasure)
                         {
                             Console.WriteLine("You have solve the puzzle. In the middle it appear a old wooden chest cover with dust.");
                             Console.WriteLine("Inside the wooden chest show an old book laying on the bottom.");
                             Console.Write(">> ");
-                            string takingBook = Console.ReadLine().ToUpper();
-                            if (takingBook == "TAKE BOOK")
+                            solvePuzzle = Console.ReadLine().ToUpper();
+                            if (HasItem("Book"))
                             {
-                                Console.WriteLine("You have taken a book"); ;
+                                Console.WriteLine("You have taken a book");
+                            }
+                            if (solvePuzzle == puzzleAnswerBook)
+                            {
+                                Console.WriteLine("You have pick up a book"); ;
                                 AddToInventory("Book");
                             }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid answer. Please try again.");
                         }
                         break;
                     case "CLIMB":
                         Console.WriteLine("You have climb the ladder. It leading into a dark old room. In the room you found a pendant");
                         Console.WriteLine(">> ");
                         string takingPendant = Console.ReadLine().ToUpper();
-                        if (takingPendant == "TAKE PENDANT")
+                        if (HasItem("Pendant"))
                         {
                             Console.WriteLine("You have taken a pendant");
+                        }
+                        if (takingPendant == puzzleAnswerPendant)
+                        {
+                            Console.WriteLine("You have pick up a pendant");
                             AddToInventory("Pendant");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid answer. Please try again.");
                         }
                         break;
                     case "INVENTORY":
