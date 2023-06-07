@@ -555,7 +555,7 @@ namespace Game
                     case "WEST":
                         if (torchUsed)
                         {
-                            PuzzleRoom();
+                            Library();
                         }
                         else
                         {
