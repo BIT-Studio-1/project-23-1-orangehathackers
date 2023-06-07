@@ -106,27 +106,33 @@ namespace Game
                         }
                         break;
                     case "SOLVE PUZZLE":
-                        if (!puzzleSolved)
-                        {
-                            Console.WriteLine("The wall is covered in ancient symbols and a series of levers nearby. Each symbol corresponds to a specific lever.");
-                            Console.WriteLine("The symbols are: Ankh, Feather, Scarab, Eye. To unlock the puzzle,");
-                            Console.WriteLine("you must decipher the correct order of symbols and pull the levers accordingly.");
-                            Console.WriteLine("What is the correct order? (Enter you answer seperated by a comma ',')");
-                            string userAnswer = Console.ReadLine().ToLower();
-                            if (userAnswer == puzzleAnswer)
+                        while (true) {
+                            if (!puzzleSolved)
                             {
-                                puzzleSolved = true;
-                                Console.WriteLine("Congratulations!!! you have solved the puzzle and obtained the key.");
-                                AddToInventory("Key");
+                                Console.WriteLine("The wall is covered in ancient symbols and a series of levers nearby. Each symbol corresponds to a specific lever.");
+                                Console.WriteLine("The symbols are: Ankh, Feather, Scarab, Eye. To unlock the puzzle,");
+                                Console.WriteLine("you must decipher the correct order of symbols and pull the levers accordingly.");
+                                Console.WriteLine("What is the correct order? (Enter you answer seperated by a comma ',')");
+                                string userAnswer = Console.ReadLine().ToUpper();
+                                if (userAnswer == "BACK")
+                                {
+                                    CentralChamber();
+                                }
+                                if (userAnswer == puzzleAnswer)
+                                {
+                                    puzzleSolved = true;
+                                    Console.WriteLine("Congratulations!!! you have solved the puzzle and obtained the key.");
+                                    AddToInventory("Key");
+                                }
+                                else
+                                {
+                                    Console.WriteLine("The puzzle remains unsolved.");
+                                }
                             }
                             else
                             {
-                                Console.WriteLine("The puzzle remains unsolved.");
+                                Console.WriteLine("You have already obtained the key.");
                             }
-                        }
-                        else
-                        {
-                            Console.WriteLine("You have already obtained the key.");
                         }
                         break;
                     case "NORTH":
@@ -206,67 +212,88 @@ namespace Game
                             Console.WriteLine("The letters form a sequence, and you need to determine the missing letter to complete the sequence.");
                             Console.WriteLine("B, D, G, I, L, N, __, S, V");
                             Console.Write("Please enter the missing letter:");
-                            string userAnswer = Console.ReadLine().ToUpper();
-                            if (userAnswer == puzzle1Answer)
+                            while (true)
                             {
-                                Console.WriteLine("Well Done! You solved the puzzle.");
-                                Console.WriteLine("On to the next one.");
-                            }
-                            else
-                            {
-                                Console.WriteLine("That's incorrect. Try again.");
-                                return;
-                            }
-                            Console.Clear();
-                            Console.WriteLine("\nPuzzle 2: Cryptic Riddles");
-                            Console.WriteLine("Solve the riddles to find the words.");
-                            for (int i = 0; i < riddles.Length; i++)
-                            {
-                                Console.WriteLine("\nRiddle " + (i + 1) + ":");
-                                Console.WriteLine(riddles[i]);
-
-                                Console.Write("Enter your answer: ");
-                                userAnswers[i] = Console.ReadLine().Trim().ToLower();
-                            }
-                            for (int i = 0; i < answers.Length; i++)
-                            {
-                                if (userAnswers[i] != answers[i].ToLower())
+                                string userAnswer = Console.ReadLine().ToUpper();
+                                if (userAnswer == "QUIT")
                                 {
-                                    allCorrect = false;
+                                    PuzzleRoom();
+                                }
+                                if (userAnswer == puzzle1Answer)
+                                {
+                                    Console.WriteLine("Well Done! You solved the puzzle.");
+                                    Console.WriteLine("On to the next one.");
                                     break;
                                 }
+                                else
+                                {
+                                    Console.WriteLine("That's incorrect. Try again.");
+                                }
                             }
-                            if (allCorrect)
+                            Console.Clear();                           
+                            Console.WriteLine("\nPuzzle 2: Cryptic Riddles");
+                            Console.WriteLine("Solve the riddles to find the words.");
+                            while (true)
                             {
-                                Console.WriteLine("\nCongratulations! You solved all the riddles!");
-                                Console.WriteLine("Two down. Two to go!");
-                            }
-                            else
-                            {
-                                Console.WriteLine("\nSome of your answers are incorrect.");
-                                Console.WriteLine("Please review the riddles and try again.");
-                                return;
+                                for (int i = 0; i < riddles.Length; i++)
+                                {
+                                    Console.WriteLine("\nRiddle " + (i + 1) + ":");
+                                    Console.WriteLine(riddles[i]);
+
+                                    Console.Write("Enter your answer: ");
+                                    userAnswers[i] = Console.ReadLine().Trim().ToLower();
+                                    if (userAnswers[i] == "quit")
+                                    {
+                                        PuzzleRoom();
+                                    }
+                                }
+                                for (int i = 0; i < answers.Length; i++)
+                                {
+                                    if (userAnswers[i] != answers[i].ToLower())
+                                    {
+                                        allCorrect = false;
+                                    }
+                                }
+                                if (allCorrect)
+                                {
+                                    Console.WriteLine("\nCongratulations! You solved all the riddles!");
+                                    Console.WriteLine("Two down. Two to go!");
+                                    break;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("\nSome of your answers are incorrect.");
+                                    Console.WriteLine("Please review the riddles and try again.");
+                                }
                             }
                             Console.Clear();
                             Console.WriteLine("\nPuzzle 3: Mirror Reflection");
                             Console.WriteLine("Rearrange the symbols based on their reflection in the mirror.");
                             Console.WriteLine("Rearrange the following symbols based on their reflection:");
-                            for (int i = 0; i < symbols.Length; i++)
+                            while (true)
                             {
-                                Console.WriteLine(symbols[i]);
-                            }
+                                for (int i = 0; i < symbols.Length; i++)
+                                {
+                                    Console.WriteLine(symbols[i]);
+                                }
 
-                            string[] rearrangedSymbols = Console.ReadLine().ToUpper().Split(',');
+                                string[] rearrangedSymbols = Console.ReadLine().ToUpper().Split(',');
+                                Console.WriteLine(rearrangedSymbols[0]);
+                                if (rearrangedSymbols[0] == "QUIT")
+                                {
+                                    PuzzleRoom();
+                                }
 
-                            if (rearrangedSymbols.SequenceEqual(reflectedSymbols))
-                            {
-                                Console.WriteLine("Great job! You rearranged the symbols correctly.");
-                                Console.WriteLine("Just one more puzzle to go!");
-                            }
-                            else
-                            {
-                                Console.WriteLine("The symbols are not rearranged correctly. Keep trying.");
-                                return;
+                                if (rearrangedSymbols.SequenceEqual(reflectedSymbols))
+                                {
+                                    Console.WriteLine("Great job! You rearranged the symbols correctly.");
+                                    Console.WriteLine("Just one more puzzle to go!");
+                                    break;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("The symbols are not rearranged correctly. Keep trying.");
+                                }
                             }
                             Console.Clear();
                             Console.WriteLine("\nPuzzle 4: Cryptic Code");
@@ -282,22 +309,24 @@ namespace Game
                             // Clue 3
                             int clue3 = 38;
                             Console.WriteLine("\nClue 3: \"I am the answer to life, the universe, and everything. Subtract the square root of 16.\"");
-
-                            Console.WriteLine("\nEnter the code:");
-
-                            int code = Convert.ToInt32(Console.ReadLine());
-
-                            if (code == clue1 * 1000 + clue2 * 10 + clue3)
+                            while (true)
                             {
-                                Console.WriteLine("Congratulations! You've solved the cryptic code puzzle!");
-                                Console.WriteLine("All the puzzles are now solved.");
-                                puzzleSolved = true;
+                                Console.WriteLine("\nEnter the code:");
 
-                            }
-                            else
-                            {
-                                Console.WriteLine("That's not the correct code. Keep deciphering or try again.");
-                                return;
+                                int code = Convert.ToInt32(Console.ReadLine());
+
+                                if (code == clue1 * 1000 + clue2 * 10 + clue3)
+                                {
+                                    Console.WriteLine("Congratulations! You've solved the cryptic code puzzle!");
+                                    Console.WriteLine("All the puzzles are now solved.");
+                                    puzzleSolved = true;
+
+                                }
+                                else
+                                {
+                                    Console.WriteLine("That's not the correct code. Keep deciphering or try again.");
+                                    return;
+                                }
                             }
                         }
                         else
@@ -666,12 +695,18 @@ namespace Game
         {
             Console.Clear();
             Console.WriteLine("You are now the puzzle room.");
+            Console.WriteLine("In the ");
             Console.WriteLine("There are doors to the east and west");
             while (true)
             {
                 Console.Write("Please enter a direction: ");
                 string userInput = Console.ReadLine().ToUpper();
-                switch (userInput)
+                if (userInput == "QUIT")
+                {
+                    return;
+                }
+
+                 switch (userInput)
                 {
                     case "NORTH":
                         Console.WriteLine("You can not go to south from here. Please try again");
