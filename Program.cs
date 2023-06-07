@@ -367,10 +367,10 @@ namespace Game
                         if (userInput != "TREASURE HUNT")
                         {
                             Console.WriteLine("You have solve the puzzle. In the middle it appear a old wooden chest cover with dust.");
-                            Console.WriteLine("Inside the wooden chest show an old pendant laying on the bottom.");
+                            Console.WriteLine("Inside the wooden chest show an old book laying on the bottom.");
                             Console.Write(">> ");
                             string takingBook = Console.ReadLine().ToUpper();
-                            if (takingBook == "TAKE")
+                            if (takingBook == "TAKE BOOK")
                             {
                                 Console.WriteLine("You have taken a book"); ;
                                 AddToInventory("Book");
@@ -381,10 +381,17 @@ namespace Game
                         Console.WriteLine("You have climb the ladder. It leading into a dark old room. In the room you found a pendant");
                         Console.WriteLine(">> ");
                         string takingPendant = Console.ReadLine().ToUpper();
-                        if (takingPendant == "TAKE")
+                        if (takingPendant == "TAKE PENDANT")
                         {
                             Console.WriteLine("You have taken a pendant");
-                            AddToInventory("");
+                            AddToInventory("Pendant");
+                        }
+                        break;
+                    case "INVENTORY":
+                        Console.WriteLine("You have the following items in your inventory:");
+                        for (int i = 0; i < inventoryCount; i++)
+                        {
+                            Console.WriteLine(inventory[i]);
                         }
                         break;
                     default:
