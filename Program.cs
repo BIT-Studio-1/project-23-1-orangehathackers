@@ -340,61 +340,58 @@ namespace Game
             Console.WriteLine("Stepping into the library, you are surrounded by shelves filled with dusty tomes and scrolls. The air is thick with the scent of ancient parchment. Sunlight filters through stained glass windows, illuminating a large desk at the center of the room. On it lies a game for you to win.");
             Console.WriteLine("On the right you see a ladder leading into the tunnel.");
             Console.WriteLine("There is a puzzle for you to solve.");
-            Console.WriteLine("The word are raseture nhtu ");
-            Console.Write(">> ");
-            string userPuzzleAnswer = Console.ReadLine().ToUpper();
-                while (true)
+            while (true)
+            {
+                Console.Write(">> ");
+                string userInput = Console.ReadLine().ToUpper();
+                switch (userInput)
                 {
-                    Console.Write(">> ");
-                    string userInput = Console.ReadLine().ToUpper();
-                    switch (userInput)
-                    {
-                        case "NORTH":
-                            Console.WriteLine("You can not go to south from here. Please try again");
-                            break;
-                        case "SOUTH":
-                            Console.WriteLine("You can not go to south from here. Please try again");
-                            break;
-                        case "EAST":
-                            ChamberOfShadow();
-                            break;
-                        case "WEST":
-                            Console.WriteLine("You can not go to west from here. Please try again");
-                            break;
-                        case "HELP":
-                            Help();
-                            break;
-                        case "SOLVE":
-                            if (userPuzzleAnswer == "TREASURE HUNT")
+                    case "NORTH":
+                        Console.WriteLine("You can not go to south from here. Please try again");
+                        break;
+                    case "SOUTH":
+                        Console.WriteLine("You can not go to south from here. Please try again");
+                        break;
+                    case "EAST":
+                        Console.WriteLine("Chamber of shadow");
+                        break;
+                    case "WEST":
+                        Console.WriteLine("You can not go to west from here. Please try again");
+                        break;
+                    case "HELP":
+                        Console.WriteLine("help");
+                        break;
+                    case "SOLVE":
+                        Console.WriteLine("The word are raseture nhtu ");
+                        string solvePuzzle = Console.ReadLine().ToUpper();
+                        if (userInput != "TREASURE HUNT")
+                        {
+                            Console.WriteLine("You have solve the puzzle. In the middle it appear a old wooden chest cover with dust.");
+                            Console.WriteLine("Inside the wooden chest show an old pendant laying on the bottom.");
+                            Console.Write(">> ");
+                            string takingBook = Console.ReadLine().ToUpper();
+                            if (takingBook == "TAKE")
                             {
-                                Console.WriteLine("You have solve the puzzle. In the middle it appear a old wooden chest cover with dust.");
-                                Console.WriteLine("Inside the wooden chest show an old pendant laying on the bottom.");
-                                Console.WriteLine(">> ");
-                                string takingBook = Console.ReadLine().ToUpper();
-                                if (takingBook == "TAKE")
-                                {
-                                    Console.WriteLine("You have taken a book");
-                                    Console.WriteLine(">> ");
-                                    AddToInventory("Book");
-                                }
+                                Console.WriteLine("You have taken a book"); ;
+                                AddToInventory("Book");
                             }
-                            break;
-                        case "CLIMB":
-                            Console.WriteLine("You have climb the ladder. It leading into a dark old room. In the room you found a pendant");
-                            Console.WriteLine(">> ");
-                            string takingPendant = Console.ReadLine().ToUpper();
-                            if (takingPendant == "TAKE")
-                            {
+                        }
+                        break;
+                    case "CLIMB":
+                        Console.WriteLine("You have climb the ladder. It leading into a dark old room. In the room you found a pendant");
+                        Console.WriteLine(">> ");
+                        string takingPendant = Console.ReadLine().ToUpper();
+                        if (takingPendant == "TAKE")
+                        {
                             Console.WriteLine("You have taken a pendant");
-                            Console.WriteLine(">> ");
                             AddToInventory("");
-                            }
-                            break;
-                        default:
-                            Console.WriteLine("Invalid answer. Please try again.");
-                            break;
-                    }
+                        }
+                        break;
+                    default:
+                        Console.WriteLine("Invalid answer. Please try again.");
+                        break;
                 }
+            }
         }
         static void ChamberOfShadow()
         {
