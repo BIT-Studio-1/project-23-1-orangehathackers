@@ -7,7 +7,7 @@ namespace Game
 {
     internal class Program
     {
-        static string[] inventory = new string[3];
+        static string[] inventory = new string[4];
         static int inventoryCount = 0;
         static void GameStart()
         {
@@ -434,41 +434,118 @@ namespace Game
         static void ChamberOfShadow()
         {
             Console.Clear();
-            inventory[0] = "TORCH";
             Console.WriteLine("You are now in the chamber of shadow.");
-            Console.WriteLine("It is too dark to see");
-            Console.Write(">> ");
-            string userInput = Console.ReadLine().ToUpper();
-            //if (inventory[1]==torch)
-
+            Console.WriteLine("As you cautiously step into the Chamber of Shadows, the air grows heavy and oppressive.");
+            Console.WriteLine("Dim, flickering lights barely illuminate the obscure corners of the room, casting eerie shadows that seem to dance and writhe along the walls.");
+            Console.WriteLine("The darkness shrouds the chamber, leaving much to the imagination and evoking an unsettling sense of the unknown.");
+            bool torchUsed = false;
+            while (true)
+            {
+                Console.Write("Please enter a command: ");
+                string userInput = Console.ReadLine().ToUpper();
                 switch (userInput)
                 {
+                    case "LOOK":
+                        if (!torchUsed)
+                        {
+                            Console.WriteLine("It's difficult to see the details in the dim light. Perhaps there's something that can help you illuminate the room.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("In the far corner, stands a locked cabinet, its contents hidden from prying eyes.");
+                            Console.WriteLine("Whispers of untold treasures or crucial clues linger in the air, enticing your curiosity.");
+                        }
+                        break;
+                    case "USE TORCH":
+                        if (HasItem("Torch"))
+                        {
+                            Console.WriteLine("As the player ignites the torch,");
+                            Console.WriteLine("the flickering flames cast dancing shadows that begin to reveal the hidden details of the room, shrouded in darkness no more.");
+                            torchUsed = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("You do not have the torch to light the room.");
+                        }
+                        break;
+                    case "USE KEY ON CABINET":
+                        if (HasItem("Key"))
+                        {
+                            Console.WriteLine("You unlock the chest with the key. Inside, you find a glowing artifact.");
+                            Console.WriteLine("The artifact radiates a powerful energy, and you can sense its ancient origins.");
+                            Console.WriteLine("You carefully pick up the artifact and add it to your inventory.");
+                            AddToInventory("Artifact");
+                        }
+                        else
+                        {
+                            Console.WriteLine("You don't have the key to unlock the chest.");
+                        }
+                        break;
+                    case "EXAMINE CABINET":
+                        Console.WriteLine("The pedestal has a lever that can be pulled.");
+                        break;
+                    case "PULL LEVER":
+                        Console.WriteLine("You pull the lever, and the room trembles slightly. The crystal in the center of the room glows brighter.");
+                        break;
+                    case "EXAMINE CRYSTAL":
+                        Console.WriteLine("The crystal is a powerful artifact that seems to be the source of the room's enchantment.");
+                        break;
+                    case "EXAMINE FLICKERING":
+                        if (HasItem("Torch"))
+                        {
+                            Console.WriteLine("You have already taken the torch.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("You observe a hint of warmth in the shadows, as if a flickering light awaits to be revealed.");
+                            Console.WriteLine("The allure of the hidden torch grows stronger, urging you to uncover its secrets.");
+                        }
+                        break;
+                    case "TAKE TORCH":
+                        if (HasItem("Torch"))
+                        {
+                            Console.WriteLine("You have already taken the torch.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Driven by an unexplained impulse, you reach into the shadows and grasp the enigmatic torch.");
+                            Console.WriteLine("You add the torch to your inventory, eager to discover its purpose.");
+                            AddToInventory("Torch");
+                        }
+                        break;
                     case "NORTH":
                         Console.WriteLine("You can not go to south from here. Please try again");
                         break;
                     case "SOUTH":
                         CentralChamber();
                         break;
-                    case "WEST":
-                        Library();
-                        break;
                     case "EAST":
                         AltarRoom();
+                        break;
+                    case "WEST":
+                        if (torchUsed)
+                        {
+                            PuzzleRoom();
+                        }
+                        else
+                        {
+                            Console.WriteLine("It's difficult to see the details in the dim light. Perhaps there's something that can help you illuminate the room.");
+                        }
+                        break;
+                    case "HELP":
+                        Help();
+                        break;
+                    case "INVENTORY":
+                        Console.WriteLine("You have the following items in your inventory:");
+                        for (int i = 0; i < inventoryCount; i++)
+                        {
+                            Console.WriteLine(inventory[i]);
+                        }
                         break;
                     default:
                         Console.WriteLine("Invalid answer. Please try again.");
                         break;
                 }
-            if (inventory[0] == "TORCH" || inventory[1] == "TORCH" || inventory[2] == "TORCH")
-            {
-                if (userInput=="USE TORCH")
-                {
-                    Console.WriteLine("the room is lit");
-                }
-            }
-            else
-            {
-                Console.WriteLine("no torch");
             }
         }
         static void TreasureVault()
