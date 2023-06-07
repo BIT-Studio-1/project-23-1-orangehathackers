@@ -336,15 +336,13 @@ namespace Game
         }
         static void Library()
         {
-            bool pendant = true;
-            string puzzleAnswer = "treasure";
             Console.Clear();
             Console.WriteLine("Stepping into the library, you are surrounded by shelves filled with dusty tomes and scrolls. The air is thick with the scent of ancient parchment. Sunlight filters through stained glass windows, illuminating a large desk at the center of the room. On it lies a game for you to win.");
+            Console.WriteLine("On the right you see a ladder leading into the tunnel.");
             Console.WriteLine("There is a puzzle for you to solve.");
+            Console.WriteLine("The word are raseture nhtu ");
             Console.Write(">> ");
             string userPuzzleAnswer = Console.ReadLine().ToUpper();
-            string u = JumbleWord();
-
                 while (true)
                 {
                     Console.Write(">> ");
@@ -367,70 +365,36 @@ namespace Game
                             Help();
                             break;
                         case "SOLVE":
-                            if (u == puzzleAnswer)
+                            if (userPuzzleAnswer == "TREASURE HUNT")
                             {
                                 Console.WriteLine("You have solve the puzzle. In the middle it appear a old wooden chest cover with dust.");
                                 Console.WriteLine("Inside the wooden chest show an old pendant laying on the bottom.");
                                 Console.WriteLine(">> ");
-                                string takingPendant = Console.ReadLine().ToUpper();
-                                if (takingPendant == "TAKE")
+                                string takingBook = Console.ReadLine().ToUpper();
+                                if (takingBook == "TAKE")
                                 {
-                                    Console.WriteLine("You have taken a pendant");
+                                    Console.WriteLine("You have taken a book");
                                     Console.WriteLine(">> ");
+                                    AddToInventory("Book");
                                 }
                             }
-                            else
+                            break;
+                        case "CLIMB":
+                            Console.WriteLine("You have climb the ladder. It leading into a dark old room. In the room you found a pendant");
+                            Console.WriteLine(">> ");
+                            string takingPendant = Console.ReadLine().ToUpper();
+                            if (takingPendant == "TAKE")
                             {
-                                Console.WriteLine("You did solve the puzzle!!!!!!!!!!!");
-                                Console.WriteLine("The dark mist appear, the room starting to shake, the wall starting crack.");
-                                Console.WriteLine("You try to escape, but the entry door got block.");
-                                Console.WriteLine("You see a ladder leading to the tunnel.");
-                                Console.WriteLine(">> ");
-                                string climbingLadder = Console.ReadLine().ToUpper();
-                                if (climbingLadder == "CLIMB")
-                                {
-
-                                }
+                            Console.WriteLine("You have taken a pendant");
+                            Console.WriteLine(">> ");
+                            AddToInventory("");
                             }
                             break;
                         default:
                             Console.WriteLine("Invalid answer. Please try again.");
                             break;
                     }
-            }
-        }
-        static string JumbleWord()
-        {
-            string Word = PickWord();
-            string Jum = Jumbled(Word);
-            Console.Write($"{Jum} \n What is the word, you think it is: ");
-            string user_Choice = Console.ReadLine();
-            return user_Choice;
-        }
-        public static string PickWord()
-        {
-            Random rand = new Random();
-            string[] Words = { "treasure" };
-            int temp = rand.Next(0, Words.Length);
-            string Pick = Words[temp];
-            return Pick;
-        }
-        public static string Jumbled(string input)
-        {
-            Random rand = new Random();
-            char[] chars = input.ToCharArray();
-            for (int i = 0; i < input.Length; i++)
-            {
-                int index1 = rand.Next(input.Length);
-                int index2 = rand.Next(input.Length);
-
-
-
-                char temp = chars[index1];
-                chars[index1] = chars[index2];
-                chars[index2] = temp;
-            }
-            return new string(chars);
+                }
         }
         static void ChamberOfShadow()
         {
