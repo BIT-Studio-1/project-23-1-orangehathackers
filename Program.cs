@@ -9,7 +9,7 @@ namespace Game
 {
     internal class Program
     {
-        static string[] inventory = new string[4];
+        static string[] inventory = new string[5];
         static int inventoryCount = 0;
         static void GameStart()
         {
@@ -107,7 +107,8 @@ namespace Game
                         }
                         break;
                     case "SOLVE PUZZLE":
-                        while (true) {
+                        while (true) 
+                        {
                             if (!puzzleSolved)
                             {
                                 Console.WriteLine("The wall is covered in ancient symbols and a series of levers nearby. Each symbol corresponds to a specific lever.");
@@ -381,7 +382,7 @@ namespace Game
                 switch (userInput)
                 {
                     case "NORTH":
-                        Console.WriteLine("You can not go to south from here. Please try again");
+                        Console.WriteLine("You can not go to north from here. Please try again");
                         break;
                     case "SOUTH":
                         Console.WriteLine("You can not go to south from here. Please try again");
@@ -484,6 +485,8 @@ namespace Game
             bool torchUsed = false;
             bool artifactPlaced = false;
             bool puzzleSolved = false;
+            string userAnswer = "";
+            string puzzleAnswer = "OWL";
             while (true)
             {
                 Console.Write("Please enter a command: ");
@@ -566,7 +569,49 @@ namespace Game
                         {
                             if (artifactPlaced)
                             {
-                                Console.WriteLine("Puzzle needs to be put. I will do it tomorrow.");
+                                if (!puzzleSolved)
+                                {
+                                    Console.WriteLine("The Tome of Forgotten Knowledge\" holds the key to unlocking the door to the final room.");
+                                    Console.WriteLine("PUZZLE:");
+                                    Console.WriteLine("Of wisdom's embrace, seek the guardian's gaze,");
+                                    Console.WriteLine("A scholar's delight, a learned mind's blaze.");
+                                    Console.WriteLine("Within the pages marked by timeless lore,");
+                                    Console.WriteLine("Find the symbol that opens the door.");
+                                    while (!puzzleSolved)
+                                    {
+                                        userAnswer = Console.ReadLine().ToUpper();
+                                        if (userAnswer ==  puzzleAnswer)
+                                        {
+                                            puzzleSolved = true;
+                                            Console.WriteLine("Behold! The once impenetrable barrier has yielded to your unwavering determination,");
+                                            Console.WriteLine("as the majestic door now stands ajar, beckoning you to enter the realm of finality.");
+                                        }
+                                        else if (userAnswer == "USE BOOK")
+                                        {
+                                            if (HasItem("Book"))
+                                            {
+                                                Console.WriteLine("In the realm of twilight's embrace, a creature of feathered grace dwells,");
+                                                Console.WriteLine("casting its mystic aura upon the land.");
+                                                Console.WriteLine("Embrace the essence of this nocturnal sentinel to illuminate the path towards the answer you seek.");
+                                            }
+                                            else
+                                            {
+                                                Console.WriteLine("Within the depths of my vast knowledge,");
+                                                Console.WriteLine("the book that contains the sought-after hint eludes my grasp,");
+                                                Console.WriteLine("leaving me unable to provide you with its wisdom.");
+                                            }
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("Invalid Answer. Please try again.");
+                                        }
+                                    }        
+                                }
+                                else
+                                {
+                                    Console.WriteLine("The puzzle is already solved.");
+                                }
+                                
                             }
                             else
                             {
@@ -579,19 +624,26 @@ namespace Game
                         }
                         break;
                     case "NORTH":
-                        Console.WriteLine("You can not go to south from here. Please try again");
+                        Console.WriteLine("You can not go to north from here. Please try again");
                         break;
                     case "SOUTH":
                         CentralChamber();
                         break;
                     case "EAST":
-                        if (puzzleSolved)
+                        if (torchUsed)
                         {
-                            AltarRoom();
+                            if (puzzleSolved)
+                            {
+                                AltarRoom();
+                            }
+                            else
+                            {
+                                Console.WriteLine("The access to the door is locked. You cannot go further.");
+                            }
                         }
                         else
                         {
-                            Console.WriteLine("The access to the door is locked. You cannot go further.");
+                            Console.WriteLine("It's difficult to see the details in the dim light. Perhaps there's something that can help you illuminate the room.");
                         }
                         break;
                     case "WEST":
