@@ -3,7 +3,6 @@ using System.ComponentModel.Design;
 using System.Linq;
 using System.Numerics;
 using System.Threading;
-using Internal;
 
 namespace Game
 {
@@ -107,7 +106,7 @@ namespace Game
                         }
                         break;
                     case "SOLVE PUZZLE":
-                        while (true) 
+                        while (!puzzleSolved) 
                         {
                             if (!puzzleSolved)
                             {
@@ -120,7 +119,7 @@ namespace Game
                                 {
                                     CentralChamber();
                                 }
-                                if (userAnswer == puzzleAnswer)
+                                else if (userAnswer == puzzleAnswer)
                                 {
                                     puzzleSolved = true;
                                     Console.WriteLine("Congratulations!!! you have solved the puzzle and obtained the key.");
@@ -742,13 +741,13 @@ namespace Game
                         }
                         break;
                     case "NORTH":
-                        Console.WriteLine("You can not go to south from here. Please try again");
+                        Console.WriteLine("You can not go to north from here. Please try again");
                         break;
                     case "SOUTH":
                         Console.WriteLine("You can not go to south from here. Please try again");
                         break;
                     case "EAST":
-                        Console.WriteLine("You can not go to south from here. Please try again");
+                        Console.WriteLine("You can not go to east from here. Please try again");
                         break;
                     case "WEST":
                         PuzzleRoom();
@@ -787,7 +786,7 @@ namespace Game
                  switch (userInput)
                 {
                     case "NORTH":
-                        Console.WriteLine("You can not go to south from here. Please try again");
+                        Console.WriteLine("You can not go to north from here. Please try again");
                         break;
                     case "SOUTH":
                         Console.WriteLine("You can not go to south from here. Please try again");
