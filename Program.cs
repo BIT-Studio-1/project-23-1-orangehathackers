@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Numerics;
 using System.Threading;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Game
 {
@@ -577,7 +578,7 @@ namespace Game
                         {
                             Console.WriteLine("You unlock the chest with the key. Inside, you find a glowing artifact.");
                             Console.WriteLine("The artifact radiates a powerful energy, and you can sense its ancient origins.");
-                            Console.WriteLine("You carefully pick up the artifact and add it to your inventory.");
+                            Console.WriteLine("You c ventory.");
                             AddToInventory("Artifact");
                         }
                         else
@@ -645,17 +646,100 @@ namespace Game
                 }
             }
         }
+
+        static bool EquationGame()
+        {
+            // Generate a random math problem
+            Random random = new Random();
+            int num1 = random.Next(-20, 21);
+            int num2 = random.Next(-20, 21);
+            int operatorIndex = random.Next(0, 4);
+            char op = '?';
+            int answer = 0;
+
+            switch (operatorIndex)
+            {
+                case 0:
+                    op = '+';
+                    answer = num1 + num2;
+                    break;
+                case 1:
+                    op = '-';
+                    answer = num1 - num2;
+                    break;
+                case 2:
+                    op = '*';
+                    answer = num1 * num2;
+                    break;
+                case 3:
+                    op = '/';
+                    num1 = num2 * random.Next(-10, 11);
+                    answer = num1 / num2;
+                    break;
+                case 4:
+                    op = '%';
+                    num1 = num2 * random.Next(-10, 11);
+                    answer = num1 % num2;
+                    break;
+            }
+
+            // Display the math problem and prompt the player to enter the answer
+            Console.Write($"{num1} {op} {num2} = ");
+            int guess = int.Parse(Console.ReadLine());
+
+            // Check if the answer is correct
+            if (guess == answer)
+            {
+                Console.WriteLine("Congratulations! You've solved the puzzle!");
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("Sorry, that's incorrect. You failed to solve the puzzle.");
+                return false;
+            }
+        }
+
+
         static void AltarRoom()
         {
             Console.Clear();
-            Console.WriteLine("You are now the puzzle room.");
+            Console.WriteLine("You come across a door and on it is an equations \n seems as if you must answer it to open the door");
             Console.WriteLine("There are doors to the east and west");
+            bool gotCorrect = EquationGame();
             while (true)
             {
-                Console.Write("Please enter a direction: ");
+                if (gotCorrect)
+                {
+                    Console.WriteLine("You are now the Altar room.");
+                    Console.WriteLine("You look around around the decaying room and see old run down table in the middle of the room");
+                    Console.WriteLine("The table has samll indents the shape of different items almost as if you are meanto place them in there");
+                }
+                Console.Write("Please enter an action: ");
+
                 string userInput = Console.ReadLine().ToUpper();
                 switch (userInput)
                 {
+
+                    case "PLACE":
+                        if (gotCorrect)
+                        {
+                            Console.WriteLine("You put your items in the indents on the table");
+                            if (Array.Exists(inventory, element => element == "Artifact") && Array.Exists(inventory, element => element == "Key"))
+                            {
+                                Console.WriteLine("it seems as if you dont have all the items to go on the table.");
+                            }
+                            else
+                            {
+                                Console.WriteLine("The table starts to shake");
+                                Thread.Sleep(1000);
+                                Console.WriteLine("All of a suddon the wall behind you starts to open up");
+                                Console.WriteLine("Inside you find a room full gold and treasures");
+                                Console.WriteLine("You will never have to work another day in your life");
+                                Console.WriteLine("Congradulations on completing the game!!!!");
+                            }
+                        }
+                        break;
                     case "NORTH":
                         Console.WriteLine("You can not go to south from here. Please try again");
                         break;
@@ -685,3 +769,4 @@ namespace Game
         }
     }
 }
+
