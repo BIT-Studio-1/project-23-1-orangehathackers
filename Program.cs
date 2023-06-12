@@ -12,8 +12,26 @@ namespace Game
         static int inventoryCount = 0;
         static void GameStart()
         {
-            Console.WriteLine("Name placeholder");
-            Thread.Sleep(2000);
+            Console.WriteLine("========================================================================================================================");
+            Console.WriteLine("");
+            Console.WriteLine("  _______ _             _____                    _      ____   __   ______ _   _____                      _       ");
+            Thread.Sleep(500);
+            Console.WriteLine(" |__   __| |           / ____|                  | |    / __ \\ / _| |  ____| | |  __ \\                    | |      ");
+            Thread.Sleep(500);
+            Console.WriteLine("    | |  | |__   ___  | (___   ___  ___ _ __ ___| |_  | |  | | |_  | |__  | | | |  | | ___  _ __ __ _  __| | ___  ");
+            Thread.Sleep(500);
+            Console.WriteLine("    | |  | '_ \\ / _ \\  \\___ \\ / _ \\/ __| '__/ _ \\ __| | |  | |  _| |  __| | | | |  | |/ _ \\| '__/ _` |/ _` |/ _ \\ ");
+            Thread.Sleep(500);
+            Console.WriteLine("    | |  | | | |  __/  ____) |  __/ (__| | |  __/ |_  | |__| | |   | |____| | | |__| | (_) | | | (_| | (_| | (_) |");
+            Thread.Sleep(500);
+            Console.WriteLine("    |_|  |_| |_|\\___| |_____/ \\___|\\___|_|  \\___|\\__|  \\____/|_|   |______|_| |_____/ \\___/|_|  \\__,_|\\__,_|\\___/ ");
+            Thread.Sleep(500);
+            Console.WriteLine("");
+            Console.WriteLine("");
+            Console.WriteLine("========================================================================================================================");
+            Console.WriteLine("");
+            Console.WriteLine("Press enter to continue: ");
+            Console.ReadLine();
             Console.Clear();
             Console.WriteLine("Welcome!!!! to the Excavation Game.");
             Console.WriteLine("You are an archaeologist exploring an ancient excavation site.");
@@ -63,7 +81,7 @@ namespace Game
         {
             bool pedestalActivated = false;
             bool puzzleSolved = false;
-            string puzzleAnswer = "feather, eye, scarab, ankh";
+            string puzzleAnswer = "FEATHER, EYE, SCARAB, ANKH";
             Console.Clear();
             Console.WriteLine("You are now in the Central Chamber.");
             Console.WriteLine("The central chamber is the heart of the excavation site.");
@@ -72,9 +90,8 @@ namespace Game
             Console.WriteLine("An old stone pedestal sits in the center, as if waiting for something to be placed upon it.");
             while (true)
             {
-                Console.Write("Please enter a command: ");
+                Console.Write(">> ");
                 string userInput = Console.ReadLine().ToUpper();
-                Console.Clear();
                 switch (userInput)
                 {
                     case "LOOK":
@@ -114,6 +131,7 @@ namespace Game
                                 Console.WriteLine("The symbols are: Ankh, Feather, Scarab, Eye. To unlock the puzzle,");
                                 Console.WriteLine("you must decipher the correct order of symbols and pull the levers accordingly.");
                                 Console.WriteLine("What is the correct order? (Enter you answer seperated by a comma ',')");
+                                Console.Write(">> ");
                                 string userAnswer = Console.ReadLine().ToUpper();
                                 if (userAnswer == "BACK")
                                 {
