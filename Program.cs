@@ -28,7 +28,7 @@ namespace Game
         private static bool torchUsed_Chamber_Of_Shadows = false;
         private static bool artifactPlaced = false;
         private static bool puzzleSolved_Chamber_Of_Shadows = false;
-
+        // Display the game title
         static void GameStart()
         {
             Console.WriteLine("========================================================================================================================");
