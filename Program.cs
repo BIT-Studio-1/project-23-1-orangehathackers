@@ -9,13 +9,26 @@ namespace Game
 {
     internal class Program
     {
+        // An array to store the inventory items
         private static string[] inventory = new string[5];
+
+        // Variable to keep track of the number of items in the inventory
         private static int inventoryCount = 0;
-        private static bool pedestalActivated_Central_Chamber = false, puzzleSolved_Central_Chamber = false;
+
+        // Flags to track various game states and puzzle progress
+        private static bool pedestalActivated_Central_Chamber = false;
+        private static bool puzzleSolved_Central_Chamber = false;
         private static bool puzzleSolved_Puzzle_Room = false;
-        private static bool puzzle_1_Solved = false, puzzle_2_Solved = false, puzzle_3_Solved = false, puzzle_4_Solved = false;
-        private static bool puzzleSolved_Library = false, torchUsed_Library = false;
-        private static bool torchUsed_Chamber_Of_Shadows = false, artifactPlaced = false, puzzleSolved_Chamber_Of_Shadows = false;
+        private static bool puzzle_1_Solved = false;
+        private static bool puzzle_2_Solved = false;
+        private static bool puzzle_3_Solved = false;
+        private static bool puzzle_4_Solved = false;
+        private static bool puzzleSolved_Library = false;
+        private static bool torchUsed_Library = false;
+        private static bool torchUsed_Chamber_Of_Shadows = false;
+        private static bool artifactPlaced = false;
+        private static bool puzzleSolved_Chamber_Of_Shadows = false;
+
         static void GameStart()
         {
             Console.WriteLine("========================================================================================================================");
@@ -39,14 +52,15 @@ namespace Game
             Console.WriteLine("Press enter to continue: ");
             Console.ReadLine();
             Console.Clear();
+
             Console.WriteLine("You are an archaeologist exploring an ancient excavation site.");
-            Console.WriteLine("Your mission is to find a long lost artifact of great power.");
+            Console.WriteLine("Your mission is to find a long-lost artifact of great power.");
             Console.WriteLine("Prepare yourself for an adventure filled with puzzles and mysteries!\n");
             Console.WriteLine("Press enter to continue");
             Console.ReadLine();
             Console.Clear();
         }
-
+        // Method for instruction of the game
         static void Help()
         {                                                                                                                                                                                                        
             Console.WriteLine("Instructions");
@@ -58,6 +72,7 @@ namespace Game
             Console.WriteLine("Your ultimate goal is to discover the hidden artifact and claim it for yourself.");
             Console.WriteLine("Good Luck!!!!!");
         }
+        // Method to add an item to the player's inventory
         static void AddToInventory(string item)
         {
             if (inventoryCount < inventory.Length)
@@ -70,6 +85,7 @@ namespace Game
                 Console.WriteLine("Inventory is full! Cannot add more items.");
             }
         }
+        // This method will check if the player inventory have a specific item
         static bool HasItem(string item)
         {
             for (int i = 0; i < inventoryCount; i++)
@@ -81,19 +97,25 @@ namespace Game
             }
             return false;
         }
+        // Central Chamber is a method representing the central area of the excavation site.
         static void CentralChamber()
         {
             string puzzleAnswer = "FEATHER, EYE, SCARAB, ANKH";
+
             Console.Clear();
             Console.WriteLine("You are now in the Central Chamber.");
             Console.WriteLine("The central chamber is the heart of the excavation site.");
             Console.WriteLine("Ancient hieroglyphics cover the walls, depicting scenes of forgotten legends.");
             Console.WriteLine("The room is dimly lit by flickering torches, casting eerie shadows.");
             Console.WriteLine("An old stone pedestal sits in the center, as if waiting for something to be placed upon it.");
+
+            // Infinite loop for handling player commands in the Central Chamber.
             while (true)
             {
                 Console.Write("Please enter a command: ");
                 string userInput = Console.ReadLine().ToUpper();
+
+                // Handle different player commands using a switch statement.
                 switch (userInput)
                 {
                     case "LOOK":
@@ -125,16 +147,18 @@ namespace Game
                         }
                         break;
                     case "SOLVE PUZZLE":
-                        while (!puzzleSolved_Central_Chamber) 
+                        while (!puzzleSolved_Central_Chamber)
                         {
                             if (!puzzleSolved_Central_Chamber)
                             {
                                 Console.WriteLine("The wall is covered in ancient symbols and a series of levers nearby. Each symbol corresponds to a specific lever.");
                                 Console.WriteLine("The symbols are: Ankh, Feather, Scarab, Eye. To unlock the puzzle,");
                                 Console.WriteLine("you must decipher the correct order of symbols and pull the levers accordingly.");
-                                Console.WriteLine("What is the correct order? (Enter you answer seperated by a comma ',')");
+                                Console.WriteLine("What is the correct order? (Enter your answer separated by a comma ',')");
                                 Console.Write(">> ");
                                 string userAnswer = Console.ReadLine().ToUpper();
+
+                                // Allow the player to go back to the Central Chamber if they wish.
                                 if (userAnswer == "BACK")
                                 {
                                     CentralChamber();
@@ -177,10 +201,10 @@ namespace Game
                         PuzzleRoom();
                         break;
                     case "WEST":
-                        Console.WriteLine("You can not go to west from here. Please try again");
+                        Console.WriteLine("You cannot go west from here. Please try again.");
                         break;
                     case "SOUTH":
-                        Console.WriteLine("You can not go to south from here. Please try again");
+                        Console.WriteLine("You cannot go south from here. Please try again.");
                         break;
                     case "HELP":
                         Help();
@@ -198,6 +222,7 @@ namespace Game
                 }
             }
         }
+
         static void PuzzleRoom()
         {
             Console.Clear();
