@@ -568,6 +568,7 @@ namespace Game
                 }
             }
         }
+        // ChamberOfShadow is a method representing the chamber of shadow area in the excavation site.
         static void ChamberOfShadow()
         {
             Console.Clear();
@@ -575,8 +576,10 @@ namespace Game
             Console.WriteLine("As you cautiously step into the Chamber of Shadows, the air grows heavy and oppressive.");
             Console.WriteLine("Dim, flickering lights barely illuminate the obscure corners of the room, casting eerie shadows that seem to dance and writhe along the walls.");
             Console.WriteLine("The darkness shrouds the chamber, leaving much to the imagination and evoking an unsettling sense of the unknown.");
+            
             string userAnswer = "";
             string puzzleAnswer = "OWL";
+            // Infinite loop for handling player commands
             while (true)
             {
                 Console.Write("Please enter a command: ");
@@ -762,6 +765,7 @@ namespace Game
                 }
             }
         }
+        // TreasureVault is a method representing the treasure vault area in the excavation site.
         static void TreasureVault()
         {
             Console.Clear();
@@ -772,6 +776,7 @@ namespace Game
             Console.WriteLine("As you explore further, you spot an enchanting crystal radiating a soft blue light, captivating your attention.");
             Console.WriteLine("Nearby, there is a pedestal with a lever and a locked chest, intriguing you with their mysterious aura.");
             Console.WriteLine("You also have a vague sense that there might be something else of interest waiting to be discovered in this room.");
+
             while (true)
             {
                 Console.Write("Please enter a command: ");
@@ -791,7 +796,7 @@ namespace Game
                         {
                             Console.WriteLine("You unlock the chest with the key. Inside, you find a glowing artifact.");
                             Console.WriteLine("The artifact radiates a powerful energy, and you can sense its ancient origins.");
-                            Console.WriteLine("You c ventory.");
+                            Console.WriteLine("You have got the artifact.");
                             AddToInventory("Artifact");
                         }
                         else
