@@ -113,6 +113,12 @@ namespace Game
             while (true)
             {
                 Console.Write("Please enter a command: ");
+                Console.Write("- North");
+                Console.Write("- South");
+                Console.Write("- West");
+                Console.Write("- East");
+                Console.Write("- Help");
+
                 string userInput = Console.ReadLine().ToUpper();
 
                 // Handle different player commands using a switch statement.
@@ -250,6 +256,13 @@ namespace Game
             while (true)
             {
                 Console.Write("Please enter a command: ");
+                Console.Write("Solve Puzzle");
+                Console.Write("- North");
+                Console.Write("- South");
+                Console.Write("- West");
+                Console.Write("- East");
+                Console.Write("- Help");
+
                 string userInput = Console.ReadLine().ToUpper();
 
                 // Handle different player commands using a switch statement.
