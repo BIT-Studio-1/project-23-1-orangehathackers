@@ -596,6 +596,12 @@ namespace Game
             while (true)
             {
                 Console.Write("Please enter a command: ");
+                Console.Write("- Look");
+                Console.Write("- Use Torch");
+                Console.Write("- Use Key On Cabinet");
+                Console.Write("- Examine Cabinet");
+                Console.Write("- 
+
                 string userInput = Console.ReadLine().ToUpper();
                 switch (userInput)
                 {
