@@ -589,7 +589,7 @@ namespace Game
             Console.WriteLine("Dim, flickering lights barely illuminate the obscure corners of the room, casting eerie shadows that seem to dance and writhe along the walls.");
             Console.WriteLine("The darkness shrouds the chamber, leaving much to the imagination and evoking an unsettling sense of the unknown.");
 
-            string userAnswer = "";
+            string userAnswer = " ";
             string puzzleAnswer = "OWL";
             // Infinite loop for handling player commands
             while (true)
@@ -943,7 +943,7 @@ namespace Game
         static void AltarRoom()
         {
             string userInput = Console.ReadLine().ToUpper();
-            string ReplayInput;
+            string ReplayInput = Console.ReadLine().ToUpper();
             bool gotCorrect = EquationGame();
 
             do
@@ -961,6 +961,7 @@ namespace Game
                             if (gotCorrect)
                             {
                                 Console.WriteLine("You put your items in the indents on the table");
+
                                 if (Array.Exists(inventory, element => element == "Artifact") && Array.Exists(inventory, element => element == "Key"))
                                 {
                                     Console.WriteLine("it seems as if you don't have all the items to go on the table.");
