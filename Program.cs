@@ -555,6 +555,33 @@ namespace Game
                             Console.WriteLine("The room is too dark. Maybe you have something to light up the room.");
                         }
                         break;
+                    case "TAKE BOTTLE":
+                        if (torchUsed_Library)
+                        {
+                            if (HasItem("Bottle"))
+                            {
+                                Console.WriteLine("You have already taken the bottle");
+                            }
+                            else
+                            {
+                                Console.WriteLine("You have picked up a bottle with a spray head fill of water.");
+                                AddToInventory("Bottle");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("The room is too dark. You can't see anything.");
+                        }
+                        break;
+                    case "USE BOTTLE": 
+                        if (HasItem("bottle"))
+                        {
+                            Console.WriteLine("You spray the bottle and the water turns into confetti");
+                        } else
+                        {
+                            Console.WriteLine("you do not yet have the bottle");
+                        }
+                        break;
                     case "INVENTORY":
                         Console.WriteLine("You have the following items in your inventory:");
                         for (int i = 0; i < inventoryCount; i++)
