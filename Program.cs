@@ -497,6 +497,11 @@ namespace Game
                     case "HELP":
                         Help();
                         break;
+                    case "SOTRYLINE":
+                        Console.WriteLine("Stepping into the library, you are surrounded by shelves filled with dusty tomes and scrolls. The air is thick with the scent of ancient parchment. Sunlight filters through stained glass windows, illuminating a large desk at the center of the room. On it lies a game for you to win.");
+                        Console.WriteLine("On the right, you see a ladder leading into the tunnel. There a book laying on the side of the shelves");
+                        Console.WriteLine("There is a puzzle for you to solve.");
+                        break;
                     case "SOLVE PUZZLE":
                         if (!puzzleSolved_Library)
                         {
