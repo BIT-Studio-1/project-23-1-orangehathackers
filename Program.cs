@@ -647,13 +647,13 @@ namespace Game
             Console.WriteLine("As you cautiously step into the Chamber of Shadows, the air grows heavy and oppressive.");
             Console.WriteLine("Dim, flickering lights barely illuminate the obscure corners of the room, casting eerie shadows that seem to dance and writhe along the walls.");
             Console.WriteLine("The darkness shrouds the chamber, leaving much to the imagination and evoking an unsettling sense of the unknown.");
-            
+
             string userAnswer = "";
             string puzzleAnswer = "OWL";
             // Infinite loop for handling player commands
             while (true)
             {
-                
+
                 Console.WriteLine("- Look");
                 Console.WriteLine("- Use Torch");
                 Console.WriteLine("- Use Key On Cabinet");
@@ -695,7 +695,7 @@ namespace Game
                                 Console.WriteLine("In the heart of the cabinet, an enigmatic mechanism catches your attention, its intricate design hinting at a greater purpose.");
                                 Console.WriteLine("A small slot within the mechanism awaits the placement of a mysterious artifact, teasing its significance.");
                                 Console.WriteLine("Beyond this intricate contraption lies a concealed door, promising a path to the unknown.");
-                                
+
                             }
                             else
                             {
@@ -705,7 +705,7 @@ namespace Game
                         else
                         {
                             Console.WriteLine("It's difficult to see the details in the dim light. Perhaps there's something that can help you illuminate the room.");
-                        } 
+                        }
                         break;
                     case "EXAMINE CABINET":
                         if (torchUsed_Chamber_Of_Shadows)
@@ -751,7 +751,7 @@ namespace Game
                                     while (!puzzleSolved_Chamber_Of_Shadows)
                                     {
                                         userAnswer = Console.ReadLine().ToUpper();
-                                        if (userAnswer ==  puzzleAnswer)
+                                        if (userAnswer == puzzleAnswer)
                                         {
                                             puzzleSolved_Chamber_Of_Shadows = true;
                                             Console.WriteLine("Behold! The once impenetrable barrier has yielded to your unwavering determination,");
@@ -776,13 +776,13 @@ namespace Game
                                         {
                                             Console.WriteLine("Invalid Answer. Please try again.");
                                         }
-                                    }        
+                                    }
                                 }
                                 else
                                 {
                                     Console.WriteLine("The puzzle is already solved.");
                                 }
-                                
+
                             }
                             else
                             {
@@ -845,7 +845,7 @@ namespace Game
                             Console.WriteLine("The room is too dark. You can't see anything.");
                         }
                         break;
-                        case "USE DAGGER:
+                    case "USE DAGGER:
                         if (HasItem("dagger"))
                         {
                             Console.WriteLine("You twirl the dagger thinking your self so cool");
@@ -954,6 +954,97 @@ namespace Game
                     case "WEST":
                         PuzzleRoom();
                         break;
+                    case "TAKE MYSTIC ORB":
+                        if (HasItem("Mystic Orb"))
+                        {
+                            Console.WriteLine("You have already taken the Mystic Orb.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("You take the Mystic Orb and add it to your inventory.");
+                            AddToInventory("Mystic Orb");
+                        }
+                        break;
+
+                    case "USE MYSTIC ORB":
+                        if (HasItem("Mystic Orb"))
+                        {
+                            Console.WriteLine("You hold the Mystic Orb in your hands. The orb emits a strange humming sound, and mystical runes appear on the walls of the vault.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("You don't have the Mystic Orb in your inventory.");
+                        }
+                        break;
+
+                    case "TAKE ENCHANTED AMULET":
+                        if (HasItem("Enchanted Amulet"))
+                        {
+                            Console.WriteLine("You have already taken the Enchanted Amulet.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("You take the Enchanted Amulet and add it to your inventory.");
+                            AddToInventory("Enchanted Amulet");
+                        }
+                        break;
+
+                    case "USE ENCHANTED AMULET":
+                        if (HasItem("Enchanted Amulet"))
+                        {
+                            Console.WriteLine("You hold the Enchanted Amulet. It glows with a gentle light, and you feel a wave of tranquility wash over you.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("You don't have the Enchanted Amulet in your inventory.");
+                        }
+                        break;
+
+                    case "TAKE CHRONO HOURGLASS":
+                        if (HasItem("Chrono Hourglass"))
+                        {
+                            Console.WriteLine("You have already taken the Chrono Hourglass.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("You take the Chrono Hourglass and add it to your inventory.");
+                            AddToInventory("Chrono Hourglass");
+                        }
+                        break;
+
+                    case "USE CHRONO HOURGLASS":
+                        if (HasItem("Chrono Hourglass"))
+                        {
+                            Console.WriteLine("You flip the Chrono Hourglass. The sands within it move strangely, seeming to flow in slow motion. You feel as though time itself is bending around you.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("You don't have the Chrono Hourglass in your inventory.");
+                        }
+                        break;
+
+                    case "TAKE LUMINOUS CRYSTAL":
+                        if (HasItem("Luminous Crystal"))
+                        {
+                            Console.WriteLine("You have already taken the Luminous Crystal.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("You take the Luminous Crystal and add it to your inventory.");
+                            AddToInventory("Luminous Crystal");
+                        }
+                        break;
+
+                    case "USE LUMINOUS CRYSTAL":
+                        if (HasItem("Luminous Crystal"))
+                        {
+                            Console.WriteLine("You hold the Luminous Crystal aloft. A brilliant light fills the room, revealing glittering treasures in every corner.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("You don't have the Luminous Crystal in your inventory.");
+                        }
+                        break;
                     case "HELP":
                         Help();
                         break;
@@ -970,7 +1061,6 @@ namespace Game
                 }
             }
         }
-
         static bool EquationGame()
         {
             // Generate a random math problem
@@ -1096,7 +1186,7 @@ namespace Game
         public static void Main(string[] args)
         {
             //GameStart();
-add-book-to-library
+
             //CentralChamber();
             Library();
             CentralChamber();
