@@ -595,13 +595,6 @@ namespace Game
             while (true)
             {
 
-                Console.WriteLine("- Look");
-                Console.WriteLine("- Use Torch");
-                Console.WriteLine("- Use Key On Cabinet");
-                Console.WriteLine("- Examine Cabinet");
-                Console.Write("Please enter a command: ");
-
-
                 string userInput = Console.ReadLine().ToUpper();
                 switch (userInput)
                 {
@@ -884,7 +877,7 @@ namespace Game
             }
         }
 
-        static bool EquationGame()
+        /*static bool EquationGame()
         {
             // Generate a random math problem
             Random random = new Random();
@@ -937,7 +930,7 @@ namespace Game
                 Console.WriteLine("Sorry, that's incorrect. You failed to solve the puzzle.");
                 return false;
             }
-        }
+        }*/
 
 
         static void AltarRoom()
@@ -1077,7 +1070,7 @@ namespace Game
         {
             //GameStart();
             //CentralChamber();
-            EquationGame();
+            //EquationGame();
             AltarRoom();
         }
     }
