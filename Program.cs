@@ -946,11 +946,13 @@ namespace Game
             string ReplayInput = Console.ReadLine().ToUpper();
             bool gotCorrect = EquationGame();
 
+            Console.WriteLine("You come across a door and on it is an equations \nseems as if you must answer it to open the door");
+            Console.WriteLine("There are doors to the east and west");
+            Console.WriteLine(" ");
+
             do
             {
-                Console.WriteLine("You come across a door and on it is an equations \nseems as if you must answer it to open the door");
-                Console.WriteLine("There are doors to the east and west");
-                Console.WriteLine(" ");
+                
 
                 if (int.TryParse(userInput, out int n))
                 {
