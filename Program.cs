@@ -117,13 +117,7 @@ namespace Game
                 Console.Write("-->: ");
 
                 string userInput = Console.ReadLine().ToUpper();
-                int count = userInput.Count;
                 
-
-                if (userInput == count(3))
-                {
-                    Console.WriteLine("- Help");
-                }
 
                 // Handle different player commands using a switch statement.
                 switch (userInput)
