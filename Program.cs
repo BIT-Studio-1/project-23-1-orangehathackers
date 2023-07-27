@@ -556,6 +556,49 @@ namespace Game
                             Console.WriteLine("The room is too dark. Maybe you have something to light up the room.");
                         }
                         break;
+                    case "TAKE BOOK":
+                        Console.WriteLine("You have taken a book.");
+                        AddToInventory("Book");
+                        break;
+                    case "USE BOOK":
+                        if (HasItem("Book"))
+                        {
+                            Console.WriteLine("In the heart of a scorching desert, an excavation site emerged. Digging through layers of time, the team unearthed remnants of an ancient civilization.");
+                            Console.WriteLine("Fragments of pottery whispered tales of forgotten traditions, while weathered hieroglyphs held untold secrets. Among the dust and sand, they discovered a long-buried temple, revealing the lost splendor of a civilization lost to the ages.");
+                            Console.WriteLine("The archaeologists marveled at their discovery, knowing that they had become custodians of a timeless legacy, ready to share its wonders with the world.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("You havn't pick up the book yet");
+                        }
+                        break;
+                    case "TAKE BOTTLE":
+                        if (torchUsed_Library)
+                        {
+                            if (HasItem("Bottle"))
+                            {
+                                Console.WriteLine("You have already taken the bottle");
+                            }
+                            else
+                            {
+                                Console.WriteLine("You have picked up a bottle with a spray head fill of water.");
+                                AddToInventory("Bottle");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("The room is too dark. You can't see anything.");
+                        }
+                        break;
+                    case "USE BOTTLE": 
+                        if (HasItem("bottle"))
+                        {
+                            Console.WriteLine("You spray the bottle and the water turns into confetti");
+                        } else
+                        {
+                            Console.WriteLine("you do not yet have the bottle");
+                        }
+                        break;
                     case "INVENTORY":
                         Console.WriteLine("You have the following items in your inventory:");
                         for (int i = 0; i < inventoryCount; i++)
@@ -764,6 +807,34 @@ namespace Game
                         else
                         {
                             Console.WriteLine("It's difficult to see the details in the dim light. Perhaps there's something that can help you illuminate the room.");
+                        }
+                        break;
+                    case "DAGGER":
+                        if (torchUsed_Chamber_Of_Shadows)
+                        {
+                            if (HasItem("dagger"))
+                            {
+                                Console.WriteLine("You have already taken the dagger");
+                            }
+                            else
+                            {
+                                Console.WriteLine("You have picked up a dagger with embellished engravings all over the blade");
+                                AddToInventory("dagger");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("The room is too dark. You can't see anything.");
+                        }
+                        break;
+                        case "USE DAGGER:
+                        if (HasItem("dagger"))
+                        {
+                            Console.WriteLine("You twirl the dagger thinking your self so cool");
+                        }
+                        else
+                        {
+                            Console.WriteLine("you do not yet have the dagger");
                         }
                         break;
                     case "HELP":
@@ -1006,8 +1077,12 @@ namespace Game
         public static void Main(string[] args)
         {
             //GameStart();
+add-book-to-library
             //CentralChamber();
             Library();
+            CentralChamber();
+            //AltarRoom();
+
             
         }
     }
