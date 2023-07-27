@@ -3,7 +3,6 @@ using System.ComponentModel.Design;
 using System.Linq;
 using System.Numerics;
 using System.Threading;
-using Internal;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace Game
@@ -617,22 +616,6 @@ namespace Game
                             Console.WriteLine(inventory[i]);
                         }
                         break;
-                    case "TAKE BOOK":
-                        Console.WriteLine("You have taken a book.");
-                        AddToInventory("Book");
-                        break;
-                    case "USE BOOK":
-                        if (HasItem("Book"))
-                        {
-                            Console.WriteLine("In the heart of a scorching desert, an excavation site emerged. Digging through layers of time, the team unearthed remnants of an ancient civilization.");
-                            Console.WriteLine("Fragments of pottery whispered tales of forgotten traditions, while weathered hieroglyphs held untold secrets. Among the dust and sand, they discovered a long-buried temple, revealing the lost splendor of a civilization lost to the ages.");
-                            Console.WriteLine("The archaeologists marveled at their discovery, knowing that they had become custodians of a timeless legacy, ready to share its wonders with the world.");
-                        }
-                        else
-                        {
-                            Console.WriteLine("You havn't pick up the book yet");
-                        }
-                        break;
                     default:
                         Console.WriteLine("Invalid answer. Please try again.");
                         break;
@@ -845,7 +828,7 @@ namespace Game
                             Console.WriteLine("The room is too dark. You can't see anything.");
                         }
                         break;
-                        case "USE DAGGER:
+                        case "USE DAGGER":
                         if (HasItem("dagger"))
                         {
                             Console.WriteLine("You twirl the dagger thinking your self so cool");
@@ -1096,12 +1079,8 @@ namespace Game
         public static void Main(string[] args)
         {
             //GameStart();
-add-book-to-library
-            //CentralChamber();
-            Library();
             CentralChamber();
             //AltarRoom();
-
             
         }
     }
