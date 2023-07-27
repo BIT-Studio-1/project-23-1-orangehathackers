@@ -3,7 +3,6 @@ using System.ComponentModel.Design;
 using System.Linq;
 using System.Numerics;
 using System.Threading;
-using Internal;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace Game
@@ -63,7 +62,8 @@ namespace Game
         }
         // Method for instruction of the game
         static void Help()
-        {                                                                                                                                                                                                        
+        {
+            string temp = "";
             Console.WriteLine("Instructions");
             Console.WriteLine("Enter commands to navigate between rooms and interact with the environment.");
             Console.WriteLine("Use 'north', 'south', 'east' and 'west' to move in those respective directions.");
@@ -72,6 +72,10 @@ namespace Game
             Console.WriteLine("Collect useful items to help you progress in the game.");
             Console.WriteLine("Your ultimate goal is to discover the hidden artifact and claim it for yourself.");
             Console.WriteLine("Good Luck!!!!!");
+
+            Console.WriteLine("Please press enter to clear out the instruction");
+            temp = Console.ReadLine();
+            Console.Clear();
         }
         // Method to add an item to the player's inventory
         static void AddToInventory(string item)
@@ -606,22 +610,6 @@ namespace Game
                             Console.WriteLine(inventory[i]);
                         }
                         break;
-                    case "TAKE BOOK":
-                        Console.WriteLine("You have taken a book.");
-                        AddToInventory("Book");
-                        break;
-                    case "USE BOOK":
-                        if (HasItem("Book"))
-                        {
-                            Console.WriteLine("In the heart of a scorching desert, an excavation site emerged. Digging through layers of time, the team unearthed remnants of an ancient civilization.");
-                            Console.WriteLine("Fragments of pottery whispered tales of forgotten traditions, while weathered hieroglyphs held untold secrets. Among the dust and sand, they discovered a long-buried temple, revealing the lost splendor of a civilization lost to the ages.");
-                            Console.WriteLine("The archaeologists marveled at their discovery, knowing that they had become custodians of a timeless legacy, ready to share its wonders with the world.");
-                        }
-                        else
-                        {
-                            Console.WriteLine("You havn't pick up the book yet");
-                        }
-                        break;
                     default:
                         Console.WriteLine("Invalid answer. Please try again.");
                         break;
@@ -827,7 +815,7 @@ namespace Game
                             Console.WriteLine("The room is too dark. You can't see anything.");
                         }
                         break;
-                        case "USE DAGGER:
+                        case "USE DAGGER":
                         if (HasItem("dagger"))
                         {
                             Console.WriteLine("You twirl the dagger thinking your self so cool");
@@ -1077,10 +1065,9 @@ namespace Game
         public static void Main(string[] args)
         {
             //GameStart();
-add-book-to-library
             //CentralChamber();
             Library();
-            CentralChamber();
+            //CentralChamber();
             //AltarRoom();
 
             
