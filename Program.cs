@@ -445,10 +445,44 @@ namespace Game
                             Console.WriteLine(inventory[i]);
                         }
                         break;
+                    case "BOW":
+                        BowAndArrow();
+                        break;
                     default:
                         Console.WriteLine("Invalid answer. Please try again.");
                         break;
                 }
+            }
+        }
+        static void BowAndArrow()
+        {
+            Console.WriteLine("Welcome to the Bow and Arrow Game!");
+            Console.WriteLine("Press Enter to shoot the arrow.");
+            Console.ReadLine();
+
+            Random random = new Random();
+            int targetPosition = random.Next(1, 11); // The target position will be between 1 and 10.
+
+            Console.WriteLine("Target is placed at position " + targetPosition);
+            Console.WriteLine("Enter the position you want to shoot the arrow (1-10):");
+
+            string input = Console.ReadLine();
+            int arrowPosition;
+
+            if (int.TryParse(input, out arrowPosition))     //this cool line is like convert to int32 but outputs a boolian so the variable does not break if something is inputted by the user wrong
+            {
+                if (arrowPosition == targetPosition)
+                {
+                    Console.WriteLine("Congratulations! You hit the target!");
+                }
+                else
+                {
+                    Console.WriteLine("Sorry, you missed the target.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Invalid input. Please enter a number between 1 and 10.");
             }
         }
 
