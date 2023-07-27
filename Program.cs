@@ -2,8 +2,8 @@
 using System.ComponentModel.Design;
 using System.Linq;
 using System.Numerics;
+using System.Runtime.CompilerServices;
 using System.Threading;
-using Internal;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace Game
@@ -29,6 +29,27 @@ namespace Game
         private static bool torchUsed_Chamber_Of_Shadows = false;
         private static bool artifactPlaced = false;
         private static bool puzzleSolved_Chamber_Of_Shadows = false;
+
+        static void AnimateText(string text)
+        {
+        int screenWidth = Console.WindowWidth;
+        int textLength = text.Length;
+        int leftPadding = (screenWidth - textLength) / 2;
+
+        for (int i = 0; i < leftPadding; i++)
+        {
+            Console.Write(" ");
+        }
+
+        foreach (char c in text)
+        {
+            Console.Write(c);
+            Thread.Sleep(50); // Adjust the delay (in milliseconds) to control the animation speed
+        }
+
+        Console.WriteLine();
+        Thread.Sleep(1000); // Add a pause after each line is displayed
+        }
         // Display the game title
         static void GameStart()
         {
@@ -617,22 +638,6 @@ namespace Game
                             Console.WriteLine(inventory[i]);
                         }
                         break;
-                    case "TAKE BOOK":
-                        Console.WriteLine("You have taken a book.");
-                        AddToInventory("Book");
-                        break;
-                    case "USE BOOK":
-                        if (HasItem("Book"))
-                        {
-                            Console.WriteLine("In the heart of a scorching desert, an excavation site emerged. Digging through layers of time, the team unearthed remnants of an ancient civilization.");
-                            Console.WriteLine("Fragments of pottery whispered tales of forgotten traditions, while weathered hieroglyphs held untold secrets. Among the dust and sand, they discovered a long-buried temple, revealing the lost splendor of a civilization lost to the ages.");
-                            Console.WriteLine("The archaeologists marveled at their discovery, knowing that they had become custodians of a timeless legacy, ready to share its wonders with the world.");
-                        }
-                        else
-                        {
-                            Console.WriteLine("You havn't pick up the book yet");
-                        }
-                        break;
                     default:
                         Console.WriteLine("Invalid answer. Please try again.");
                         break;
@@ -643,24 +648,34 @@ namespace Game
         static void ChamberOfShadow()
         {
             Console.Clear();
-            Console.WriteLine("You are now in the chamber of shadow.");
-            Console.WriteLine("As you cautiously step into the Chamber of Shadows, the air grows heavy and oppressive.");
-            Console.WriteLine("Dim, flickering lights barely illuminate the obscure corners of the room, casting eerie shadows that seem to dance and writhe along the walls.");
-            Console.WriteLine("The darkness shrouds the chamber, leaving much to the imagination and evoking an unsettling sense of the unknown.");
-            
+            AnimateText("You are now in the chamber of shadow.");
+            AnimateText("As you cautiously step into the Chamber of Shadows, the air grows heavy and oppressive.");
+            AnimateText("Dim, flickering lights barely illuminate the obscure corners of the room, casting eerie");
+            AnimateText("shadows that seem to dance and writhe along the walls.");
+            AnimateText("The darkness shrouds the chamber, leaving much to the imagination and evoking an unsettling sense of the unknown.");
+            Console.WriteLine(" ");
+            Console.WriteLine("Use the following commands to interact with the room environment.");
+            Console.WriteLine("- Look");
+            Console.WriteLine("- Use Torch");
+            Console.WriteLine("- Use Key On Cabinet");
+            Console.WriteLine("- Examine Cabinet");
+            Console.WriteLine("- Place artifact on Mechanism");
+            Console.WriteLine("- Solve Puzzle");
+            Console.WriteLine("- Dagger");
+            Console.WriteLine("- Use Dagger");
+            Console.WriteLine("- Help");
+            Console.WriteLine("- Inventory");
+            Console.WriteLine("- North");
+            Console.WriteLine("- South");
+            Console.WriteLine("- East");
+            Console.WriteLine("- West");
+
             string userAnswer = "";
             string puzzleAnswer = "OWL";
             // Infinite loop for handling player commands
             while (true)
             {
-                
-                Console.WriteLine("- Look");
-                Console.WriteLine("- Use Torch");
-                Console.WriteLine("- Use Key On Cabinet");
-                Console.WriteLine("- Examine Cabinet");
                 Console.Write("Please enter a command: ");
-
-
                 string userInput = Console.ReadLine().ToUpper();
                 switch (userInput)
                 {
@@ -845,7 +860,7 @@ namespace Game
                             Console.WriteLine("The room is too dark. You can't see anything.");
                         }
                         break;
-                        case "USE DAGGER:
+                        case "USE DAGGER":
                         if (HasItem("dagger"))
                         {
                             Console.WriteLine("You twirl the dagger thinking your self so cool");
@@ -1096,13 +1111,12 @@ namespace Game
         public static void Main(string[] args)
         {
             //GameStart();
-add-book-to-library
             //CentralChamber();
-            Library();
-            CentralChamber();
+            //Library();
+            //CentralChamber();
             //AltarRoom();
-
-            
+            ChamberOfShadow();
+            Console.ReadLine();
         }
     }
 }
