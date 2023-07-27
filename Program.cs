@@ -112,14 +112,18 @@ namespace Game
             // Infinite loop for handling player commands in the Central Chamber.
             while (true)
             {
-                Console.Write("Please enter a command: ");
-                Console.Write("- North");
-                Console.Write("- South");
-                Console.Write("- West");
-                Console.Write("- East");
-                Console.Write("- Help");
+                Console.WriteLine("Please enter a command: ");
+                Console.WriteLine("");
+                Console.Write("-->: ");
 
                 string userInput = Console.ReadLine().ToUpper();
+                int count = userInput.Count;
+                
+
+                if (userInput == count(3))
+                {
+                    Console.WriteLine("- Help");
+                }
 
                 // Handle different player commands using a switch statement.
                 switch (userInput)
@@ -226,7 +230,7 @@ namespace Game
                         Console.WriteLine("Invalid command. Please try again.");
                         break;
                 }
-            }
+            } 
         }
 
         // Puzzle Room is a method representing the puzzle room in the excavation site.
@@ -595,12 +599,13 @@ namespace Game
             // Infinite loop for handling player commands
             while (true)
             {
+                
+                Console.WriteLine("- Look");
+                Console.WriteLine("- Use Torch");
+                Console.WriteLine("- Use Key On Cabinet");
+                Console.WriteLine("- Examine Cabinet");
                 Console.Write("Please enter a command: ");
-                Console.Write("- Look");
-                Console.Write("- Use Torch");
-                Console.Write("- Use Key On Cabinet");
-                Console.Write("- Examine Cabinet");
-                Console.Write("- 
+
 
                 string userInput = Console.ReadLine().ToUpper();
                 switch (userInput)
@@ -948,11 +953,12 @@ namespace Game
             {
                 if (gotCorrect)
                 {
-                    Console.WriteLine("You are now the Altar room.");
-                    Console.WriteLine("You look around around the decaying room and see old run down table in the middle of the room");
+                    Console.WriteLine("You are now in the Altar room.");
+                    Console.WriteLine("You look around the decaying room and see old run down table in the middle of the room");
                     Console.WriteLine("The table has small indents the shape of different items almost as if you are mean to place them in there");
                 }
-                Console.Write("Please enter an action: ");
+                Console.WriteLine("Please enter an action: ");
+                Console.Write("---> ");
 
                 string userInput = Console.ReadLine().ToUpper();
                 if (userInput == "BACK")
