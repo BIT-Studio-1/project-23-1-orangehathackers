@@ -988,8 +988,9 @@ namespace Game
         }
         public static void Main(string[] args)
         {
-            GameStart();
+            //GameStart();
             CentralChamber();
+            //AltarRoom();
             
         }
     }
