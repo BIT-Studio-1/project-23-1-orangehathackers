@@ -1,10 +1,7 @@
 ﻿using System;
-using System.ComponentModel.Design;
 using System.Linq;
-using System.Numerics;
 using System.Threading;
-using Internal;
-using static System.Net.Mime.MediaTypeNames;
+
 
 namespace Game
 {
@@ -617,22 +614,6 @@ namespace Game
                             Console.WriteLine(inventory[i]);
                         }
                         break;
-                    case "TAKE BOOK":
-                        Console.WriteLine("You have taken a book.");
-                        AddToInventory("Book");
-                        break;
-                    case "USE BOOK":
-                        if (HasItem("Book"))
-                        {
-                            Console.WriteLine("In the heart of a scorching desert, an excavation site emerged. Digging through layers of time, the team unearthed remnants of an ancient civilization.");
-                            Console.WriteLine("Fragments of pottery whispered tales of forgotten traditions, while weathered hieroglyphs held untold secrets. Among the dust and sand, they discovered a long-buried temple, revealing the lost splendor of a civilization lost to the ages.");
-                            Console.WriteLine("The archaeologists marveled at their discovery, knowing that they had become custodians of a timeless legacy, ready to share its wonders with the world.");
-                        }
-                        else
-                        {
-                            Console.WriteLine("You havn't pick up the book yet");
-                        }
-                        break;
                     default:
                         Console.WriteLine("Invalid answer. Please try again.");
                         break;
@@ -845,7 +826,7 @@ namespace Game
                             Console.WriteLine("The room is too dark. You can't see anything.");
                         }
                         break;
-                    case "USE DAGGER:
+                    case "USE DAGGER":
                         if (HasItem("dagger"))
                         {
                             Console.WriteLine("You twirl the dagger thinking your self so cool");
@@ -875,13 +856,21 @@ namespace Game
         static void TreasureVault()
         {
             Console.Clear();
-            Console.WriteLine("You have entered the Treasure Vault.");
-            Console.WriteLine("The Treasure Vault is a vast chamber filled with glittering treasures and ancient artifacts.");
-            Console.WriteLine("The room is bathed in a soft golden light, illuminating the riches that surround you.");
-            Console.WriteLine("You notice a gentle flickering in the corner of your eye, hinting at something hidden within the shadows.");
-            Console.WriteLine("As you explore further, you spot an enchanting crystal radiating a soft blue light, captivating your attention.");
-            Console.WriteLine("Nearby, there is a pedestal with a lever and a locked chest, intriguing you with their mysterious aura.");
-            Console.WriteLine("You also have a vague sense that there might be something else of interest waiting to be discovered in this room.");
+            string[] messages = {
+                "You have entered the Treasure Vault.",
+                "The Treasure Vault is a vast chamber filled with glittering treasures and ancient artifacts.",
+                "The room is bathed in a soft golden light, illuminating the riches that surround you.",
+                "You notice a gentle flickering in the corner of your eye, hinting at something hidden within the shadows.",
+                "As you explore further, you spot an enchanting crystal radiating a soft blue light, captivating your attention.",
+                "Nearby, there is a pedestal with a lever and a locked chest, intriguing you with their mysterious aura.",
+                "You also have a vague sense that there might be something else of interest waiting to be discovered in this room.",
+            };
+
+            foreach (string message in messages)
+            {
+                Console.WriteLine("       " + message); 
+                System.Threading.Thread.Sleep(500); 
+            }
 
             while (true)
             {
