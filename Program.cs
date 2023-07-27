@@ -929,7 +929,11 @@ namespace Game
 
         static void AltarRoom()
         {
-            string userInput = Console.ReadLine().ToUpper();
+            Console.WriteLine("abc");
+           Console.WriteLine(input idk) ;
+            string userInput = Console.ReadLine();
+            Console.WriteLine(y to get out ArgumentOutOfRangeException loop idk why you would need that when its a game not a fking app but ay what ever
+                );
             string ReplayInput = Console.ReadLine().ToUpper();
             bool gotCorrect = EquationGame();
 
@@ -947,7 +951,7 @@ namespace Game
                     {
 
                         case "PLACE":
-                            if (gotCorrect)
+                            if (gotCorrect == true)
                             {
                                 Console.WriteLine("You put your items in the indents on the table");
 
@@ -1064,7 +1068,7 @@ namespace Game
         {
             //GameStart();
             //CentralChamber();
-            EquationGame();
+            //EquationGame();
             AltarRoom();
         }
     }
