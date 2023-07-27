@@ -776,6 +776,34 @@ namespace Game
                             Console.WriteLine("It's difficult to see the details in the dim light. Perhaps there's something that can help you illuminate the room.");
                         }
                         break;
+                    case "DAGGER":
+                        if (torchUsed_Chamber_Of_Shadows)
+                        {
+                            if (HasItem("dagger"))
+                            {
+                                Console.WriteLine("You have already taken the dagger");
+                            }
+                            else
+                            {
+                                Console.WriteLine("You have picked up a dagger with embellished engravings all over the blade");
+                                AddToInventory("dagger");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("The room is too dark. You can't see anything.");
+                        }
+                        break;
+                        case "USE DAGGER:
+                        if (HasItem("dagger"))
+                        {
+                            Console.WriteLine("You twirl the dagger thinking your self so cool");
+                        }
+                        else
+                        {
+                            Console.WriteLine("you do not yet have the dagger");
+                        }
+                        break;
                     case "HELP":
                         Help();
                         break;
