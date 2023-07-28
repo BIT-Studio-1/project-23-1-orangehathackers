@@ -584,6 +584,10 @@ namespace Game
                             Console.WriteLine("You have taken a book.");
                             AddToInventory("Book");
                         }
+                        else if (HasItem("Book"))
+                        {
+                            Console.WriteLine("You have already taken a book");
+                        }
                         else
                         {
                             Console.WriteLine("You need to use a torch to investigate the book shelf");
@@ -634,6 +638,11 @@ namespace Game
                         {
                             Console.WriteLine(inventory[i]);
                         }
+                        break;
+                    case "STORYLINE"
+                        Console.WriteLine("Stepping into the library, you are surrounded by shelves filled with dusty tomes and scrolls. The air is thick with the scent of ancient parchment. Sunlight filters through stained glass windows, illuminating a large desk at the center of the room. On it lies a game for you to win.");
+                        Console.WriteLine("On the right, you see a ladder leading into the tunnel. There a book laying on the side of the shelves");
+                        Console.WriteLine("There is a puzzle for you to solve.");
                         break;
                     default:
                         Console.WriteLine("Invalid answer. Please try again.");
