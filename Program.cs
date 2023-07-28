@@ -3,6 +3,7 @@ using System.ComponentModel.Design;
 using System.Linq;
 using System.Numerics;
 using System.Threading;
+using Internal;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace Game
@@ -456,7 +457,24 @@ namespace Game
                 }
             }
         }
-
+        static void helpLibrary()
+        {
+            Console.WriteLine("This is all the helpful command in library room");
+            Console.WriteLine("- North")
+            Console.WriteLine("- South");
+            Console.WriteLine("- West");
+            Console.WriteLine("- East");
+            Console.WriteLine("- Solve puzzle");
+            Console.WriteLine("- Climb");
+            Console.WriteLine("- Use torch");
+            Console.WriteLine("- Take pendant");
+            Console.WriteLine("- Take book");
+            Console.WriteLine("- Use book");
+            Console.WriteLine("- Take bottle");
+            Console.WriteLine("- Use bottle");
+            Console.WriteLine("- Inventory");
+            Console.WriteLine("- Help");
+        }
         // Library is a method representing the library area in the excavation site.
         static void Library()
         {
@@ -488,7 +506,7 @@ namespace Game
                         Console.WriteLine("You cannot go west from here. Please try again.");
                         break;
                     case "HELP":
-                        Help();
+                        helpLibrary();
                         break;
                     case "SOLVE PUZZLE":
                         if (!puzzleSolved_Library)
