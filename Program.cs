@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Linq;
 using System.Numerics;
@@ -10,11 +11,8 @@ namespace Game
 {
     internal class Program
     {
-        // An array to store the inventory items
-        private static string[] inventory = new string[5];
-
-        // Variable to keep track of the number of items in the inventory
-        private static int inventoryCount = 0;
+        // A List to store the inventory items
+        private static List<string> Inventory = new List<string>();
 
         // Flags to track various game states and puzzle progress
         private static bool pedestalActivated_Central_Chamber = false;
@@ -30,6 +28,7 @@ namespace Game
         private static bool artifactPlaced = false;
         private static bool puzzleSolved_Chamber_Of_Shadows = false;
 
+        // A method to animate the text describing the room
         static void AnimateText(string text)
         {
         int screenWidth = Console.WindowWidth;
@@ -75,72 +74,75 @@ namespace Game
             Console.ReadLine();
             Console.Clear();
 
-            Console.WriteLine("You are an archaeologist exploring an ancient excavation site.");
-            Console.WriteLine("Your mission is to find a long-lost artifact of great power.");
-            Console.WriteLine("Prepare yourself for an adventure filled with puzzles and mysteries!\n");
-            Console.WriteLine("Press enter to continue");
+            AnimateText("You are an archaeologist exploring an ancient excavation site.");
+            AnimateText("Your mission is to find a long-lost artifact of great power.");
+            AnimateText("Prepare yourself for an adventure filled with puzzles and mysteries!\n");
+            AnimateText("Press enter to continue");
             Console.ReadLine();
             Console.Clear();
         }
-        // Method for instruction of the game
-        static void Help()
+        // Method for instruction of the game in chamber of shadows
+        static void Help_Chamber_Of_Shadows()
         {                                                                                                                                                                                                        
             Console.WriteLine("Instructions");
             Console.WriteLine("Enter commands to navigate between rooms and interact with the environment.");
-            Console.WriteLine("Use 'north', 'south', 'east' and 'west' to move in those respective directions.");
-            Console.WriteLine("Use words like 'examine', 'use', 'look', 'solve', 'climb', 'take' to interact with the items and environment.");
+            Console.WriteLine("You can use the following commands.");
+            Console.WriteLine("- Look");
+            Console.WriteLine("- Use Torch");
+            Console.WriteLine("- Use Key On Cabinet");
+            Console.WriteLine("- Examine Cabinet");
+            Console.WriteLine("- Place artifact on Mechanism");
+            Console.WriteLine("- Solve Puzzle");
+            Console.WriteLine("- Dagger");
+            Console.WriteLine("- Use Dagger");
+            Console.WriteLine("- Inventory");
+            Console.WriteLine("- North");
+            Console.WriteLine("- South");
+            Console.WriteLine("- East");
+            Console.WriteLine("- West");
             Console.WriteLine("Explore each room throughly to find items and solve puzzles.");
             Console.WriteLine("Collect useful items to help you progress in the game.");
             Console.WriteLine("Your ultimate goal is to discover the hidden artifact and claim it for yourself.");
             Console.WriteLine("Good Luck!!!!!");
         }
-        // Method to add an item to the player's inventory
-        static void AddToInventory(string item)
+
+        static void Help_Central_Chamber()
         {
-            if (inventoryCount < inventory.Length)
-            {
-                inventory[inventoryCount] = item;
-                inventoryCount++;
-            }
-            else
-            {
-                Console.WriteLine("Inventory is full! Cannot add more items.");
-            }
+            Console.WriteLine("Instructions");
+            Console.WriteLine("Enter commands to navigate between rooms and interact with the environment.");
+            Console.WriteLine("You can use the following commands.");
+            Console.WriteLine("- Look");
+            Console.WriteLine("- Examine Pedestal");
+            Console.WriteLine("- Solve Puzzle");
+            Console.WriteLine("- Use Key On Pedestal");
+            Console.WriteLine("- North");
+            Console.WriteLine("- South");
+            Console.WriteLine("- East");
+            Console.WriteLine("- West");
+            Console.WriteLine("- Inventory");
         }
-        // This method will check if the player inventory have a specific item
-        static bool HasItem(string item)
-        {
-            for (int i = 0; i < inventoryCount; i++)
-            {
-                if (inventory[i] == item)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
+            
         // Central Chamber is a method representing the central area of the excavation site.
         static void CentralChamber()
         {
             string puzzleAnswer = "FEATHER, EYE, SCARAB, ANKH";
 
             Console.Clear();
-            Console.WriteLine("You are now in the Central Chamber.");
-            Console.WriteLine("The central chamber is the heart of the excavation site.");
-            Console.WriteLine("Ancient hieroglyphics cover the walls, depicting scenes of forgotten legends.");
-            Console.WriteLine("The room is dimly lit by flickering torches, casting eerie shadows.");
-            Console.WriteLine("An old stone pedestal sits in the center, as if waiting for something to be placed upon it.");
+            AnimateText("You are now in the Central Chamber.");
+            AnimateText("The central chamber is the heart of the excavation site.");
+            AnimateText("Ancient hieroglyphics cover the walls, depicting scenes of forgotten legends.");
+            AnimateText("The room is dimly lit by flickering torches, casting eerie shadows.");
+            AnimateText("An old stone pedestal sits in the center, as if waiting for something to be placed upon it.");
+            Console.WriteLine(" ");
+            Console.WriteLine("Type help for instructions.");
+            Help_Central_Chamber();
 
             // Infinite loop for handling player commands in the Central Chamber.
             while (true)
             {
                 Console.WriteLine("Please enter a command: ");
-                Console.WriteLine("");
-                Console.Write("-->: ");
-
                 string userInput = Console.ReadLine().ToUpper();
                 
-
                 // Handle different player commands using a switch statement.
                 switch (userInput)
                 {
@@ -158,7 +160,7 @@ namespace Game
                         }
                         break;
                     case "USE KEY ON PEDESTAL":
-                        if (!HasItem("Key"))
+                        if (!Inventory.Contains("Key"))
                         {
                             Console.WriteLine("You don't have a key to use on the pedestal.");
                         }
@@ -193,7 +195,7 @@ namespace Game
                                 {
                                     puzzleSolved_Central_Chamber = true;
                                     Console.WriteLine("Congratulations!!! you have solved the puzzle and obtained the key.");
-                                    AddToInventory("Key");
+                                    Inventory.Add("Key");
                                 }
                                 else
                                 {
@@ -207,7 +209,7 @@ namespace Game
                         }
                         break;
                     case "NORTH":
-                        if (HasItem("Key"))
+                        if (Inventory.Contains("Key"))
                         {
                             if (pedestalActivated_Central_Chamber)
                             {
@@ -232,14 +234,11 @@ namespace Game
                     case "SOUTH":
                         Console.WriteLine("You cannot go south from here. Please try again.");
                         break;
-                    case "HELP":
-                        Help();
-                        break;
                     case "INVENTORY":
                         Console.WriteLine("You have the following items in your inventory:");
-                        for (int i = 0; i < inventoryCount; i++)
+                        foreach (string item in Inventory)
                         {
-                            Console.WriteLine(inventory[i]);
+                            Console.Write($"{item} ");
                         }
                         break;
                     default:
@@ -654,21 +653,8 @@ namespace Game
             AnimateText("shadows that seem to dance and writhe along the walls.");
             AnimateText("The darkness shrouds the chamber, leaving much to the imagination and evoking an unsettling sense of the unknown.");
             Console.WriteLine(" ");
-            Console.WriteLine("Use the following commands to interact with the room environment.");
-            Console.WriteLine("- Look");
-            Console.WriteLine("- Use Torch");
-            Console.WriteLine("- Use Key On Cabinet");
-            Console.WriteLine("- Examine Cabinet");
-            Console.WriteLine("- Place artifact on Mechanism");
-            Console.WriteLine("- Solve Puzzle");
-            Console.WriteLine("- Dagger");
-            Console.WriteLine("- Use Dagger");
-            Console.WriteLine("- Help");
-            Console.WriteLine("- Inventory");
-            Console.WriteLine("- North");
-            Console.WriteLine("- South");
-            Console.WriteLine("- East");
-            Console.WriteLine("- West");
+            Console.WriteLine("Type help for instructions.");
+            Help_Chamber_Of_Shadows();
 
             string userAnswer = "";
             string puzzleAnswer = "OWL";
