@@ -579,8 +579,15 @@ namespace Game
                         }
                         break;
                     case "TAKE BOOK":
-                        Console.WriteLine("You have taken a book.");
-                        AddToInventory("Book");
+                        if (torchUsed_Library)
+                        {
+                            Console.WriteLine("You have taken a book.");
+                            AddToInventory("Book");
+                        }
+                        else
+                        {
+                            Console.WriteLine("You need to use a torch to investigate the book shelf");
+                        }
                         break;
                     case "USE BOOK":
                         if (HasItem("Book"))
