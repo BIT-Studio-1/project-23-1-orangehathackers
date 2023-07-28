@@ -134,6 +134,27 @@ namespace Game
             Console.WriteLine("- East");
             Console.WriteLine("- Inventory");
         }
+
+        static void Help_Library()
+        {
+            Console.WriteLine("Instructions");
+            Console.WriteLine("Enter commands to navigate between rooms and interact with the environment.");
+            Console.WriteLine("You can use the following commands.");
+            Console.WriteLine("Solve Puzzle");
+            Console.WriteLine("- North");
+            Console.WriteLine("- South");
+            Console.WriteLine("- West");
+            Console.WriteLine("- East");
+            Console.WriteLine("- Inventory");
+            Console.WriteLine("Climb");
+            Console.WriteLine("Use Torch");
+            Console.WriteLine("Take Pendant");
+            Console.WriteLine("Take Book");
+            Console.WriteLine("Use Book");
+            Console.WriteLine("Take Bottle");
+            Console.WriteLine("Use Bottle");
+
+        }
             
         // Central Chamber is a method representing the central area of the excavation site.
         static void CentralChamber()
@@ -270,6 +291,9 @@ namespace Game
             AnimateText("As you enter this room, you are greeted by a series of intricate puzzles.");
             AnimateText("The walls are adorned with enigmatic symbols, and the floor is marked with a pattern of tiles.");
             AnimateText("A riddle is etched onto a stone tablet, challenging you to unlock the room's secrets.");
+            Console.WriteLine(" ");
+            Console.WriteLine("Type help for instructions.");
+            Help_Puzzle_Room();
 
             // Define puzzle answers and riddles for the room.
             string puzzle1Answer = "Q";
@@ -496,14 +520,18 @@ namespace Game
         {
             string puzzleAnswerTreasure = "TREASURE HUNT";
             Console.Clear();
-            Console.WriteLine("Stepping into the library, you are surrounded by shelves filled with dusty tomes and scrolls. The air is thick with the scent of ancient parchment. Sunlight filters through stained glass windows, illuminating a large desk at the center of the room. On it lies a game for you to win.");
-            Console.WriteLine("On the right, you see a ladder leading into the tunnel. There a book laying on the side of the shelves");
-            Console.WriteLine("There is a puzzle for you to solve.");
+            AnimateText("Stepping into the library, you are surrounded by shelves filled with dusty tomes and scrolls. The air is thick with the scent of ancient parchment. Sunlight filters through stained glass windows, illuminating a large desk at the center of the room. On it lies a game for you to win.");
+            AnimateText("On the right, you see a ladder leading into the tunnel. There a book laying on the side of the shelves");
+            AnimateText("There is a puzzle for you to solve.");
+            Console.WriteLine(" ");
+            Console.WriteLine("Type help for instructions.");
+            Help_Library();
+
 
             // Infinite loop for handling player commands in the Library.
             while (true)
             {
-                Console.Write(">> ");
+                Console.Write("Please enter a command: ");
                 string userInput = Console.ReadLine().ToUpper();
 
                 // Handle different player commands using a switch statement.
@@ -520,9 +548,6 @@ namespace Game
                         break;
                     case "WEST":
                         Console.WriteLine("You cannot go west from here. Please try again.");
-                        break;
-                    case "HELP":
-                        Help();
                         break;
                     case "SOLVE PUZZLE":
                         if (!puzzleSolved_Library)
@@ -541,14 +566,14 @@ namespace Game
                                     Console.WriteLine("Inside the wooden chest, you find an old book laying on the bottom.");
 
                                     // Check if the player already has a book.
-                                    if (HasItem("Book"))
+                                    if (Inventory.Contains("Book"))
                                     {
                                         Console.WriteLine("You have already taken a book.");
                                     }
                                     else
                                     {
                                         Console.WriteLine("The book is added to the inventory.");
-                                        AddToInventory("Book");
+                                        Inventory.Add("Book");
                                     }
                                 }
                                 else
@@ -566,7 +591,7 @@ namespace Game
                         Console.WriteLine("You have climbed the ladder. It's leading into a dark room.");
                         break;
                     case "USE TORCH":
-                        if (HasItem("Torch"))
+                        if (Inventory.Contains("Torch"))
                         {
                             torchUsed_Library = true;
                             Console.WriteLine("As the beam of your torch pierced the enveloping darkness, the once concealed room came alive, revealing a mesmerizing pendant resting serenely on the table, its facets sparkling with newfound light.");
@@ -579,14 +604,14 @@ namespace Game
                     case "TAKE PENDANT":
                         if (torchUsed_Library)
                         {
-                            if (HasItem("Pendant"))
+                            if (Inventory.Contains("Pendant"))
                             {
                                 Console.WriteLine("You have already taken a pendant.");
                             }
                             else
                             {
                                 Console.WriteLine("You have picked up a pendant and go back to the library.");
-                                AddToInventory("Pendant");
+                                Inventory.Add("Pendant");
                             }
                         }
                         else
@@ -596,10 +621,10 @@ namespace Game
                         break;
                     case "TAKE BOOK":
                         Console.WriteLine("You have taken a book.");
-                        AddToInventory("Book");
+                        Inventory.Add("Book");
                         break;
                     case "USE BOOK":
-                        if (HasItem("Book"))
+                        if (Inventory.Contains("Book"))
                         {
                             Console.WriteLine("In the heart of a scorching desert, an excavation site emerged. Digging through layers of time, the team unearthed remnants of an ancient civilization.");
                             Console.WriteLine("Fragments of pottery whispered tales of forgotten traditions, while weathered hieroglyphs held untold secrets. Among the dust and sand, they discovered a long-buried temple, revealing the lost splendor of a civilization lost to the ages.");
@@ -613,14 +638,14 @@ namespace Game
                     case "TAKE BOTTLE":
                         if (torchUsed_Library)
                         {
-                            if (HasItem("Bottle"))
+                            if (Inventory.Contains("Bottle"))
                             {
                                 Console.WriteLine("You have already taken the bottle");
                             }
                             else
                             {
                                 Console.WriteLine("You have picked up a bottle with a spray head fill of water.");
-                                AddToInventory("Bottle");
+                                Inventory.Add("Bottle");
                             }
                         }
                         else
@@ -629,19 +654,19 @@ namespace Game
                         }
                         break;
                     case "USE BOTTLE": 
-                        if (HasItem("bottle"))
+                        if (Inventory.Contains("bottle"))
                         {
                             Console.WriteLine("You spray the bottle and the water turns into confetti");
                         } else
                         {
-                            Console.WriteLine("you do not yet have the bottle");
+                            Console.WriteLine("You do not yet have the bottle");
                         }
                         break;
                     case "INVENTORY":
                         Console.WriteLine("You have the following items in your inventory:");
-                        for (int i = 0; i < inventoryCount; i++)
+                        foreach (string item in Inventory)
                         {
-                            Console.WriteLine(inventory[i]);
+                            Console.Write($"{item} ");
                         }
                         break;
                     default:
@@ -684,7 +709,7 @@ namespace Game
                         }
                         break;
                     case "USE TORCH":
-                        if (HasItem("Torch"))
+                        if (Inventory.Contains("Torch"))
                         {
                             Console.WriteLine("As the player ignites the torch,");
                             Console.WriteLine("the flickering flames cast dancing shadows that begin to reveal the hidden details of the room, shrouded in darkness no more.");
@@ -698,7 +723,7 @@ namespace Game
                     case "USE KEY ON CABINET":
                         if (torchUsed_Chamber_Of_Shadows)
                         {
-                            if (HasItem("Key"))
+                            if (Inventory.Contains("Key"))
                             {
                                 Console.WriteLine("In the heart of the cabinet, an enigmatic mechanism catches your attention, its intricate design hinting at a greater purpose.");
                                 Console.WriteLine("A small slot within the mechanism awaits the placement of a mysterious artifact, teasing its significance.");
