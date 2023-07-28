@@ -93,7 +93,7 @@ namespace Game
             Console.WriteLine("- Examine Cabinet");
             Console.WriteLine("- Place artifact on Mechanism");
             Console.WriteLine("- Solve Puzzle");
-            Console.WriteLine("- Dagger");
+            Console.WriteLine("- Take Dagger");
             Console.WriteLine("- Use Dagger");
             Console.WriteLine("- Inventory");
             Console.WriteLine("- North");
@@ -168,7 +168,7 @@ namespace Game
             AnimateText("The room is dimly lit by flickering torches, casting eerie shadows.");
             AnimateText("An old stone pedestal sits in the center, as if waiting for something to be placed upon it.");
             Console.WriteLine(" ");
-            Console.WriteLine("Type help for instructions.");
+            Console.WriteLine("Commands that can be used in the room are: ");
             Help_Central_Chamber();
 
             // Infinite loop for handling player commands in the Central Chamber.
@@ -292,7 +292,7 @@ namespace Game
             AnimateText("The walls are adorned with enigmatic symbols, and the floor is marked with a pattern of tiles.");
             AnimateText("A riddle is etched onto a stone tablet, challenging you to unlock the room's secrets.");
             Console.WriteLine(" ");
-            Console.WriteLine("Type help for instructions.");
+            Console.WriteLine("Commands that can be used in the room are: ");
             Help_Puzzle_Room();
 
             // Define puzzle answers and riddles for the room.
@@ -524,7 +524,7 @@ namespace Game
             AnimateText("On the right, you see a ladder leading into the tunnel. There a book laying on the side of the shelves");
             AnimateText("There is a puzzle for you to solve.");
             Console.WriteLine(" ");
-            Console.WriteLine("Type help for instructions.");
+            Console.WriteLine("Commands that can be used in the room are: ");
             Help_Library();
 
 
@@ -685,7 +685,7 @@ namespace Game
             AnimateText("shadows that seem to dance and writhe along the walls.");
             AnimateText("The darkness shrouds the chamber, leaving much to the imagination and evoking an unsettling sense of the unknown.");
             Console.WriteLine(" ");
-            Console.WriteLine("Type help for instructions.");
+            Console.WriteLine("Commands that can be used in the room are: ");
             Help_Chamber_Of_Shadows();
 
             string userAnswer = "";
@@ -754,7 +754,7 @@ namespace Game
                     case "PLACE ARTIFACT ON MECHANISM":
                         if (torchUsed_Chamber_Of_Shadows)
                         {
-                            if (HasItem("Artifact"))
+                            if (Inventory.Contains("Artifact"))
                             {
                                 artifactPlaced = true;
                                 Console.WriteLine("As the artifact is carefully placed on the mechanism,");
@@ -787,12 +787,12 @@ namespace Game
                                         if (userAnswer ==  puzzleAnswer)
                                         {
                                             puzzleSolved_Chamber_Of_Shadows = true;
-                                            Console.WriteLine("Behold! The once impenetrable barrier has yielded to your unwavering determination,");
-                                            Console.WriteLine("as the majestic door now stands ajar, beckoning you to enter the realm of finality.");
+                                            AnimateText("Behold! The once impenetrable barrier has yielded to your unwavering determination,");
+                                            AnimateText("as the majestic door now stands ajar, beckoning you to enter the realm of finality.");
                                         }
                                         else if (userAnswer == "USE BOOK")
                                         {
-                                            if (HasItem("Book"))
+                                            if (Inventory.Contains("Book"))
                                             {
                                                 Console.WriteLine("In the realm of twilight's embrace, a creature of feathered grace dwells,");
                                                 Console.WriteLine("casting its mystic aura upon the land.");
@@ -860,17 +860,17 @@ namespace Game
                             Console.WriteLine("It's difficult to see the details in the dim light. Perhaps there's something that can help you illuminate the room.");
                         }
                         break;
-                    case "DAGGER":
+                    case "TAKE DAGGER":
                         if (torchUsed_Chamber_Of_Shadows)
                         {
-                            if (HasItem("dagger"))
+                            if (Inventory.Contains("Dagger"))
                             {
                                 Console.WriteLine("You have already taken the dagger");
                             }
                             else
                             {
                                 Console.WriteLine("You have picked up a dagger with embellished engravings all over the blade");
-                                AddToInventory("dagger");
+                                Inventory.Add("Dagger");
                             }
                         }
                         else
@@ -879,7 +879,7 @@ namespace Game
                         }
                         break;
                         case "USE DAGGER":
-                        if (HasItem("dagger"))
+                        if (Inventory.Contains("Dagger"))
                         {
                             Console.WriteLine("You twirl the dagger thinking your self so cool");
                         }
@@ -888,14 +888,11 @@ namespace Game
                             Console.WriteLine("you do not yet have the dagger");
                         }
                         break;
-                    case "HELP":
-                        Help();
-                        break;
                     case "INVENTORY":
                         Console.WriteLine("You have the following items in your inventory:");
-                        for (int i = 0; i < inventoryCount; i++)
+                        foreach (string item in Inventory)
                         {
-                            Console.WriteLine(inventory[i]);
+                            Console.Write($"{item} ");
                         }
                         break;
                     default:
