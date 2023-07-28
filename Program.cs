@@ -879,9 +879,9 @@ namespace Game
                 switch (userInput)
                 {
                     case "LOOK":
-                        Console.WriteLine("       You see a multitude of precious gems, golden artifacts, and mysterious relics.");
-                        Console.WriteLine("       You see a pedestal with a lever and a locked chest.");
-                        Console.WriteLine("       Among the treasures, there is a mysterious object concealed within the dimly lit corners.");
+                        Console.WriteLine("       The vault shimmers with various treasures - precious gems, golden artifacts, and ancient relics.");
+                        Console.WriteLine("       A pedestal with a lever and a secured chest piques your curiosity.");
+                        Console.WriteLine("       Amidst these riches, a mysterious orb, an enigmatic amulet, a peculiar hourglass, and a radiant crystal catch your attention.");
                         break;
                     case "EXAMINE CHEST":
                         Console.WriteLine("The chest is made of solid iron and secured with a heavy lock. It seems to be waiting for a key.");
