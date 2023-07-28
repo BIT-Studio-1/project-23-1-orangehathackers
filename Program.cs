@@ -879,6 +879,7 @@ namespace Game
                 switch (userInput)
                 {
                     case "LOOK":
+                        
                         Console.WriteLine("       The vault shimmers with various treasures - precious gems, golden artifacts, and ancient relics.");
                         Console.WriteLine("       A pedestal with a lever and a secured chest piques your curiosity.");
                         Console.WriteLine("       Amidst these riches, a mysterious orb, an enigmatic amulet, a peculiar hourglass, and a radiant crystal catch your attention.");
@@ -1047,6 +1048,14 @@ namespace Game
                         else
                         {
                             Console.WriteLine("       You don't have the Luminous Crystal in your inventory.");
+                        }
+                        break;
+                    case "STORYLINE":
+                        Console.Clear();
+                        foreach (string message in messages)
+                        {
+                            Console.WriteLine("       " + message);
+                            System.Threading.Thread.Sleep(500);
                         }
                         break;
                     case "HELP":
