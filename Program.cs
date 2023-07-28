@@ -899,13 +899,13 @@ namespace Game
                         }
                         break;
                     case "EXAMINE PEDESTAL":
-                        Console.WriteLine("       The pedestal has a lever that can be pulled.");
+                        Console.WriteLine("       The pedestal, solid and silent, holds a lever begging to be pulled.");
                         break;
                     case "PULL LEVER":
-                        Console.WriteLine("       You pull the lever, and the room trembles slightly. The crystal in the center of the room glows brighter.");
+                        Console.WriteLine("       With a swift movement, you pull the lever. A subtle tremor sweeps the room as the crystal's glow intensifies.");
                         break;
                     case "EXAMINE CRYSTAL":
-                        Console.WriteLine("       The crystal is a powerful artifact that seems to be the source of the room's enchantment.");
+                        Console.WriteLine("       This enchanting crystal is more than mere decoration - it's a beacon of power, an ancient artifact pulsating with magical energy.");
                         break;
                     case "EXAMINE FLICKERING":
                         if (HasItem("Torch"))
