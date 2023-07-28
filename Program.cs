@@ -965,6 +965,10 @@ namespace Game
                         }
                         break;
 
+                    case "EXAMINE MYSTIC ORB":
+                        Console.WriteLine("       The orb appears to be from another world, filled with swirling energies. Its presence feels calming yet energetic, like the ebb and flow of an ethereal tide.");
+                        break;
+
                     case "TAKE ENCHANTED AMULET":
                         if (HasItem("Enchanted Amulet"))
                         {
@@ -986,6 +990,10 @@ namespace Game
                         {
                             Console.WriteLine("       You don't have the Enchanted Amulet in your inventory.");
                         }
+                        break;
+
+                    case "EXAMINE ENCHANTED AMULET":
+                        Console.WriteLine("       An ancient aura surrounds the amulet. It bears the mark of forgotten craftsmen, its enchantment radiating a soothing light that beckons the heart.");
                         break;
 
                     case "TAKE CHRONO HOURGLASS":
@@ -1011,6 +1019,10 @@ namespace Game
                         }
                         break;
 
+                    case "EXAMINE CHRONO HOURGLASS":
+                        Console.WriteLine("       The hourglass holds your gaze with its languid rhythm. Each grain of sand feels like a stolen moment, the glass vessel a gateway to a realm beyond time.");
+                        break;
+
                     case "TAKE LUMINOUS CRYSTAL":
                         if (HasItem("Luminous Crystal"))
                         {
@@ -1021,6 +1033,10 @@ namespace Game
                             Console.WriteLine("       You take the Luminous Crystal and add it to your inventory.");
                             AddToInventory("Luminous Crystal");
                         }
+                        break;
+
+                    case "EXAMINE LUMINOUS CRYSTAL":
+                        Console.WriteLine("       The crystal's radiant glow engulfs your senses. Its luminescence illuminates hidden corners of the vault, as if yearning to reveal untold treasures.");
                         break;
 
                     case "USE LUMINOUS CRYSTAL":
