@@ -105,7 +105,7 @@ namespace Game
             Console.WriteLine("Your ultimate goal is to discover the hidden artifact and claim it for yourself.");
             Console.WriteLine("Good Luck!!!!!");
         }
-
+        // Method for instruction of the game in central chamber
         static void Help_Central_Chamber()
         {
             Console.WriteLine("Instructions");
@@ -119,6 +119,19 @@ namespace Game
             Console.WriteLine("- South");
             Console.WriteLine("- East");
             Console.WriteLine("- West");
+            Console.WriteLine("- Inventory");
+        }
+        // Method for instruction of the game in puzzle room
+        static void Help_Puzzle_Room()
+        {
+            Console.WriteLine("Instructions");
+            Console.WriteLine("Enter commands to navigate between rooms and interact with the environment.");
+            Console.WriteLine("You can use the following commands.");
+            Console.WriteLine("Solve Puzzle");
+            Console.WriteLine("- North");
+            Console.WriteLine("- South");
+            Console.WriteLine("- West");
+            Console.WriteLine("- East");
             Console.WriteLine("- Inventory");
         }
             
@@ -183,6 +196,7 @@ namespace Game
                                 Console.WriteLine("The symbols are: Ankh, Feather, Scarab, Eye. To unlock the puzzle,");
                                 Console.WriteLine("you must decipher the correct order of symbols and pull the levers accordingly.");
                                 Console.WriteLine("What is the correct order? (Enter your answer separated by a comma ',')");
+                                Console.WriteLine("Type 'Back' if you wish to start from the beginning of the central chamber.");
                                 Console.Write(">> ");
                                 string userAnswer = Console.ReadLine().ToUpper();
 
@@ -252,19 +266,19 @@ namespace Game
         static void PuzzleRoom()
         {
             Console.Clear();
-            Console.WriteLine("You are now in the puzzle room.");
-            Console.WriteLine("As you enter this room, you are greeted by a series of intricate puzzles.");
-            Console.WriteLine("The walls are adorned with enigmatic symbols, and the floor is marked with a pattern of tiles.");
-            Console.WriteLine("A riddle is etched onto a stone tablet, challenging you to unlock the room's secrets.");
+            AnimateText("You are now in the puzzle room.");
+            AnimateText("As you enter this room, you are greeted by a series of intricate puzzles.");
+            AnimateText("The walls are adorned with enigmatic symbols, and the floor is marked with a pattern of tiles.");
+            AnimateText("A riddle is etched onto a stone tablet, challenging you to unlock the room's secrets.");
 
             // Define puzzle answers and riddles for the room.
             string puzzle1Answer = "Q";
             string[] riddles = {
-        "I speak without a mouth and hear without ears. I have no body, but I come alive with the wind. What am I?",
-        "I have keys but no locks. I have space but no room. You can enter but can't go outside. What am I?",
-        "The more you take, the more you leave behind. What am I?",
-        "I can be cracked, made, told, and played. What am I?"
-    };
+                                "I speak without a mouth and hear without ears. I have no body, but I come alive with the wind. What am I?",
+                                "I have keys but no locks. I have space but no room. You can enter but can't go outside. What am I?",
+                                "The more you take, the more you leave behind. What am I?",
+                                "I can be cracked, made, told, and played. What am I?"
+                               };
             string[] answers = { "ECHO", "KEYBOARD", "FOOTSTEPS", "JOKE" };
             string[] userAnswers = new string[4];
             string[] symbols = { "STAR", "MOON", "SUN", "PLANET" };
@@ -275,13 +289,6 @@ namespace Game
             while (true)
             {
                 Console.Write("Please enter a command: ");
-                Console.Write("Solve Puzzle");
-                Console.Write("- North");
-                Console.Write("- South");
-                Console.Write("- West");
-                Console.Write("- East");
-                Console.Write("- Help");
-
                 string userInput = Console.ReadLine().ToUpper();
 
                 // Handle different player commands using a switch statement.
@@ -298,6 +305,7 @@ namespace Game
                             Console.WriteLine("You come across a series of letters on the wall, but one letter is missing.");
                             Console.WriteLine("The letters form a sequence, and you need to determine the missing letter to complete the sequence.");
                             Console.WriteLine("B, D, G, I, L, N, __, S, V");
+                            Console.WriteLine("Type 'Back' if you wish to start from the beginning of the puzzle room.");
                             Console.Write("Please enter the missing letter:");
 
                             // Loop for handling the user's attempts to solve Puzzle 1.
@@ -325,6 +333,7 @@ namespace Game
                             Console.Clear();
                             Console.WriteLine("Puzzle 2: Cryptic Riddles");
                             Console.WriteLine("Solve the riddles to find the words.");
+                            Console.WriteLine("Type 'Back' if you wish to start from the beginning of the puzzle room.");
 
                             // Check if Puzzle 2 has not been solved yet.
                             if (!puzzle_2_Solved)
@@ -385,6 +394,7 @@ namespace Game
                             // Loop for handling the user's attempts to solve Puzzle 3.
                             while (!puzzle_3_Solved)
                             {
+                                Console.WriteLine("Type 'Back' if you wish to start from the beginning of the puzzle room.");
                                 string[] rearrangedSymbols = Console.ReadLine().ToUpper().Split(',');
                                 if (rearrangedSymbols[0] == "BACK")
                                 {
@@ -467,14 +477,11 @@ namespace Game
                     case "WEST":
                         CentralChamber();
                         break;
-                    case "HELP":
-                        Help();
-                        break;
                     case "INVENTORY":
                         Console.WriteLine("You have the following items in your inventory:");
-                        for (int i = 0; i < inventoryCount; i++)
+                        foreach (string item in Inventory)
                         {
-                            Console.WriteLine(inventory[i]);
+                            Console.Write($"{item} ");
                         }
                         break;
                     default:
