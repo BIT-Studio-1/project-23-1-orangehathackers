@@ -884,19 +884,18 @@ namespace Game
                         Console.WriteLine("       Amidst these riches, a mysterious orb, an enigmatic amulet, a peculiar hourglass, and a radiant crystal catch your attention.");
                         break;
                     case "EXAMINE CHEST":
-                        Console.WriteLine("The chest is made of solid iron and secured with a heavy lock. It seems to be waiting for a key.");
+                        Console.WriteLine("       The chest is forged from resilient iron, its secrets guarded by a heavy lock. It eagerly awaits a key.");
                         break;
                     case "USE KEY ON CHEST":
                         if (HasItem("Key"))
                         {
-                            Console.WriteLine("       You unlock the chest with the key. Inside, you find a glowing artifact.");
-                            Console.WriteLine("       The artifact radiates a powerful energy, and you can sense its ancient origins.");
-                            Console.WriteLine("       You have got the artifact.");
+                            Console.WriteLine("       With the key, you release the chest's long-held secrets. Within, you find a pulsating artifact, ancient and powerful.");
+                            Console.WriteLine("       You're now the guardian of this artifact.");
                             AddToInventory("Artifact");
                         }
                         else
                         {
-                            Console.WriteLine("       You don't have the key to unlock the chest.");
+                            Console.WriteLine("       Alas, without a key, the chest's secrets remain beyond your reach.");
                         }
                         break;
                     case "EXAMINE PEDESTAL":
