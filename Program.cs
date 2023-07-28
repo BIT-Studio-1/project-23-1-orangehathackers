@@ -155,6 +155,26 @@ namespace Game
             Console.WriteLine("Use Bottle");
 
         }
+
+        static void Help_Treasure_Vault()
+        {
+            Console.WriteLine("Instructions");
+            Console.WriteLine("Enter commands to navigate between rooms and interact with the environment.");
+            Console.WriteLine("You can use the following commands.");
+            Console.WriteLine("-Look");
+            Console.WriteLine("-Examine Chest");
+            Console.WriteLine("-Use Key On Chest");
+            Console.WriteLine("-Examine Pedestal");
+            Console.WriteLine("-Pull Lever");
+            Console.WriteLine("-Examine Crystal");
+            Console.WriteLine("-Examine Flickering");
+            Console.WriteLine("-Take Torch");
+            Console.WriteLine("- North");
+            Console.WriteLine("- South");
+            Console.WriteLine("- West");
+            Console.WriteLine("- East");
+            Console.WriteLine("- Inventory");
+        }
             
         // Central Chamber is a method representing the central area of the excavation site.
         static void CentralChamber()
@@ -168,7 +188,7 @@ namespace Game
             AnimateText("The room is dimly lit by flickering torches, casting eerie shadows.");
             AnimateText("An old stone pedestal sits in the center, as if waiting for something to be placed upon it.");
             Console.WriteLine(" ");
-            Console.WriteLine("Commands that can be used in the room are: ");
+            Console.WriteLine("Commands that can be used in the room are: "); 
             Help_Central_Chamber();
 
             // Infinite loop for handling player commands in the Central Chamber.
@@ -905,13 +925,16 @@ namespace Game
         static void TreasureVault()
         {
             Console.Clear();
-            Console.WriteLine("You have entered the Treasure Vault.");
-            Console.WriteLine("The Treasure Vault is a vast chamber filled with glittering treasures and ancient artifacts.");
-            Console.WriteLine("The room is bathed in a soft golden light, illuminating the riches that surround you.");
-            Console.WriteLine("You notice a gentle flickering in the corner of your eye, hinting at something hidden within the shadows.");
-            Console.WriteLine("As you explore further, you spot an enchanting crystal radiating a soft blue light, captivating your attention.");
-            Console.WriteLine("Nearby, there is a pedestal with a lever and a locked chest, intriguing you with their mysterious aura.");
-            Console.WriteLine("You also have a vague sense that there might be something else of interest waiting to be discovered in this room.");
+            AnimateText("You have entered the Treasure Vault.");
+            AnimateText("The Treasure Vault is a vast chamber filled with glittering treasures and ancient artifacts.");
+            AnimateText("The room is bathed in a soft golden light, illuminating the riches that surround you.");
+            AnimateText("You notice a gentle flickering in the corner of your eye, hinting at something hidden within the shadows.");
+            AnimateText("As you explore further, you spot an enchanting crystal radiating a soft blue light, captivating your attention.");
+            AnimateText("Nearby, there is a pedestal with a lever and a locked chest, intriguing you with their mysterious aura.");
+            AnimateText("You also have a vague sense that there might be something else of interest waiting to be discovered in this room.");
+            Console.WriteLine(" ");
+            Console.WriteLine("Commands that can be used in the room are: ");
+            Help_Treasure_Vault();
 
             while (true)
             {
@@ -928,12 +951,12 @@ namespace Game
                         Console.WriteLine("The chest is made of solid iron and secured with a heavy lock. It seems to be waiting for a key.");
                         break;
                     case "USE KEY ON CHEST":
-                        if (HasItem("Key"))
+                        if (Inventory.Contains("Key"))
                         {
                             Console.WriteLine("You unlock the chest with the key. Inside, you find a glowing artifact.");
                             Console.WriteLine("The artifact radiates a powerful energy, and you can sense its ancient origins.");
                             Console.WriteLine("You have got the artifact.");
-                            AddToInventory("Artifact");
+                            Inventory.Add("Artifact");
                         }
                         else
                         {
@@ -950,7 +973,7 @@ namespace Game
                         Console.WriteLine("The crystal is a powerful artifact that seems to be the source of the room's enchantment.");
                         break;
                     case "EXAMINE FLICKERING":
-                        if (HasItem("Torch"))
+                        if (Inventory.Contains("Torch"))
                         {
                             Console.WriteLine("You have already taken the torch.");
                         }
@@ -961,7 +984,7 @@ namespace Game
                         }
                         break;
                     case "TAKE TORCH":
-                        if (HasItem("Torch"))
+                        if (Inventory.Contains("Torch"))
                         {
                             Console.WriteLine("You have already taken the torch.");
                         }
@@ -969,7 +992,7 @@ namespace Game
                         {
                             Console.WriteLine("Driven by an unexplained impulse, you reach into the shadows and grasp the enigmatic torch.");
                             Console.WriteLine("You add the torch to your inventory, eager to discover its purpose.");
-                            AddToInventory("Torch");
+                            Inventory.Add("Torch");
                         }
                         break;
                     case "NORTH":
@@ -984,14 +1007,11 @@ namespace Game
                     case "WEST":
                         PuzzleRoom();
                         break;
-                    case "HELP":
-                        Help();
-                        break;
                     case "INVENTORY":
                         Console.WriteLine("You have the following items in your inventory:");
-                        for (int i = 0; i < inventoryCount; i++)
+                        foreach (string item in Inventory)
                         {
-                            Console.WriteLine(inventory[i]);
+                            Console.Write($"{item} ");
                         }
                         break;
                     default:
@@ -1085,7 +1105,7 @@ namespace Game
                         if (gotCorrect)
                         {
                             Console.WriteLine("You put your items in the indents on the table");
-                            if (Array.Exists(inventory, element => element == "Artifact") && Array.Exists(inventory, element => element == "Key"))
+                            if (List.Exists(Inventory, element => element == "Artifact") && Array.Exists(inventory, element => element == "Key"))
                             {
                                 Console.WriteLine("it seems as if you dont have all the items to go on the table.");
                             }
@@ -1113,9 +1133,6 @@ namespace Game
                         break;
                     case "WEST":
                         ChamberOfShadow();
-                        break;
-                    case "HELP":
-                        Help();
                         break;
                     default:
                         Console.WriteLine("Invalid answer. Please try again.");
