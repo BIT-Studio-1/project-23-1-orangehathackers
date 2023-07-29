@@ -487,10 +487,19 @@ namespace Game
         {
             string puzzleAnswerTreasure = "TREASURE HUNT";
             Console.Clear();
-            Console.WriteLine("Stepping into the library, you are surrounded by shelves filled with dusty tomes and scrolls. The air is thick with the scent of ancient parchment. Sunlight filters through stained glass windows, illuminating a large desk at the center of the room. On it lies a game for you to win.");
-            Console.WriteLine("On the right, you see a ladder leading into the tunnel. There a book laying on the side of the shelves");
-            Console.WriteLine("There is a puzzle for you to solve.");
-
+            string[] messages = {
+                "Stepping into the library, you are surrounded by shelves filled with dusty tomes and scrolls.",
+                "The air is thick with the scent of ancient parchment.",
+                "Sunlight filters through stained glass windows, illuminating a large desk at the center of the room.",
+                "On it lies a puzzle for you to solve.",
+                "On the right, you see a ladder leading into the tunnel.",
+                "You have look straight into the middle, and discover a book laying on a floor.",,
+            };
+            foreach (string message in messages)
+            {
+                Console.WriteLine("       " + message);
+                System.Threading.Thread.Sleep(500);
+            }
             // Infinite loop for handling player commands in the Library.
             while (true)
             {
