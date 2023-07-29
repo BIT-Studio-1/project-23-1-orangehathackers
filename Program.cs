@@ -457,23 +457,30 @@ namespace Game
                 }
             }
         }
+        struct ColorCodes
+        {
+            public const string R = "\x1b[31m";
+            public const string G = "\x1b[32m";
+            public const string B = "\x1b[34m";
+            public const string Reset = "\x1b[0m";
+        }
         static void helpLibrary()
         {
             Console.WriteLine("This is all the helpful command in library room");
-            Console.WriteLine("- North")
-            Console.WriteLine("- South");
-            Console.WriteLine("- West");
-            Console.WriteLine("- East");
-            Console.WriteLine("- Solve puzzle");
-            Console.WriteLine("- Climb");
-            Console.WriteLine("- Use torch");
-            Console.WriteLine("- Take pendant");
-            Console.WriteLine("- Take book");
-            Console.WriteLine("- Use book");
-            Console.WriteLine("- Take bottle");
-            Console.WriteLine("- Use bottle");
-            Console.WriteLine("- Inventory");
-            Console.WriteLine("- Help");
+            Console.WriteLine($"{ColorCodes.R}- North{ColorCodes.Reset}");
+            Console.WriteLine($"{ColorCodes.R}- South{ColorCodes.Reset}");
+            Console.WriteLine($"{ColorCodes.R}- East{ColorCodes.Reset}");
+            Console.WriteLine($"{ColorCodes.R}- West{ColorCodes.Reset}");
+            Console.WriteLine($"{ColorCodes.R}- Solve Puzzle{ColorCodes.Reset}");
+            Console.WriteLine($"{ColorCodes.R}- Climb{ColorCodes.Reset}");
+            Console.WriteLine($"{ColorCodes.R}- Use Torch{ColorCodes.Reset}");
+            Console.WriteLine($"{ColorCodes.R}- Take Pendant{ColorCodes.Reset}");
+            Console.WriteLine($"{ColorCodes.R}- Take Book{ColorCodes.Reset}");
+            Console.WriteLine($"{ColorCodes.R}- Use Book{ColorCodes.Reset}");
+            Console.WriteLine($"{ColorCodes.R}- Take Bottle{ColorCodes.Reset}");
+            Console.WriteLine($"{ColorCodes.R}- Use Bottle{ColorCodes.Reset}");
+            Console.WriteLine($"{ColorCodes.R}- Inventory{ColorCodes.Reset}");
+            Console.WriteLine($"{ColorCodes.R}- Help{ColorCodes.Reset}");
         }
         // Library is a method representing the library area in the excavation site.
         static void Library()
