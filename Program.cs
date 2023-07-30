@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
+using System.Reflection;
 using System.Threading;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Game
 {
@@ -50,16 +52,14 @@ namespace Game
             Console.ReadLine();
             Console.Clear();
 
-            Console.WriteLine("You are an archaeologist exploring an ancient excavation site.");
-            Console.WriteLine("Your mission is to find a long-lost artifact of great power.");
-            Console.WriteLine("Prepare yourself for an adventure filled with puzzles and mysteries!\n");
-            Console.WriteLine("Press enter to continue");
+            string text ="You are an archaeologist exploring an ancient excavation site.\nYour mission is to find a long-lost artifact of great power.\nPrepare yourself for an adventure filled with puzzles and mysteries!\n\nPress enter to continue";
+            Animate(text);
             Console.ReadLine();
             Console.Clear();
         }
         // Method for instruction of the game
         static void Help()
-        {                                                                                                                                                                                                        
+        {
             Console.WriteLine("Instructions");
             Console.WriteLine("Enter commands to navigate between rooms and interact with the environment.");
             Console.WriteLine("Use 'north', 'south', 'east' and 'west' to move in those respective directions.");
@@ -114,7 +114,7 @@ namespace Game
                 Console.Write("-->: ");
 
                 string userInput = Console.ReadLine().ToUpper();
-                
+
 
                 // Handle different player commands using a switch statement.
                 switch (userInput)
@@ -221,7 +221,7 @@ namespace Game
                         Console.WriteLine("Invalid command. Please try again.");
                         break;
                 }
-            } 
+            }
         }
 
         // Puzzle Room is a method representing the puzzle room in the excavation site.
@@ -597,7 +597,7 @@ namespace Game
                             Console.WriteLine("The room is too dark. You can't see anything.");
                         }
                         break;
-                    case "USE BOTTLE": 
+                    case "USE BOTTLE":
                         if (HasItem("bottle"))
                         {
                             Console.WriteLine("You spray the bottle and the water turns into confetti");
@@ -627,13 +627,13 @@ namespace Game
             Console.WriteLine("As you cautiously step into the Chamber of Shadows, the air grows heavy and oppressive.");
             Console.WriteLine("Dim, flickering lights barely illuminate the obscure corners of the room, casting eerie shadows that seem to dance and writhe along the walls.");
             Console.WriteLine("The darkness shrouds the chamber, leaving much to the imagination and evoking an unsettling sense of the unknown.");
-            
+
             string userAnswer = "";
             string puzzleAnswer = "OWL";
             // Infinite loop for handling player commands
             while (true)
             {
-                
+
                 Console.WriteLine("- Look");
                 Console.WriteLine("- Use Torch");
                 Console.WriteLine("- Use Key On Cabinet");
@@ -675,7 +675,7 @@ namespace Game
                                 Console.WriteLine("In the heart of the cabinet, an enigmatic mechanism catches your attention, its intricate design hinting at a greater purpose.");
                                 Console.WriteLine("A small slot within the mechanism awaits the placement of a mysterious artifact, teasing its significance.");
                                 Console.WriteLine("Beyond this intricate contraption lies a concealed door, promising a path to the unknown.");
-                                
+
                             }
                             else
                             {
@@ -685,7 +685,7 @@ namespace Game
                         else
                         {
                             Console.WriteLine("It's difficult to see the details in the dim light. Perhaps there's something that can help you illuminate the room.");
-                        } 
+                        }
                         break;
                     case "EXAMINE CABINET":
                         if (torchUsed_Chamber_Of_Shadows)
@@ -731,7 +731,7 @@ namespace Game
                                     while (!puzzleSolved_Chamber_Of_Shadows)
                                     {
                                         userAnswer = Console.ReadLine().ToUpper();
-                                        if (userAnswer ==  puzzleAnswer)
+                                        if (userAnswer == puzzleAnswer)
                                         {
                                             puzzleSolved_Chamber_Of_Shadows = true;
                                             Console.WriteLine("Behold! The once impenetrable barrier has yielded to your unwavering determination,");
@@ -756,13 +756,13 @@ namespace Game
                                         {
                                             Console.WriteLine("Invalid Answer. Please try again.");
                                         }
-                                    }        
+                                    }
                                 }
                                 else
                                 {
                                     Console.WriteLine("The puzzle is already solved.");
                                 }
-                                
+
                             }
                             else
                             {
@@ -825,7 +825,7 @@ namespace Game
                             Console.WriteLine("The room is too dark. You can't see anything.");
                         }
                         break;
-                        case "USE DAGGER":
+                    case "USE DAGGER":
                         if (HasItem("dagger"))
                         {
                             Console.WriteLine("You twirl the dagger thinking your self so cool");
@@ -1028,7 +1028,7 @@ namespace Game
                     return;
                 }
 
-                 switch (userInput)
+                switch (userInput)
                 {
 
                     case "PLACE":
@@ -1073,15 +1073,32 @@ namespace Game
                 }
             }
         }
+
+        static void Animate(string Text)
+        {
+            int delay = 30;
+            for (int i = 0; i < Text.Length; i++)
+            {
+                if (!Console.KeyAvailable)
+                {
+                    Console.Write(Text[i]);
+                    Thread.Sleep(delay);
+                }
+                
+                else if (Console.ReadKey(true).Key == ConsoleKey.Z)
+                {
+
+                    Console.ReadLine();
+                }
+            }
+
+            Console.WriteLine();
+        }
+
         public static void Main(string[] args)
         {
-            //GameStart();
-            //CentralChamber();
-            Library();
+            GameStart();
             CentralChamber();
-            //AltarRoom();
-
-            
         }
     }
 }
