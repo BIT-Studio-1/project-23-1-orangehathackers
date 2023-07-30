@@ -481,6 +481,7 @@ namespace Game
             Console.WriteLine($"{ColorCodes.R}- Use Bottle{ColorCodes.Reset}");
             Console.WriteLine($"{ColorCodes.R}- Inventory{ColorCodes.Reset}");
             Console.WriteLine($"{ColorCodes.R}- Help{ColorCodes.Reset}");
+            Console.WriteLine($"{ColorCodes.R}- StoryLine{ColorCodes.Reset}");
         }
         // Library is a method representing the library area in the excavation site.
         static void Library()
@@ -493,7 +494,7 @@ namespace Game
                 "Sunlight filters through stained glass windows, illuminating a large desk at the center of the room.",
                 "On it lies a puzzle for you to solve.",
                 "On the right, you see a ladder leading into the tunnel.",
-                "You have look straight into the middle, and discover a book laying on a floor.",,
+                "You have look straight into the middle, and discover a book laying on a floor."
             };
             foreach (string message in messages)
             {
@@ -523,6 +524,10 @@ namespace Game
                         break;
                     case "HELP":
                         helpLibrary();
+                        Console.WriteLine("Press enter to continue");
+                        Thread.Sleep(100);
+                        string temp = Console.ReadLine();
+                        Console.Clear();
                         break;
                     case "SOLVE PUZZLE":
                         if (!puzzleSolved_Library)
@@ -597,7 +602,7 @@ namespace Game
                     case "TAKE BOOK":
                         if (torchUsed_Library)
                         {
-                            Console.WriteLine("You have taken a book.");
+                            Console.WriteLine("You have already taken a book.");
                             AddToInventory("Book");
                         }
                         else if (HasItem("Book"))
@@ -612,9 +617,18 @@ namespace Game
                     case "USE BOOK":
                         if (HasItem("Book"))
                         {
-                            Console.WriteLine("In the heart of a scorching desert, an excavation site emerged. Digging through layers of time, the team unearthed remnants of an ancient civilization.");
-                            Console.WriteLine("Fragments of pottery whispered tales of forgotten traditions, while weathered hieroglyphs held untold secrets. Among the dust and sand, they discovered a long-buried temple, revealing the lost splendor of a civilization lost to the ages.");
-                            Console.WriteLine("The archaeologists marveled at their discovery, knowing that they had become custodians of a timeless legacy, ready to share its wonders with the world.");
+                            string[] useBook = {
+                                    "In the heart of a scorching desert, an excavation site emerged.",
+                                    "Digging through layers of time, the team unearthed remnants of an ancient civilization.",
+                                    "Fragments of pottery whispered tales of forgotten traditions, while weathered hieroglyphs held untold secrets.",
+                                    "Among the dust and sand, they discovered a long-buried temple, revealing the lost splendor of a civilization lost to the ages.",
+                                    "The archaeologists marveled at their discovery, knowing that they had become custodians of a timeless legacy, ready to share its wonders with the world."
+                            };
+                            foreach (string useBooks in useBook)
+                            {
+                                Console.WriteLine("       " + useBooks);
+                                System.Threading.Thread.Sleep(500);
+                            }
                         }
                         else
                         {
@@ -655,15 +669,13 @@ namespace Game
                             Console.WriteLine(inventory[i]);
                         }
                         break;
-                    case "STORYLINE"
-                        case "STORYLINE":
-                        Console.Clear();
+                    case "STORYLINE":
+
                         foreach (string message in messages)
                         {
                             Console.WriteLine("       " + message);
                             System.Threading.Thread.Sleep(500);
                         }
-                        break;
                         break;
                     default:
                         Console.WriteLine("Invalid answer. Please try again.");
