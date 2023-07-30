@@ -929,73 +929,8 @@ namespace Game
 
         static void AltarRoom()
         {
-            Console.WriteLine("abc");
-           Console.WriteLine(input idk) ;
-            string userInput = Console.ReadLine();
-            Console.WriteLine(y to get out ArgumentOutOfRangeException loop idk why you would need that when its a game not a fking app but ay what ever
-                );
-            string ReplayInput = Console.ReadLine().ToUpper();
-            bool gotCorrect = EquationGame();
-
-            Console.WriteLine("You come across a door and on it is an equations \nseems as if you must answer it to open the door");
-            Console.WriteLine("There are doors to the east and west");
-            Console.WriteLine(" ");
-
-            do
-            {
-                
-
-                if (int.TryParse(userInput, out int n))
-                {
-                    switch (userInput)
-                    {
-
-                        case "PLACE":
-                            if (gotCorrect == true)
-                            {
-                                Console.WriteLine("You put your items in the indents on the table");
-
-                                if (Array.Exists(inventory, element => element == "Artifact") && Array.Exists(inventory, element => element == "Key"))
-                                {
-                                    Console.WriteLine("it seems as if you don't have all the items to go on the table.");
-                                }
-                                else
-                                {
-                                    Console.WriteLine("The table starts to shake");
-                                    Thread.Sleep(1000);
-                                    Console.WriteLine("All of a sudden the wall behind you starts to open up");
-                                    Console.WriteLine("Among the gleaming heap of treasure lies a magnificent artifact,");
-                                    Console.WriteLine("adorned with intricate carvings and shimmering gemstones,");
-                                    Console.WriteLine("exuding an aura of mystery and ancient power.");
-                                    Console.WriteLine("You will never have to work another day in your life");
-                                    Console.WriteLine("Congratulation on completing the game!!!!");
-                                }
-                            }
-                            break;
-                        case "NORTH":
-                            Console.WriteLine("You can not go to north from here. Please try again");
-                            break;
-                        case "SOUTH":
-                            Console.WriteLine("You can not go to south from here. Please try again");
-                            break;
-                        case "EAST":
-                            Console.WriteLine("You can not go to east from here. Please try again");
-                            break;
-                        case "WEST":
-                            ChamberOfShadow();
-                            break;
-                        case "HELP":
-                            Help();
-                            break;
-                        default:
-                            Console.WriteLine("Invalid answer. Please try again.");
-                            break;
-                    }
-                }
-
-
-            } while (ReplayInput == "y");
-            /*Console.Clear();
+            
+            Console.Clear();
             Console.WriteLine("You come across a door and on it is an equations \nseems as if you must answer it to open the door");
             Console.WriteLine("There are doors to the east and west");
             bool gotCorrect = EquationGame();
@@ -1006,6 +941,14 @@ namespace Game
                     Console.WriteLine("You are now in the Altar room.");
                     Console.WriteLine("You look around the decaying room and see old run down table in the middle of the room");
                     Console.WriteLine("The table has small indents the shape of different items almost as if you are mean to place them in there");
+                }
+
+                else
+                {
+                    Console.WriteLine("- Wrong Answer...");
+                    Console.WriteLine("- Wrould you like to try again ? ");
+                    Console.WriteLine("- If you would keen to try it again please type (yes)");
+                    Console.WriteLine("- If not, just type (no)");
                 }
 
                 Console.WriteLine("Please enter an action: ");
@@ -1041,34 +984,40 @@ namespace Game
                             }
                         }
                         break;
+
                     case "NORTH":
                         Console.WriteLine("You can not go to north from here. Please try again");
                         break;
+
                     case "SOUTH":
                         Console.WriteLine("You can not go to south from here. Please try again");
                         break;
+
                     case "EAST":
                         Console.WriteLine("You can not go to east from here. Please try again");
                         break;
+
                     case "WEST":
                         ChamberOfShadow();
                         break;
+
                     case "HELP":
                         Help();
                         break;
+
                     default:
                         Console.WriteLine("Invalid answer. Please try again.");
                         break;
                 }
 
-            }*/
+            }
 
         }
         public static void Main(string[] args)
         {
             //GameStart();
             //CentralChamber();
-            //EquationGame();
+            EquationGame();
             AltarRoom();
         }
     }
