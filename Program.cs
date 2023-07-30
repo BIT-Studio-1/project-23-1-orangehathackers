@@ -923,7 +923,9 @@ namespace Game
             }
             else
             {
-                Console.WriteLine($"\nSorry, your answer: {guess} is incorrect. The correct answer is {answer}");
+                Console.WriteLine($"\nSorry, your answer: {guess} is incorrect. \nThe correct answer is {answer}");
+                Console.WriteLine(" ");
+                Console.WriteLine("Would you like to try again? Press y for yes and n for no");
                 return false;
             }
         }
@@ -998,6 +1000,13 @@ namespace Game
 
                     case "HELP":
                         Help();
+                        break;
+
+                    case "y":
+                        Console.Clear();
+                        Console.WriteLine("You come across a door and on it is an equation.\nSeems as if you must answer it to open the door.");
+                        Console.WriteLine("There are doors to the east and west.\n");
+                        gotCorrect = EquationGame();
                         break;
 
                     default:
