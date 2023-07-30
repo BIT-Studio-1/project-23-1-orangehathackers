@@ -910,13 +910,14 @@ namespace Game
             // Display the math problem and prompt the player to enter the answer
             Console.WriteLine($"{num1} {op} {num2} ? ");
             Console.WriteLine();
-            Console.Write("Your answer is : ");
+            Console.WriteLine("Your answer is ? ");
+            Console.Write("---> ");
             int guess = int.Parse(Console.ReadLine());
 
             // Check if the answer is correct
             if (guess == answer)
             {
-                Console.WriteLine("Congratulations! You've solved the puzzle!");
+                Console.WriteLine("- Congratulations! You've solved the puzzle!");
                 return true;
             }
             else
@@ -932,7 +933,7 @@ namespace Game
             
             Console.Clear();
             Console.WriteLine("You come across a door and on it is an equations \nseems as if you must answer it to open the door");
-            Console.WriteLine("There are doors to the east and west");
+            Console.WriteLine("There are doors to the east and west\n");
             bool gotCorrect = EquationGame();
             while (true)
             {
@@ -943,16 +944,8 @@ namespace Game
                     Console.WriteLine("The table has small indents the shape of different items almost as if you are mean to place them in there");
                 }
 
-                else
-                {
-                    Console.WriteLine("- Wrong Answer...");
-                    Console.WriteLine("- Wrould you like to try again ? ");
-                    Console.WriteLine("- If you would keen to try it again please type (yes)");
-                    Console.WriteLine("- If not, just type (no)");
-                }
-
                 Console.WriteLine("Please enter an action: ");
-                Console.Write("---> ");
+                
 
                 string userInput = Console.ReadLine().ToUpper();
                 if (userInput == "BACK")
