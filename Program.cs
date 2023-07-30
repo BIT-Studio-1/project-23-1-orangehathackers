@@ -918,14 +918,14 @@ namespace Game
             // Check if the answer is correct
             if (guess == answer)
             {
-                Console.WriteLine("- Congratulations! You've solved the puzzle!");
+                Console.WriteLine("\nCongratulations! You've solved the puzzle!");
                 return true;
             }
             else
             {
                 Console.WriteLine($"\nSorry, your answer: {guess} is incorrect. \nThe correct answer is {answer}");
                 Console.WriteLine(" ");
-                Console.WriteLine("Would you like to try again? Press y for yes and n for no");
+                Console.WriteLine("Would you like to try again? Press y for yes and n for no\n");
                 return false;
             }
         }
@@ -944,7 +944,7 @@ namespace Game
                 {
                     Console.WriteLine("You are now in the Altar room.");
                     Console.WriteLine("You look around the decaying room and see old run down table in the middle of the room");
-                    Console.WriteLine("The table has small indents the shape of different items almost as if you are mean to place them in there");
+                    Console.WriteLine("The table has small indents the shape of different items almost as if you are mean to place them in there\n");
                 }
 
                 Console.WriteLine("Please enter an action: ");
@@ -1008,6 +1008,9 @@ namespace Game
                         Console.WriteLine("There are doors to the east and west.\n");
                         gotCorrect = EquationGame();
                         break;
+
+                    case "n":
+                        return;
 
                     default:
                         Console.WriteLine("Invalid answer. Please try again.");
