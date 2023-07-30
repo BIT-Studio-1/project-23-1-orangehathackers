@@ -908,7 +908,7 @@ namespace Game
             }
 
             // Display the math problem and prompt the player to enter the answer
-            Console.WriteLine($"{num1} {op} {num2} ? ");
+            Console.WriteLine($"- The Equation is: {num1} {op} {num2}");
             Console.WriteLine();
             Console.WriteLine("Your answer is ? ");
             Console.Write("---> ");
