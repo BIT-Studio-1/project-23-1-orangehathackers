@@ -64,7 +64,7 @@ namespace Game
         // Method for instruction of the game
         static void Help()
         {
-            Console.WriteLine("Instructions");
+            Console.WriteLine("\nInstructions");
             Console.WriteLine("Enter commands to navigate between rooms and interact with the environment.");
             Console.WriteLine("Use 'north', 'south', 'east' and 'west' to move in those respective directions.");
             Console.WriteLine("Use words like 'examine', 'use', 'look', 'solve', 'climb', 'take' to interact with the items and environment.");
@@ -923,7 +923,7 @@ namespace Game
             }
             else
             {
-                Console.WriteLine("Sorry, that's incorrect. You failed to solve the puzzle.");
+                Console.WriteLine($"\nSorry, your answer: {guess} is incorrect. The correct answer is {answer}");
                 return false;
             }
         }
@@ -946,6 +946,7 @@ namespace Game
                 }
 
                 Console.WriteLine("Please enter an action: ");
+                Console.Write("---> ");
                 
 
                 string userInput = Console.ReadLine().ToUpper();
