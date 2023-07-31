@@ -2,8 +2,8 @@
 using System.ComponentModel.Design;
 using System.Linq;
 using System.Numerics;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading;
+using Internal;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace Game
@@ -64,7 +64,7 @@ namespace Game
         // Method for instruction of the game
         static void Help()
         {
-            Console.WriteLine("\nInstructions");
+            Console.WriteLine("Instructions");
             Console.WriteLine("Enter commands to navigate between rooms and interact with the environment.");
             Console.WriteLine("Use 'north', 'south', 'east' and 'west' to move in those respective directions.");
             Console.WriteLine("Use words like 'examine', 'use', 'look', 'solve', 'climb', 'take' to interact with the items and environment.");
