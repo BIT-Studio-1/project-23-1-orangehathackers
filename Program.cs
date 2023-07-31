@@ -864,6 +864,30 @@ namespace Game
                             Console.WriteLine("It's difficult to see the details in the dim light. Perhaps there's something that can help you illuminate the room.");
                         }
                         break;
+                    case "ENTER SECRET ROOM":
+                        if (torchUsed_Chamber_Of_Shadows)
+                        {
+                            if (secretDoorDiscovered)
+                            {
+                                if (secretDoorUnlocked)
+                                {
+                                    AlternateEnding();
+                                }
+                                else
+                                {
+                                    Console.WriteLine("As you approach the hidden door, you find it securely locked, its ancient mechanism awaiting the touch of a worthy hand to unlock its mysteries.");
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("There appears to be a hidden door, but it remains concealed from your sight. Perhaps you need to find a way to reveal it.");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("It's difficult to see the details in the dim light. Perhaps there's something that can help you illuminate the room.");
+                        }
+                        break;
                     case "HELP":
                         Help_COS();
                         break;
@@ -1105,7 +1129,7 @@ namespace Game
         static void Help_COS()
         {
             Console.WriteLine("Please use the following commands to navigate and interact with the room environment.");
-            string[] commands = {"-Look", "-Use Torch", "-Examine Cabinet", "-Use Key On Cabinet", "-Place Artifact On Mechanism", "-Solve Puzzle", "-North", "-South", "-East", "-West", "-Inventory"};
+            string[] commands = {"-Look", "-Use Torch", "-Examine Cabinet", "-Use Key On Cabinet", "-Place Artifact On Mechanism", "-Solve Puzzle", "Examine Painting","Examine Secret Door", "Enter Secret Room", "-North", "-South", "-East", "-West", "-Inventory"};
             foreach(string command in commands)
             {
                 Console.WriteLine(command);
@@ -1125,7 +1149,7 @@ namespace Game
             {
                 Console.WriteLine(number[i]);
             }
-            Thread.Sleep(2000);
+            Thread.Sleep(3000);
             Console.Clear();
             Console.WriteLine("Enter the sequence of numbers in the order that it was displayed.");
             for (int i = 0; i < userGuess.Length - 1; i++)
@@ -1144,11 +1168,37 @@ namespace Game
             Console.WriteLine("Congratulations! You successfully unlocked the hidden door.");
             return true;
         }
+
+        static void AlternateEnding()
+        {
+            Console.WriteLine("You step through the secret door and find yourself in the Chamber of Enlightenment.");
+            Console.WriteLine("Before you lies a radiant crystal orb, glowing with ancient wisdom.");
+
+            Console.WriteLine("\nYou reach out and touch the crystal orb, and a flood of knowledge fills your mind.");
+            Console.WriteLine("The secrets of the universe unfold before you, and you become a beacon of enlightenment.");
+            Console.WriteLine("You return to the world outside, forever changed by the wisdom you've gained.");
+
+            // ASCII art to mark the end of the game in the secret room
+            Console.WriteLine(          @"
+               ____  _             _             _____            __ _ _
+              / __ \| |           | |           |  __ \          / _(_) |
+             | |  | | |_   _  ___| |_ ___ _ __ | |  | | _____  _| |_ _| | ___
+             | |  | | | | | |/ _ \ __/ _ \ '_ \| |  | |/ _ \ \/ /  _| | |/ _ \
+             | |__| | | |_| |  __/ ||  __/ | | | |__| |  __/>  <| | | | |  __/
+              \____/|_|\__,_|\___|\__\___|_| |_|_____/ \___/_/\_\_| |_|_|\___|
+            ");
+
+            // End the game here
+            Environment.Exit(0);
+        }
+    
         public static void Main(string[] args)
         {
             //GameStart();
             //CentralChamber();
-            ChamberOfShadow();
+            //ChamberOfShadow();
+            //MemoryGamePuzzle();
+            AlternateEnding();
         }
     }
 }
