@@ -872,42 +872,43 @@ namespace Game
 
         static bool EquationGame()
         {
-            do
+
+            // Generate a random math problem
+            Random random = new Random();
+            int num1 = random.Next(-20, 21);
+            int num2 = random.Next(-20, 21);
+            int operatorIndex = random.Next(0, 4);
+            char op = '?';
+            int answer = 0;
+
+            switch (operatorIndex)
             {
-                // Generate a random math problem
-                Random random = new Random();
-                int num1 = random.Next(-20, 21);
-                int num2 = random.Next(-20, 21);
-                int operatorIndex = random.Next(0, 4);
-                char op = '?';
-                int answer = 0;
+                case 0:
+                    op = '+';
+                    answer = num1 + num2;
+                    break;
+                case 1:
+                    op = '-';
+                    answer = num1 - num2;
+                    break;
+                case 2:
+                    op = '*';
+                    answer = num1 * num2;
+                    break;
+                case 3:
+                    op = '/';
+                    num1 = num2 * random.Next(-10, 11);
+                    answer = num1 / num2;
+                    break;
+                case 4:
+                    op = '%';
+                    num1 = num2 * random.Next(-10, 11);
+                    answer = num1 % num2;
+                    break;
+            }
 
-                switch (operatorIndex)
-                {
-                    case 0:
-                        op = '+';
-                        answer = num1 + num2;
-                        break;
-                    case 1:
-                        op = '-';
-                        answer = num1 - num2;
-                        break;
-                    case 2:
-                        op = '*';
-                        answer = num1 * num2;
-                        break;
-                    case 3:
-                        op = '/';
-                        num1 = num2 * random.Next(-10, 11);
-                        answer = num1 / num2;
-                        break;
-                    case 4:
-                        op = '%';
-                        num1 = num2 * random.Next(-10, 11);
-                        answer = num1 % num2;
-                        break;
-                }
-
+            while (true)
+            {
                 // Display the math problem and prompt the player to enter the answer
                 Console.WriteLine("Please answer the following math question: \n");
                 Console.WriteLine($"{num1} {op} {num2}");
@@ -923,6 +924,7 @@ namespace Game
                     Console.WriteLine("\nCongratulations! You've solved the puzzle!");
                     return true;
                 }
+
                 else
                 {
                     Console.WriteLine($"\nSorry, your answer: {guess} is incorrect. \nThe correct answer is {answer}");
@@ -930,14 +932,13 @@ namespace Game
                     Console.WriteLine("Would you like to try again? Press y for yes and n for no\n");
                     return false;
                 }
-            }while(true);
-            
+            }
         }
 
 
         static void AltarRoom()
         {
-            
+
             Console.Clear();
             Console.WriteLine("You come across a door and on it is an equations \nseems as if you must answer it to open the door");
             Console.WriteLine("There are doors to the east and west\n");
@@ -953,7 +954,7 @@ namespace Game
 
                 Console.WriteLine("Please enter an action: ");
                 Console.Write("---> ");
-                
+
 
                 string userInput = Console.ReadLine().ToUpper();
                 if (userInput == "BACK")
