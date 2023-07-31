@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Linq;
 using System.Threading;
 
@@ -25,6 +26,8 @@ namespace Game
         private static bool torchUsed_Chamber_Of_Shadows = false;
         private static bool artifactPlaced = false;
         private static bool puzzleSolved_Chamber_Of_Shadows = false;
+        private static bool secretDoorDiscovered = false;
+        private static bool secretDoorUnlocked = false;
         // Display the game title
         static void GameStart()
         {
@@ -634,7 +637,7 @@ namespace Game
             {
                 Console.WriteLine(room);
             }
-            string userAnswer = "";
+            string userAnswer;
             string puzzleAnswer = "OWL";
             // Infinite loop for handling player commands
             while (true)
@@ -652,6 +655,7 @@ namespace Game
                         {
                             Console.WriteLine("In the far corner, stands a locked cabinet, its contents hidden from prying eyes.");
                             Console.WriteLine("Whispers of untold treasures or crucial clues linger in the air, enticing your curiosity.");
+                            Console.WriteLine("In the center of the room, an ancient and mysterious painting hangs on the wall, its colors faded but its details hauntingly vivid.");
                         }
                         break;
                     case "USE TORCH":
@@ -800,6 +804,60 @@ namespace Game
                         if (torchUsed_Chamber_Of_Shadows)
                         {
                             Library();
+                        }
+                        else
+                        {
+                            Console.WriteLine("It's difficult to see the details in the dim light. Perhaps there's something that can help you illuminate the room.");
+                        }
+                        break;
+                    case "EXAMINE PAINTING":
+                        if (torchUsed_Chamber_Of_Shadows)
+                        {
+                            if (!secretDoorDiscovered)
+                            {
+                                Console.WriteLine("As you closely examine the ancient painting on the wall, you notice a faint outline around it.");
+                                Console.WriteLine("With a gentle push, the painting slides aside, revealing a hidden door behind it!");
+                                secretDoorDiscovered = true;
+                            }
+                            else
+                            {
+                                Console.WriteLine("You have already discovered the secret door.");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("It's difficult to see the details in the dim light. Perhaps there's something that can help you illuminate the room.");
+                        }
+                        break;
+                    case "EXAMINE SECRET DOOR":
+                        if (torchUsed_Chamber_Of_Shadows)
+                        {
+                            if (secretDoorDiscovered)
+                            {
+                                if (!secretDoorUnlocked)
+                                {
+                                    Console.WriteLine("You approach the secret door and run your fingers along its intricate engravings.");
+                                    Console.WriteLine("The engravings seem to depict a pattern of glowing symbols, a memory game to unlock the door.");
+                                    Console.WriteLine("Do you dare to challenge the ancient memory puzzle? (YES/NO)");
+                                    string input = Console.ReadLine().ToUpper();
+                                    if (input == "YES")
+                                    {
+                                        secretDoorUnlocked = MemoryGamePuzzle();
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("You decide to step back from the mysterious memory puzzle for now.");
+                                    }
+                                }
+                                else
+                                {
+                                    Console.WriteLine("The secret door has already been unlocked.");
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("There appears to be a hidden door, but it remains concealed from your sight. Perhaps you need to find a way to reveal it.");
+                            }
                         }
                         else
                         {
@@ -1052,6 +1110,39 @@ namespace Game
             {
                 Console.WriteLine(command);
             }
+        }
+        static bool MemoryGamePuzzle()
+        {
+            Console.WriteLine("The memory game begins......");
+            Random rand = new Random();
+            int[] number = new int[7];
+            int[] userGuess = new int[7];
+            for (int i = 0;i<number.Length-1;i++)
+            {
+                number[i] = rand.Next(10,100);
+            }
+            for (int i = 0; i < number.Length - 1; i++)
+            {
+                Console.WriteLine(number[i]);
+            }
+            Thread.Sleep(2000);
+            Console.Clear();
+            Console.WriteLine("Enter the sequence of numbers in the order that it was displayed.");
+            for (int i = 0; i < userGuess.Length - 1; i++)
+            {
+                userGuess[i] = Convert.ToInt32(Console.ReadLine());
+            }
+            for (int i = 0; i < userGuess.Length - 1; i++)
+            {
+                if (userGuess[i] != number[i])
+                {
+                    Console.WriteLine("Unfortunately, your memory fails you as the numbers blur together.");
+                    Console.WriteLine("The hidden door remains locked, concealing its secrets for now.");
+                    return false;
+                }
+            }
+            Console.WriteLine("Congratulations! You successfully unlocked the hidden door.");
+            return true;
         }
         public static void Main(string[] args)
         {
