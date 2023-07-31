@@ -889,97 +889,220 @@ namespace Game
         static void TreasureVault()
         {
             Console.Clear();
-            Console.WriteLine("You have entered the Treasure Vault.");
-            Console.WriteLine("The Treasure Vault is a vast chamber filled with glittering treasures and ancient artifacts.");
-            Console.WriteLine("The room is bathed in a soft golden light, illuminating the riches that surround you.");
-            Console.WriteLine("You notice a gentle flickering in the corner of your eye, hinting at something hidden within the shadows.");
-            Console.WriteLine("As you explore further, you spot an enchanting crystal radiating a soft blue light, captivating your attention.");
-            Console.WriteLine("Nearby, there is a pedestal with a lever and a locked chest, intriguing you with their mysterious aura.");
-            Console.WriteLine("You also have a vague sense that there might be something else of interest waiting to be discovered in this room.");
+            string[] messages = {
+                "You have entered the Treasure Vault.",
+                "The Treasure Vault is a vast chamber filled with glittering treasures and ancient artifacts.",
+                "The room is bathed in a soft golden light, illuminating the riches that surround you.",
+                "You notice a gentle flickering in the corner of your eye, hinting at something hidden within the shadows.",
+                "As you explore further, you spot an enchanting crystal radiating a soft blue light, captivating your attention.",
+                "Nearby, there is a pedestal with a lever and a locked chest, intriguing you with their mysterious aura.",
+                "You also have a vague sense that there might be something else of interest waiting to be discovered in this room.",
+            };
+
+            foreach (string message in messages)
+            {
+                Console.WriteLine("       " + message); 
+                System.Threading.Thread.Sleep(500); 
+            }
 
             while (true)
             {
-                Console.Write("Please enter a command: ");
+                Console.Write("       Please enter a command: ");
                 string userInput = Console.ReadLine().ToUpper();
                 switch (userInput)
                 {
                     case "LOOK":
-                        Console.WriteLine("You see a multitude of precious gems, golden artifacts, and mysterious relics.");
-                        Console.WriteLine("You see a pedestal with a lever and a locked chest.");
-                        Console.WriteLine("Among the treasures, there is a mysterious object concealed within the dimly lit corners.");
+                        
+                        Console.WriteLine("       The vault shimmers with various treasures - precious gems, golden artifacts, and ancient relics.");
+                        Console.WriteLine("       A pedestal with a lever and a secured chest piques your curiosity.");
+                        Console.WriteLine("       Amidst these riches, a mysterious orb, an enigmatic amulet, a peculiar hourglass, and a radiant crystal catch your attention.");
                         break;
                     case "EXAMINE CHEST":
-                        Console.WriteLine("The chest is made of solid iron and secured with a heavy lock. It seems to be waiting for a key.");
+                        Console.WriteLine("       The chest is forged from resilient iron, its secrets guarded by a heavy lock. It eagerly awaits a key.");
                         break;
                     case "USE KEY ON CHEST":
                         if (HasItem("Key"))
                         {
-                            Console.WriteLine("You unlock the chest with the key. Inside, you find a glowing artifact.");
-                            Console.WriteLine("The artifact radiates a powerful energy, and you can sense its ancient origins.");
-                            Console.WriteLine("You have got the artifact.");
+                            Console.WriteLine("       With the key, you release the chest's long-held secrets. Within, you find a pulsating artifact, ancient and powerful.");
+                            Console.WriteLine("       You're now the guardian of this artifact.");
                             AddToInventory("Artifact");
                         }
                         else
                         {
-                            Console.WriteLine("You don't have the key to unlock the chest.");
+                            Console.WriteLine("       Alas, without a key, the chest's secrets remain beyond your reach.");
                         }
                         break;
                     case "EXAMINE PEDESTAL":
-                        Console.WriteLine("The pedestal has a lever that can be pulled.");
+                        Console.WriteLine("       The pedestal, solid and silent, holds a lever begging to be pulled.");
                         break;
                     case "PULL LEVER":
-                        Console.WriteLine("You pull the lever, and the room trembles slightly. The crystal in the center of the room glows brighter.");
+                        Console.WriteLine("       With a swift movement, you pull the lever. A subtle tremor sweeps the room as the crystal's glow intensifies.");
                         break;
                     case "EXAMINE CRYSTAL":
-                        Console.WriteLine("The crystal is a powerful artifact that seems to be the source of the room's enchantment.");
+                        Console.WriteLine("       This enchanting crystal is more than mere decoration - it's a beacon of power, an ancient artifact pulsating with magical energy.");
                         break;
                     case "EXAMINE FLICKERING":
                         if (HasItem("Torch"))
                         {
-                            Console.WriteLine("You have already taken the torch.");
+                            Console.WriteLine("       You have already taken the torch.");
                         }
                         else
                         {
-                            Console.WriteLine("You observe a hint of warmth in the shadows, as if a flickering light awaits to be revealed.");
-                            Console.WriteLine("The allure of the hidden torch grows stronger, urging you to uncover its secrets.");
+                            Console.WriteLine("       You observe a hint of warmth in the shadows, as if a flickering light awaits to be revealed.");
+                            Console.WriteLine("       The allure of the hidden torch grows stronger, urging you to uncover its secrets.");
                         }
                         break;
                     case "TAKE TORCH":
                         if (HasItem("Torch"))
                         {
-                            Console.WriteLine("You have already taken the torch.");
+                            Console.WriteLine("       You have already taken the torch.");
                         }
                         else
                         {
-                            Console.WriteLine("Driven by an unexplained impulse, you reach into the shadows and grasp the enigmatic torch.");
-                            Console.WriteLine("You add the torch to your inventory, eager to discover its purpose.");
+                            Console.WriteLine("       Driven by an unexplained impulse, you reach into the shadows and grasp the enigmatic torch.");
+                            Console.WriteLine("       You add the torch to your inventory, eager to discover its purpose.");
                             AddToInventory("Torch");
                         }
                         break;
                     case "NORTH":
-                        Console.WriteLine("You can not go to north from here. Please try again");
+                        Console.WriteLine("       You can not go to north from here. Please try again");
                         break;
                     case "SOUTH":
-                        Console.WriteLine("You can not go to south from here. Please try again");
+                        Console.WriteLine("       You can not go to south from here. Please try again");
                         break;
                     case "EAST":
-                        Console.WriteLine("You can not go to east from here. Please try again");
+                        Console.WriteLine("       You can not go to east from here. Please try again");
                         break;
                     case "WEST":
                         PuzzleRoom();
+                        break;
+                    case "TAKE MYSTIC ORB":
+                        if (HasItem("Mystic Orb"))
+                        {
+                            Console.WriteLine("       You have already taken the Mystic Orb.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("       You take the Mystic Orb and add it to your inventory.");
+                            AddToInventory("Mystic Orb");
+                        }
+                        break;
+
+                    case "USE MYSTIC ORB":
+                        if (HasItem("Mystic Orb"))
+                        {
+                            Console.WriteLine("       You hold the Mystic Orb in your hands. The orb emits a strange humming sound, and mystical runes appear on the walls of the vault.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("       You don't have the Mystic Orb in your inventory.");
+                        }
+                        break;
+
+                    case "EXAMINE MYSTIC ORB":
+                        Console.WriteLine("       The orb appears to be from another world, filled with swirling energies. Its presence feels calming yet energetic, like the ebb and flow of an ethereal tide.");
+                        break;
+
+                    case "TAKE ENCHANTED AMULET":
+                        if (HasItem("Enchanted Amulet"))
+                        {
+                            Console.WriteLine("       You have already taken the Enchanted Amulet.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("       You take the Enchanted Amulet and add it to your inventory.");
+                            AddToInventory("Enchanted Amulet");
+                        }
+                        break;
+
+                    case "USE ENCHANTED AMULET":
+                        if (HasItem("Enchanted Amulet"))
+                        {
+                            Console.WriteLine("       You hold the Enchanted Amulet. It glows with a gentle light, and you feel a wave of tranquility wash over you.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("       You don't have the Enchanted Amulet in your inventory.");
+                        }
+                        break;
+
+                    case "EXAMINE ENCHANTED AMULET":
+                        Console.WriteLine("       An ancient aura surrounds the amulet. It bears the mark of forgotten craftsmen, its enchantment radiating a soothing light that beckons the heart.");
+                        break;
+
+                    case "TAKE CHRONO HOURGLASS":
+                        if (HasItem("Chrono Hourglass"))
+                        {
+                            Console.WriteLine("       You have already taken the Chrono Hourglass.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("       You take the Chrono Hourglass and add it to your inventory.");
+                            AddToInventory("Chrono Hourglass");
+                        }
+                        break;
+
+                    case "USE CHRONO HOURGLASS":
+                        if (HasItem("Chrono Hourglass"))
+                        {
+                            Console.WriteLine("       You flip the Chrono Hourglass. The sands within it move strangely, seeming to flow in slow motion. You feel as though time itself is bending around you.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("       You don't have the Chrono Hourglass in your inventory.");
+                        }
+                        break;
+
+                    case "EXAMINE CHRONO HOURGLASS":
+                        Console.WriteLine("       The hourglass holds your gaze with its languid rhythm. Each grain of sand feels like a stolen moment, the glass vessel a gateway to a realm beyond time.");
+                        break;
+
+                    case "TAKE LUMINOUS CRYSTAL":
+                        if (HasItem("Luminous Crystal"))
+                        {
+                            Console.WriteLine("       You have already taken the Luminous Crystal.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("       You take the Luminous Crystal and add it to your inventory.");
+                            AddToInventory("Luminous Crystal");
+                        }
+                        break;
+
+                    case "EXAMINE LUMINOUS CRYSTAL":
+                        Console.WriteLine("       The crystal's radiant glow engulfs your senses. Its luminescence illuminates hidden corners of the vault, as if yearning to reveal untold treasures.");
+                        break;
+
+                    case "USE LUMINOUS CRYSTAL":
+                        if (HasItem("Luminous Crystal"))
+                        {
+                            Console.WriteLine("       You hold the Luminous Crystal aloft. A brilliant light fills the room, revealing glittering treasures in every corner.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("       You don't have the Luminous Crystal in your inventory.");
+                        }
+                        break;
+                    case "STORYLINE":
+                        Console.Clear();
+                        foreach (string message in messages)
+                        {
+                            Console.WriteLine("       " + message);
+                            System.Threading.Thread.Sleep(500);
+                        }
                         break;
                     case "HELP":
                         Help();
                         break;
                     case "INVENTORY":
-                        Console.WriteLine("You have the following items in your inventory:");
+                        Console.WriteLine("       You have the following items in your inventory:");
                         for (int i = 0; i < inventoryCount; i++)
                         {
                             Console.WriteLine(inventory[i]);
                         }
                         break;
                     default:
-                        Console.WriteLine("Invalid answer. Please try again.");
+                        Console.WriteLine("       Invalid answer. Please try again.");
                         break;
                 }
             }
