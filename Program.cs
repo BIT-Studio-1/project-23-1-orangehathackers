@@ -623,24 +623,23 @@ namespace Game
         static void ChamberOfShadow()
         {
             Console.Clear();
-            Console.WriteLine("You are now in the chamber of shadow.");
-            Console.WriteLine("As you cautiously step into the Chamber of Shadows, the air grows heavy and oppressive.");
-            Console.WriteLine("Dim, flickering lights barely illuminate the obscure corners of the room, casting eerie shadows that seem to dance and writhe along the walls.");
-            Console.WriteLine("The darkness shrouds the chamber, leaving much to the imagination and evoking an unsettling sense of the unknown.");
-            
+            string[] roomDesc = { "You are now in the chamber of shadow.",
+                                  "As you cautiously step into the Chamber of Shadows, the air grows heavy and oppressive.",
+                                  "Dim, flickering lights barely illuminate the obscure corners of the room, casting eerie shadows that seem to dance and writhe along the walls.",
+                                  "The darkness shrouds the chamber, leaving much to the imagination and evoking an unsettling sense of the unknown.",
+                                  " ",
+                                  "Please enter Help for list of commands to be used in the Chamber Of Shadows."
+                                };
+            foreach (string room in roomDesc)
+            {
+                Console.WriteLine(room);
+            }
             string userAnswer = "";
             string puzzleAnswer = "OWL";
             // Infinite loop for handling player commands
             while (true)
             {
-                
-                Console.WriteLine("- Look");
-                Console.WriteLine("- Use Torch");
-                Console.WriteLine("- Use Key On Cabinet");
-                Console.WriteLine("- Examine Cabinet");
-                Console.Write("Please enter a command: ");
-
-
+                Console.Write("\nPlease enter a command: ");
                 string userInput = Console.ReadLine().ToUpper();
                 switch (userInput)
                 {
@@ -807,36 +806,8 @@ namespace Game
                             Console.WriteLine("It's difficult to see the details in the dim light. Perhaps there's something that can help you illuminate the room.");
                         }
                         break;
-                    case "DAGGER":
-                        if (torchUsed_Chamber_Of_Shadows)
-                        {
-                            if (HasItem("dagger"))
-                            {
-                                Console.WriteLine("You have already taken the dagger");
-                            }
-                            else
-                            {
-                                Console.WriteLine("You have picked up a dagger with embellished engravings all over the blade");
-                                AddToInventory("dagger");
-                            }
-                        }
-                        else
-                        {
-                            Console.WriteLine("The room is too dark. You can't see anything.");
-                        }
-                        break;
-                        case "USE DAGGER":
-                        if (HasItem("dagger"))
-                        {
-                            Console.WriteLine("You twirl the dagger thinking your self so cool");
-                        }
-                        else
-                        {
-                            Console.WriteLine("you do not yet have the dagger");
-                        }
-                        break;
                     case "HELP":
-                        Help();
+                        Help_COS();
                         break;
                     case "INVENTORY":
                         Console.WriteLine("You have the following items in your inventory:");
@@ -1073,15 +1044,20 @@ namespace Game
                 }
             }
         }
+        static void Help_COS()
+        {
+            Console.WriteLine("Please use the following commands to navigate and interact with the room environment.");
+            string[] commands = {"-Look", "-Use Torch", "-Examine Cabinet", "-Use Key On Cabinet", "-Place Artifact On Mechanism", "-Solve Puzzle", "-North", "-South", "-East", "-West", "-Inventory"};
+            foreach(string command in commands)
+            {
+                Console.WriteLine(command);
+            }
+        }
         public static void Main(string[] args)
         {
             //GameStart();
             //CentralChamber();
-            Library();
-            CentralChamber();
-            //AltarRoom();
-
-            
+            ChamberOfShadow();
         }
     }
 }
