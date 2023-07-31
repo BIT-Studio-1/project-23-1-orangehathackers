@@ -873,62 +873,66 @@ namespace Game
 
         static bool EquationGame()
         {
-            // Generate a random math problem
-            Random random = new Random();
-            int num1 = random.Next(-20, 21);
-            int num2 = random.Next(-20, 21);
-            int operatorIndex = random.Next(0, 4);
-            char op = '?';
-            int answer = 0;
-
-            switch (operatorIndex)
+            do
             {
-                case 0:
-                    op = '+';
-                    answer = num1 + num2;
-                    break;
-                case 1:
-                    op = '-';
-                    answer = num1 - num2;
-                    break;
-                case 2:
-                    op = '*';
-                    answer = num1 * num2;
-                    break;
-                case 3:
-                    op = '/';
-                    num1 = num2 * random.Next(-10, 11);
-                    answer = num1 / num2;
-                    break;
-                case 4:
-                    op = '%';
-                    num1 = num2 * random.Next(-10, 11);
-                    answer = num1 % num2;
-                    break;
-            }
+                // Generate a random math problem
+                Random random = new Random();
+                int num1 = random.Next(-20, 21);
+                int num2 = random.Next(-20, 21);
+                int operatorIndex = random.Next(0, 4);
+                char op = '?';
+                int answer = 0;
 
-            // Display the math problem and prompt the player to enter the answer
-            Console.WriteLine("Please answer the following math question: \n");
-            Console.WriteLine($"{num1} {op} {num2}");
-            Console.WriteLine();
-            Console.WriteLine("Your answer is ? ");
-            Console.Write("---> ");
-            int guess = int.Parse(Console.ReadLine());
-            Console.Clear();
+                switch (operatorIndex)
+                {
+                    case 0:
+                        op = '+';
+                        answer = num1 + num2;
+                        break;
+                    case 1:
+                        op = '-';
+                        answer = num1 - num2;
+                        break;
+                    case 2:
+                        op = '*';
+                        answer = num1 * num2;
+                        break;
+                    case 3:
+                        op = '/';
+                        num1 = num2 * random.Next(-10, 11);
+                        answer = num1 / num2;
+                        break;
+                    case 4:
+                        op = '%';
+                        num1 = num2 * random.Next(-10, 11);
+                        answer = num1 % num2;
+                        break;
+                }
 
-            // Check if the answer is correct
-            if (guess == answer)
-            {
-                Console.WriteLine("\nCongratulations! You've solved the puzzle!");
-                return true;
-            }
-            else
-            {
-                Console.WriteLine($"\nSorry, your answer: {guess} is incorrect. \nThe correct answer is {answer}");
-                Console.WriteLine(" ");
-                Console.WriteLine("Would you like to try again? Press y for yes and n for no\n");
-                return false;
-            }
+                // Display the math problem and prompt the player to enter the answer
+                Console.WriteLine("Please answer the following math question: \n");
+                Console.WriteLine($"{num1} {op} {num2}");
+                Console.WriteLine();
+                Console.WriteLine("Your answer is ? ");
+                Console.Write("---> ");
+                int guess = int.Parse(Console.ReadLine());
+                Console.Clear();
+
+                // Check if the answer is correct
+                if (guess == answer)
+                {
+                    Console.WriteLine("\nCongratulations! You've solved the puzzle!");
+                    return true;
+                }
+                else
+                {
+                    Console.WriteLine($"\nSorry, your answer: {guess} is incorrect. \nThe correct answer is {answer}");
+                    Console.WriteLine(" ");
+                    Console.WriteLine("Would you like to try again? Press y for yes and n for no\n");
+                    return false;
+                }
+            }while(true);
+            
         }
 
 
