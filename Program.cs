@@ -52,7 +52,10 @@ namespace Game
             Console.ReadLine();
             Console.Clear();
 
-            string text ="You are an archaeologist exploring an ancient excavation site.\nYour mission is to find a long-lost artifact of great power.\nPrepare yourself for an adventure filled with puzzles and mysteries!\n\nPress enter to continue";
+            string text ="You are an archaeologist exploring an ancient excavation site.\n" +
+                "Your mission is to find a long-lost artifact of great power.\n" +
+                "Prepare yourself for an adventure filled with puzzles and mysteries!\n\n" +
+                "Press enter to continue";
             Animate(text);
             Console.ReadLine();
             Console.Clear();
@@ -1074,25 +1077,29 @@ namespace Game
             }
         }
 
-        static void Animate(string Text)
+        static void Animate(string Text)        //method that takes text and prints it 
         {
-            int delay = 30;
-            for (int i = 0; i < Text.Length; i++)
+            bool skip = false;
             {
-                if (!Console.KeyAvailable)
+                int delay = 30;
+                for (int i = 0; i < Text.Length; i++)
                 {
-                    Console.Write(Text[i]);
-                    Thread.Sleep(delay);
-                }
-                
-                else if (Console.ReadKey(true).Key == ConsoleKey.Z)
-                {
-
-                    Console.ReadLine();
+                    if (Console.KeyAvailable)
+                    {
+                        skip = true;
+                    }
+                    if (skip == false)
+                    {
+                        Console.Write(Text[i]);
+                        Thread.Sleep(delay);
+                    }
+                    else
+                    {
+                        Console.Write(Text[i]);
+                    }
                 }
             }
-
-            Console.WriteLine();
+            Console.ReadLine();
         }
 
         public static void Main(string[] args)
