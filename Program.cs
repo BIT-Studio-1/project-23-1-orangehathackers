@@ -914,6 +914,7 @@ namespace Game
             Console.WriteLine("Your answer is ? ");
             Console.Write("---> ");
             int guess = int.Parse(Console.ReadLine());
+            Console.Clear();
 
             // Check if the answer is correct
             if (guess == answer)
