@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
@@ -51,11 +53,10 @@ namespace Game
             Console.WriteLine("Press enter to continue: ");
             Console.ReadLine();
             Console.Clear();
-
-            string text ="You are an archaeologist exploring an ancient excavation site.\n" +
-                "Your mission is to find a long-lost artifact of great power.\n" +
-                "Prepare yourself for an adventure filled with puzzles and mysteries!\n\n" +
-                "Press enter to continue";
+            string[] text = { "You are an archaeologist exploring an ancient excavation site.",
+            "Your mission is to find a long-lost artifact of great power.",
+            "Prepare yourself for an adventure filled with puzzles and mysteries!",
+            "Press enter to continue"};
             Animate(text);
             Console.ReadLine();
             Console.Clear();
@@ -1077,12 +1078,19 @@ namespace Game
             }
         }
 
-        static void Animate(string Text)        //method that takes text and prints it 
+        static void Animate(string[] text)        //method that takes text and prints it 
         {
             bool skip = false;
             {
                 int delay = 30;
-                for (int i = 0; i < Text.Length; i++)
+                foreach (string s in text)
+                {
+                    int padding = (Console.WindowWidth - text.Length) / 2;
+                    Console.WriteLine(s.PadRight(padding));
+                    Console.WriteLine();
+                }
+                
+                for (int i = 0; i < text.Length; i++)
                 {
                     if (Console.KeyAvailable)
                     {
@@ -1090,12 +1098,12 @@ namespace Game
                     }
                     if (skip == false)
                     {
-                        Console.Write(Text[i]);
+                        Console.Write(text[i]);
                         Thread.Sleep(delay);
                     }
                     else
                     {
-                        Console.Write(Text[i]);
+                        Console.Write(text[i]);
                     }
                 }
             }
