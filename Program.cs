@@ -946,10 +946,15 @@ namespace Game
         //Altar Room Method
         static void AltarRoom()
         {
-
             Console.Clear();
-            Console.WriteLine("You come across a door and on it is an equations \nseems as if you must answer it to open the door");
-            Console.WriteLine("There are doors to the east and west\n");
+            string[] messages = {"You come across a door and on it is an equations", "seems as if you must answer it to open the door", "There are doors to the east and west"};
+
+            foreach(string message in messages)
+            {
+                Console.WriteLine("     " + message);
+                Thread.Sleep(1000);
+            }
+
             bool gotCorrect = EquationGame();
             while (true)
             {
@@ -972,7 +977,6 @@ namespace Game
 
                 switch (userInput)
                 {
-
                     case "PLACE":
                         if (gotCorrect)
                         {
