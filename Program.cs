@@ -912,10 +912,8 @@ namespace Game
             {
                 // Display the math problem and prompt the player to enter the answer
                 Console.WriteLine("Please answer the following math question: \n");
-                Console.WriteLine($"{num1} {op} {num2}");
+                Console.Write($"{num1} {op} {num2} = ");
                 Console.WriteLine();
-                Console.WriteLine("Your answer is ? ");
-                Console.Write("---> ");
                 int guess = int.Parse(Console.ReadLine());
                 Console.Clear();
 
