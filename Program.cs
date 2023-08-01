@@ -870,6 +870,7 @@ namespace Game
             }
         }
 
+        //Equation Game Method
         static bool EquationGame()
         {
 
@@ -945,7 +946,7 @@ namespace Game
             }
         }
 
-
+        //Altar Room Method
         static void AltarRoom()
         {
 
