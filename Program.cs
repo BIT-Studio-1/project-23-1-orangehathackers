@@ -1017,16 +1017,6 @@ namespace Game
                         Help();
                         break;
 
-                    case "y":
-                        Console.Clear();
-                        Console.WriteLine("You come across a door and on it is an equation.\nSeems as if you must answer it to open the door.");
-                        Console.WriteLine("There are doors to the east and west.\n");
-                        gotCorrect = EquationGame();
-                        break;
-
-                    case "n":
-                        return;
-
                     default:
                         Console.WriteLine("Invalid answer. Please try again.");
                         break;
