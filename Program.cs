@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Reflection;
 using System.Threading;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Game
 {
@@ -56,6 +52,7 @@ namespace Game
             string[] text = { "You are an archaeologist exploring an ancient excavation site.",
             "Your mission is to find a long-lost artifact of great power.",
             "Prepare yourself for an adventure filled with puzzles and mysteries!",
+            "",
             "Press enter to continue"};
             Animate(text);
             Console.ReadLine();
@@ -1085,27 +1082,27 @@ namespace Game
                 int delay = 30;
                 foreach (string s in text)
                 {
-                    int padding = (Console.WindowWidth - text.Length) / 2;
-                    Console.WriteLine(s.PadRight(padding));
-                    Console.WriteLine();
+                    Console.SetCursorPosition(Console.WindowWidth - s.Length) / 2);
+                    //int padding = (Console.WindowWidth - s.Length) / 2;
+                    for (int i = 0; i < s.Length; i++)
+                    {
+                        if (Console.KeyAvailable)
+                        {
+                            skip = true;
+                        }
+                        if (skip == false)
+                        {
+                            Console.Write(s[i]);
+                            Thread.Sleep(delay);
+                        }
+                        else
+                        {
+                            Console.Write(text[i]);
+                        }
+                    }
+                    Console.WriteLine(s.PadLeft(padding + s.Length).PadRight(Console.WindowWidth));
                 }
-                
-                for (int i = 0; i < text.Length; i++)
-                {
-                    if (Console.KeyAvailable)
-                    {
-                        skip = true;
-                    }
-                    if (skip == false)
-                    {
-                        Console.Write(text[i]);
-                        Thread.Sleep(delay);
-                    }
-                    else
-                    {
-                        Console.Write(text[i]);
-                    }
-                }
+
             }
             Console.ReadLine();
         }
