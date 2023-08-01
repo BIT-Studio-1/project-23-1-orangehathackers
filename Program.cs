@@ -3,7 +3,6 @@ using System.ComponentModel.Design;
 using System.Linq;
 using System.Numerics;
 using System.Threading;
-using Internal;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace Game
@@ -63,8 +62,7 @@ namespace Game
         }
         // Method for instruction of the game
         static void Help()
-        {
-            string temp = "";
+        { 
             Console.WriteLine("Instructions");
             Console.WriteLine("Enter commands to navigate between rooms and interact with the environment.");
             Console.WriteLine("Use 'north', 'south', 'east' and 'west' to move in those respective directions.");
@@ -73,10 +71,6 @@ namespace Game
             Console.WriteLine("Collect useful items to help you progress in the game.");
             Console.WriteLine("Your ultimate goal is to discover the hidden artifact and claim it for yourself.");
             Console.WriteLine("Good Luck!!!!!");
-
-            Console.WriteLine("Please press enter to clear out the instruction");
-            temp = Console.ReadLine();
-            Console.Clear();
         }
         // Method to add an item to the player's inventory
         static void AddToInventory(string item)
@@ -457,13 +451,6 @@ namespace Game
                 }
             }
         }
-        struct ColorCodes
-        {
-            public const string R = "\x1b[31m";
-            public const string G = "\x1b[32m";
-            public const string B = "\x1b[34m";
-            public const string Reset = "\x1b[0m";
-        }
         static void helpLibrary()
         {
             Console.WriteLine("This is all the helpful command in library room");
@@ -499,7 +486,7 @@ namespace Game
             foreach (string message in messages)
             {
                 Console.WriteLine("       " + message);
-                System.Threading.Thread.Sleep(500);
+                Thread.Sleep(500);
             }
             // Infinite loop for handling player commands in the Library.
             while (true)
@@ -526,7 +513,7 @@ namespace Game
                         helpLibrary();
                         Console.WriteLine("Press enter to continue");
                         Thread.Sleep(100);
-                        string temp = Console.ReadLine();
+                        Console.ReadLine();
                         Console.Clear();
                         break;
                     case "SOLVE PUZZLE":
@@ -882,7 +869,7 @@ namespace Game
                             Console.WriteLine("The room is too dark. You can't see anything.");
                         }
                         break;
-                        case "USE DAGGER":
+                        case "USE DAGGER:
                         if (HasItem("dagger"))
                         {
                             Console.WriteLine("You twirl the dagger thinking your self so cool");
