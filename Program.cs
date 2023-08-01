@@ -1151,6 +1151,12 @@ namespace Game
                 Console.Write($"{num1} {op} {num2} = ");
                 int guess = int.Parse(Console.ReadLine());
                 Console.Clear();
+
+                if (guess == answer)
+                {
+                    Console.WriteLine("Congratulations! You've solved the puzzle!");
+                    return true;
+                }
             }
         }
 
