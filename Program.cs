@@ -1080,10 +1080,10 @@ namespace Game
             bool skip = false;
             {
                 int delay = 30;
+                Console.SetCursorPosition(0, 2);
                 foreach (string s in text)
                 {
-                    Console.SetCursorPosition(Console.WindowWidth - s.Length) / 2);
-                    //int padding = (Console.WindowWidth - s.Length) / 2;
+                    Console.SetCursorPosition((Console.WindowWidth - s.Length) / 2, Console.CursorTop);
                     for (int i = 0; i < s.Length; i++)
                     {
                         if (Console.KeyAvailable)
@@ -1097,15 +1097,16 @@ namespace Game
                         }
                         else
                         {
-                            Console.Write(text[i]);
+                            Console.Write(s[i]);
                         }
                     }
-                    Console.WriteLine(s.PadLeft(padding + s.Length).PadRight(Console.WindowWidth));
+                    Console.WriteLine();
                 }
-
+        
             }
             Console.ReadLine();
         }
+
 
         public static void Main(string[] args)
         {
