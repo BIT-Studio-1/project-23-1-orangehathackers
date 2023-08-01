@@ -454,6 +454,7 @@ namespace Game
         static void helpLibrary()
         {
             Console.WriteLine("This is all the helpful command in library room");
+            Console.WriteLine("You can type 'GAME' to win more treasure.");
             Console.WriteLine($"{ColorCodes.R}- North{ColorCodes.Reset}");
             Console.WriteLine($"{ColorCodes.R}- South{ColorCodes.Reset}");
             Console.WriteLine($"{ColorCodes.R}- East{ColorCodes.Reset}");
@@ -657,13 +658,55 @@ namespace Game
                         }
                         break;
                     case "STORYLINE":
-
                         foreach (string message in messages)
                         {
                             Console.WriteLine("       " + message);
                             System.Threading.Thread.Sleep(500);
                         }
                         break;
+                    case "GAME":
+                        int maxPlay = 3, playerScore = 0, libraryKeeperScore = 0;
+                        char[] libraryKeeper = { 'R', 'P', 'S' };
+                        Random rand = new Random();
+                        int libraryKeeperChoice = rand.Next(0, libraryKeeper.Length);
+                        char libraryKeeperSelectedAns = libraryKeeper[libraryKeeperChoice];
+                        Console.WriteLine("Please enter rock by 'R', scissor by 'S', and paper by 'P'");
+                        char playerAnswer = Convert.ToChar(Console.ReadLine().ToUpper());
+
+                        for (int playNumber = 1; playNumber <= maxPlay; playNumber++)
+                        {
+                            if (playerAnswer == libraryKeeperSelectedAns)
+                            {
+                                Console.WriteLine("The game draw.");
+                            }
+                            else if (((playerAnswer == 'R') && (libraryKeeperSelectedAns == 'S')) || ((playerAnswer == 'S') && (libraryKeeperSelectedAns == 'P')) || ((playerAnswer == 'P') && (libraryKeeperSelectedAns == 'R')))
+                            {
+                                Console.WriteLine("You won!!!!!");
+                                playerScore++;
+                            }
+                            else if (((libraryKeeperSelectedAns == 'R') && (playerAnswer == 'S')) || ((playerAnswer == 'S') && (libraryKeeperSelectedAns == 'P')) || ((playerAnswer == 'P') && (libraryKeeperSelectedAns == 'R')))
+                            {
+                                Console.WriteLine("The library keeper won");
+                                libraryKeeperScore++;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Wrong answer. Please try again");
+                            }
+                        }
+                        if (playerScore > libraryKeeperScore)
+                        {
+                            AddToInventory("Oracle's Guidance Orb");
+                            Console.WriteLine("An Oracle's Guidance Orb has been add into your inventory.");
+                        }
+                        else if (libraryKeeperScore > playerScore)
+                        {
+                            Console.WriteLine("You have lose to the library keep");
+                        }
+                        else
+                        {
+                            Console.WriteLine("What a luck. You and the library keeper didn't score any point.");
+                        }
                     default:
                         Console.WriteLine("Invalid answer. Please try again.");
                         break;
