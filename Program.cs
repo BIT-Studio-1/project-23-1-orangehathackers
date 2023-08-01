@@ -977,6 +977,16 @@ namespace Game
 
                 switch (userInput)
                 {
+                    case "STORYLINE":
+                        {
+                            foreach(string message in messages)
+                            {
+                                string text = message;
+                                //Animate(text);
+                                Thread.Sleep(2000);
+                            }
+                        }
+                        break;
                     case "PLACE":
                         if (gotCorrect)
                         {
