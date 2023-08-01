@@ -1144,20 +1144,13 @@ namespace Game
                     break;
             }
 
-            // Display the math problem and prompt the player to enter the answer
-            Console.Write($"{num1} {op} {num2} = ");
-            int guess = int.Parse(Console.ReadLine());
-
-            // Check if the answer is correct
-            if (guess == answer)
+            while (true)
             {
-                Console.WriteLine("Congratulations! You've solved the puzzle!");
-                return true;
-            }
-            else
-            {
-                Console.WriteLine("Sorry, that's incorrect. You failed to solve the puzzle.");
-                return false;
+                // Display the math problem and prompt the player to enter the answer
+                Console.WriteLine("Please answer the following math question: \n");
+                Console.Write($"{num1} {op} {num2} = ");
+                int guess = int.Parse(Console.ReadLine());
+                Console.Clear();
             }
         }
 
