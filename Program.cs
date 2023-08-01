@@ -922,7 +922,7 @@ namespace Game
                 // Check if the answer is correct
                 if (guess == answer)
                 {
-                    Console.WriteLine("\nCongratulations! You've solved the puzzle!");
+                    Console.WriteLine("Congratulations! You've solved the puzzle!");
                     return true;
                 }
 
