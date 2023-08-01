@@ -1089,7 +1089,7 @@ namespace Game
                     Console.WriteLine(s.PadRight(padding));
                     Console.WriteLine();
                 }
-                
+
                 for (int i = 0; i < text.Length; i++)
                 {
                     if (Console.KeyAvailable)
@@ -1108,6 +1108,42 @@ namespace Game
                 }
             }
             Console.ReadLine();
+        }
+
+        static void Animate_Mayank(string[] text)
+        {
+            bool skip = false;
+            int windowWidth = Console.WindowWidth;
+            foreach(string line in text)
+            {
+                int leftPadding = (windowWidth - line.Length) / 2;
+                if (!skip)
+                {
+                    for (int i=0; i <= leftPadding; i++)
+                    {
+                        Console.Write(" ");
+                    }
+                    foreach (char c in line)
+                    {
+                        if (Console.KeyAvailable && Console.ReadKey(intercept: true).Key == ConsoleKey.Enter)
+                        {
+                            skip = true;
+                            break;
+                        }
+                        Console.Write(c);
+                        Thread.Sleep(30);   
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i <= leftPadding; i++)
+                    {
+                        Console.Write(" ");
+                    }
+                    Console.Write(line);
+                }
+                Console.WriteLine();
+            }
         }
 
         public static void Main(string[] args)
