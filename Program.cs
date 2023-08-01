@@ -1304,15 +1304,37 @@ namespace Game
                     if (room =="PuzzleRoom")
                     {
 
-                    } else if (room ==)
+                    } else if (room =="ChamberOfShadow")
                     {
-
-                    }else
+                        if (torchUsed_Chamber_Of_Shadows)
+                        {
+                            Library();
+                        }
+                        else
+                        {
+                            Console.WriteLine("It's difficult to see the details in the dim light. Perhaps there's something that can help you illuminate the room.");
+                        }
+                        break;
+                    }else if (room == "TreasureVault")
+                    {
+                        PuzzleRoom();
+                    } else if (room == "AltarRoom")
+                    {
+                        ChamberOfShadow();
+                    }
+                    else
                     {
                         Console.WriteLine("       You can not go to west from here. Please try again");
                     }
                     break;
                 case "SOUTH":
+                    if (room == "ChamberOfShadow")
+                    {
+                        CentralChamber();
+                    } else
+                    {
+                        Console.WriteLine("       You can not go to south from here. Please try again");
+                    }
                     break;
                 case "HELP":
                     Help();
