@@ -1119,9 +1119,10 @@ namespace Game
         public static void Main(string[] args)
         {
             //GameStart();
+add-book-to-library
             //CentralChamber();
             Library();
-            //CentralChamber();
+            CentralChamber();
             //AltarRoom();
 
             
