@@ -927,10 +927,20 @@ namespace Game
 
                 else
                 {
-                    Console.WriteLine($"\nSorry, your answer: {guess} is incorrect. \nThe correct answer is {answer}");
+                    Console.WriteLine($"Sorry, your answer: {guess} is incorrect. \nThe correct answer is {answer}");
                     Console.WriteLine(" ");
                     Console.WriteLine("Would you like to try again? Press y for yes and n for no\n");
-                    return false;
+                    string tryAgain = Console.ReadLine().ToLower();
+                    if(tryAgain == "y")
+                    {
+                        Console.Clear();
+                        continue;
+                    }
+                    
+                    else
+                    {
+                        return false;
+                    }
                 }
             }
         }
