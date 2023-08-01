@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Threading;
 
@@ -1230,6 +1231,106 @@ namespace Game
                 }
             }
         }
+        static void CondencedHelp(string input, string room)
+        {
+            switch (input)
+            {
+                case "NORTH":
+                 if (room == "CentralChamber")
+                    {
+                        if (HasItem("Key"))
+                        {
+                            if (pedestalActivated_Central_Chamber)
+                            {
+                                ChamberOfShadow();
+                            }
+                            else
+                            {
+                                Console.WriteLine("       The door to the north is sealed. You need to find a key and place it on the pedestal.");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("       The door to the north is sealed. You need to activate the pedestal first.");
+                        }
+                    } else
+                    {
+                        Console.WriteLine("       You can not go to north from here. Please try again");
+                    }
+                    break;
+                case "EAST":
+                    if (room == "CentralChamber") // CentralChamber east
+                    {
+                        PuzzleRoom();
+                    } else if (room == "PuzzleRoom") // Puzzleroom east
+                    {
+                        if (puzzleSolved_Puzzle_Room)
+                        {
+                            TreasureVault();
+                        }
+                        else
+                        {
+                            Console.WriteLine("       The door to the Treasure Vault is sealed. First solve all the puzzles to gain access.");
+                        }
+                    } else if (room == "library") // Librery East
+                    {
+                        ChamberOfShadow();
+                    }  else if(room == "ChamberOfShadow") // Chamber of shadows east
+                    {
+                        if (torchUsed_Chamber_Of_Shadows)
+                        {
+                            if (puzzleSolved_Chamber_Of_Shadows)
+                            {
+                                AltarRoom();
+                            }
+                            else
+                            {
+                                Console.WriteLine("       The access to the door is locked. You cannot go further.");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("       It's difficult to see the details in the dim light. Perhaps there's something that can help you illuminate the room.");
+                        }
+                    } else
+                    {
+                        Console.WriteLine("       You can not go to east from here. Please try again");
+                    }
+                    {
+
+                    }
+                    break;
+                case "WEST":
+                    if (room =="PuzzleRoom")
+                    {
+
+                    } else if (room ==)
+                    {
+
+                    }else
+                    {
+                        Console.WriteLine("       You can not go to west from here. Please try again");
+                    }
+                    break;
+                case "SOUTH":
+                    break;
+                case "HELP":
+                    Help();
+                    break;
+                case "INVENTORY":
+                    Console.WriteLine("You have the following items in your inventory:");
+                    for (int i = 0; i < inventoryCount; i++)
+                    {
+                        Console.WriteLine(inventory[i]);
+                    }
+                    break;
+
+                default:
+                    Console.WriteLine("Invalid command. Please try again.");
+                    break;
+            }
+        }
+
         public static void Main(string[] args)
         {
             //GameStart();
