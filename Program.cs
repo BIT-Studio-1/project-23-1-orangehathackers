@@ -1108,6 +1108,7 @@ namespace Game
             }
         }
 
+        //Equation Method
         static bool EquationGame()
         {
             // Generate a random math problem
@@ -1156,6 +1157,24 @@ namespace Game
                 {
                     Console.WriteLine("Congratulations! You've solved the puzzle!");
                     return true;
+                }
+
+                else
+                {
+                    Console.WriteLine($"Sorry, your answer: {guess} is incorrect. \nThe correct answer is {answer}");
+                    Console.WriteLine(" ");
+                    Console.WriteLine("Would you like to try again? Press y for yes and n for no\n");
+                    string tryAgain = Console.ReadLine().ToLower();
+                    if (tryAgain == "y")
+                    {
+                        Console.Clear();
+                        continue;
+                    }
+
+                    else
+                    {
+                        return false;
+                    }
                 }
             }
         }
