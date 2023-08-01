@@ -947,11 +947,11 @@ namespace Game
         static void AltarRoom()
         {
             Console.Clear();
-            string[] messages = {"You come across a door and on it is an equations", "seems as if you must answer it to open the door", "There are doors to the east and west"};
+            string[] messages = {"You come across a door and on it is an equations", "seems as if you must answer it to open the door", "There are doors to the east and west\n"};
 
             foreach(string message in messages)
             {
-                Console.WriteLine("     " + message);
+                Console.WriteLine("" + message);
                 Thread.Sleep(1000);
             }
 
