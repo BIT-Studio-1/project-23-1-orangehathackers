@@ -1112,71 +1112,52 @@ namespace Game
         static bool EquationGame()
         {
             // Generate a random math problem
+            bool playAgain = true;
             Random random = new Random();
-            int num1 = random.Next(-20, 21);
-            int num2 = random.Next(-20, 21);
-            int operatorIndex = random.Next(0, 4);
-            char op = '?';
-            int answer = 0;
-
-            switch (operatorIndex)
+            while (playAgain)
             {
-                case 0:
-                    op = '+';
-                    answer = num1 + num2;
-                    break;
-                case 1:
-                    op = '-';
-                    answer = num1 - num2;
-                    break;
-                case 2:
-                    op = '*';
-                    answer = num1 * num2;
-                    break;
-                case 3:
-                    op = '/';
-                    num1 = num2 * random.Next(-10, 11);
-                    answer = num1 / num2;
-                    break;
-                case 4:
-                    op = '%';
-                    num1 = num2 * random.Next(-10, 11);
-                    answer = num1 % num2;
-                    break;
-            }
+                int num1 = random.Next(50, 250);
+                int num2 = random.Next(-50, -250);
+                char[] operatorIndex = {'+', '-'};
+                char op = operatorIndex[random.Next(operatorIndex.Length)];
 
-            while (true)
-            {
-                // Display the math problem and prompt the player to enter the answer
-                Console.WriteLine("Please answer the following math question: \n");
-                Console.Write($"{num1} {op} {num2} = ");
-                int guess = int.Parse(Console.ReadLine());
-                Console.Clear();
-
-                if (guess == answer)
+                int correctAnswer;
+                if(op == '+') 
                 {
-                    Console.WriteLine("Congratulations! You've solved the puzzle!");
-                    return true;
+                    correctAnswer = num1 + num2;
                 }
 
                 else
                 {
-                    Console.WriteLine($"Sorry, your answer: {guess} is incorrect. \nThe correct answer is {answer}");
-                    Console.WriteLine(" ");
-                    Console.WriteLine("Would you like to try again? Press y for yes and n for no\n");
-                    string tryAgain = Console.ReadLine().ToLower();
-                    if (tryAgain == "y")
-                    {
-                        Console.Clear();
-                        continue;
-                    }
+                    correctAnswer = num1 - num2;
+                }
 
+                Console.Write($"{num1} {op} {num2} = ");
+                int Answer;
+                if (int.TryParse(Console.ReadLine(), out Answer))
+                {
+                    if (Answer == correctAnswer)
+                    {
+                        Console.WriteLine("Your answer is correct !");
+                    }
                     else
                     {
-                        return false;
+                        Console.WriteLine($"Wrong! The correct answer is - {correctAnswer}.");
                     }
                 }
+
+                else
+                {
+                    Console.WriteLine("Invalid answer. Please enter a valid number.");
+                }
+
+                Console.Write("Do you want to try again? (y/n): ");
+                string userInput = Console.ReadLine();
+                
+
             }
+            
+            
         }
 
 
