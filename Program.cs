@@ -876,21 +876,6 @@ namespace Game
 
             // Generate a random math problem
             Random random = new Random();
-            bool playAgain;
-
-            while (playAgain)
-            {
-                int num1 = random.Next(50, 150);
-                int num2 = random.Next(-50, -150);
-                char[] operatorIndex = { '+', '-' };
-                char op = operatorIndex[random.Next(operatorIndex.Length)];
-
-                int correctAnswer;
-                if (op == '+')
-                {
-
-                }
-            }
             int num1 = random.Next(-20, 21);
             int num2 = random.Next(-20, 21);
             int operatorIndex = random.Next(0, 4);
@@ -929,7 +914,6 @@ namespace Game
                 Console.WriteLine("Please answer the following math question: \n");
                 Console.Write($"{num1} {op} {num2} = ");
                 int guess = int.Parse(Console.ReadLine());
-                Console.ReadLine();
                 Console.Clear();
 
                 // Check if the answer is correct
@@ -948,7 +932,7 @@ namespace Game
                     if(tryAgain == "y")
                     {
                         Console.Clear();
-                        
+                        continue;
                     }
                     
                     else
