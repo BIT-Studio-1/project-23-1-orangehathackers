@@ -30,9 +30,9 @@ namespace Game
         struct ColorCodes 
         {
             public const string R = "\x1b[31m"; // Red denotes important items 
-            public const string G = "\x1b[32m"; // cosmetic gimic items
-            public const string B = "\x1b[34m"; // used for hidden rooms and secret side quests lines
-            public const string Reset = "\x1b[0m";
+            public const string G = "\x1b[32m"; // Green cosmetic gimic items
+            public const string B = "\x1b[34m"; // Blue used for hidden rooms and secret side quests lines
+            public const string Reset = "\x1b[0m"; // At the other side of color so the res of the text remains unafected
         }
 
         // Display the game title
