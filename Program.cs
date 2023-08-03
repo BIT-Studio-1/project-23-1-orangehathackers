@@ -28,8 +28,11 @@ namespace Game
 
         // Strust for color to be put in text.
         struct ColorCodes 
-        { 
-
+        {
+            public const string R = "\x1b[31m";
+            public const string G = "\x1b[32m";
+            public const string B = "\x1b[34m";
+            public const string Reset = "\x1b[0m";
         }
 
         // Display the game title
