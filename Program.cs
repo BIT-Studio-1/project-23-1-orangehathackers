@@ -821,6 +821,12 @@ namespace Game
                             Console.WriteLine(dimLightMessage);
                         }
                         break;
+                    case "STORYLINE":
+                        foreach (string room in roomDesc)
+                        {
+                            Console.WriteLine(room);
+                        }
+                        break;
                     case "EXAMINE PAINTING":
                         if (torchUsed_Chamber_Of_Shadows)
                         {
