@@ -633,12 +633,16 @@ namespace Game
                                   " ",
                                   "Please enter Help for list of commands to be used in the Chamber Of Shadows."
                                 };
+
+            // Display room description
             foreach (string room in roomDesc)
             {
                 Console.WriteLine(room);
             }
+
             string userAnswer;
             string puzzleAnswer = "OWL";
+
             // Infinite loop for handling player commands
             while (true)
             {
@@ -1126,6 +1130,7 @@ namespace Game
                 }
             }
         }
+        // Method to display help commands for Chamber of Shadows
         static void Help_COS()
         {
             Console.WriteLine("Please use the following commands to navigate and interact with the room environment.");
@@ -1135,16 +1140,21 @@ namespace Game
                 Console.WriteLine(command);
             }
         }
+        // Method to handle the memory game puzzle
         static bool MemoryGamePuzzle()
         {
             Console.WriteLine("The memory game begins......");
             Random rand = new Random();
             int[] number = new int[7];
             int[] userGuess = new int[7];
+
+            // Generate random numbers for the memory game
             for (int i = 0;i<number.Length-1;i++)
             {
                 number[i] = rand.Next(10,100);
             }
+
+            // Display the numbers to the player
             for (int i = 0; i < number.Length - 1; i++)
             {
                 Console.WriteLine(number[i]);
@@ -1152,10 +1162,14 @@ namespace Game
             Thread.Sleep(3000);
             Console.Clear();
             Console.WriteLine("Enter the sequence of numbers in the order that it was displayed.");
+
+            // Get user input for the memory game
             for (int i = 0; i < userGuess.Length - 1; i++)
             {
                 userGuess[i] = Convert.ToInt32(Console.ReadLine());
             }
+
+            // Check if the user's guess matches the generated numbers
             for (int i = 0; i < userGuess.Length - 1; i++)
             {
                 if (userGuess[i] != number[i])
@@ -1169,6 +1183,7 @@ namespace Game
             return true;
         }
 
+        //Mehod to handle the alternate ending of the game
         static void AlternateEnding()
         {
             Console.WriteLine("You step through the secret door and find yourself in the Chamber of Enlightenment.");
