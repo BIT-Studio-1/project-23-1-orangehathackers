@@ -1146,22 +1146,23 @@ namespace Game
                 
 
                 Console.WriteLine("\nPlease answer the following math question: \n");
-                Console.Write($"{num1} {op} {num2} = \n");
+                Console.Write($"{num1} {op} {num2} = ");
 
                 int Answer;
                 if (int.TryParse(Console.ReadLine(), out Answer))
                 {
                     if (Answer == correctAnswer)
                     {
-                        Console.WriteLine("Your answer is correct !");
+                        Console.WriteLine("\nYour answer is correct !");
                         return true;
                     }
                     else
                     {
-                        Console.WriteLine($"Wrong! The correct answer is : {correctAnswer}.");
+                        Console.WriteLine($"\nWrong! The correct answer is : [{correctAnswer}].");
                         Console.Write("Do you want to try again? (y/n): ");
                         string userInput = Console.ReadLine();
                         playAgain = (userInput.ToLower() == "y");
+                        Console.Clear();
                     }
                 }
 
