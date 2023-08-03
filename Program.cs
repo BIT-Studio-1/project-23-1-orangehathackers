@@ -29,9 +29,9 @@ namespace Game
         // Strust for color to be put in text.
         struct ColorCodes 
         {
-            public const string R = "\x1b[31m";
-            public const string G = "\x1b[32m";
-            public const string B = "\x1b[34m";
+            public const string R = "\x1b[31m"; // Red denotes important items 
+            public const string G = "\x1b[32m"; // cosmetic gimic items
+            public const string B = "\x1b[34m"; // used for hidden rooms and secret side quests lines
             public const string Reset = "\x1b[0m";
         }
 
