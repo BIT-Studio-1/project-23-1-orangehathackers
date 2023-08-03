@@ -1247,9 +1247,10 @@ namespace Game
         {
             //GameStart();
             //CentralChamber();
-            Library();
-            CentralChamber();
-            //AltarRoom();
+            //Library();
+            //CentralChamber();
+            AltarRoom();
+            EquationGame();
 
             
         }
