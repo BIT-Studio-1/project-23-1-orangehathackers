@@ -633,6 +633,9 @@ namespace Game
                                   " ",
                                   "Please enter Help for list of commands to be used in the Chamber Of Shadows."
                                 };
+            string dimLightMessage = "It's difficult to see the details in the dim light. Perhaps there's something that can help you illuminate the room.";
+            string secretDoorMessage = "There appears to be a hidden door, but it remains concealed from your sight. Perhaps you need to find a way to reveal it.";
+            string invalidAnswer = "Invalid Answer.Please try again.";
 
             // Display room description
             foreach (string room in roomDesc)
@@ -653,7 +656,7 @@ namespace Game
                     case "LOOK":
                         if (!torchUsed_Chamber_Of_Shadows)
                         {
-                            Console.WriteLine("It's difficult to see the details in the dim light. Perhaps there's something that can help you illuminate the room.");
+                            Console.WriteLine(dimLightMessage);
                         }
                         else
                         {
@@ -691,7 +694,7 @@ namespace Game
                         }
                         else
                         {
-                            Console.WriteLine("It's difficult to see the details in the dim light. Perhaps there's something that can help you illuminate the room.");
+                            Console.WriteLine(dimLightMessage);
                         } 
                         break;
                     case "EXAMINE CABINET":
@@ -702,7 +705,7 @@ namespace Game
                         }
                         else
                         {
-                            Console.WriteLine("It's difficult to see the details in the dim light. Perhaps there's something that can help you illuminate the room.");
+                            Console.WriteLine(dimLightMessage);
                         }
                         break;
                     case "PLACE ARTIFACT ON MECHANISM":
@@ -716,10 +719,14 @@ namespace Game
                                 Console.WriteLine("The door itself is made of ancient, weathered wood, adorned with mysterious symbols and engravings that seem to shift and rearrange as if alive.");
                                 Console.WriteLine("To unlock the door and gain access to the final room, a complex puzzle awaits the player.");
                             }
+                            else
+                            {
+                                Console.WriteLine("You do not have the artifact to place on the mechanism.");
+                            }
                         }
                         else
                         {
-                            Console.WriteLine("It's difficult to see the details in the dim light. Perhaps there's something that can help you illuminate the room.");
+                            Console.WriteLine(dimLightMessage);
                         }
                         break;
                     case "SOLVE PUZZLE":
@@ -761,7 +768,7 @@ namespace Game
                                         }
                                         else
                                         {
-                                            Console.WriteLine("Invalid Answer. Please try again.");
+                                            Console.WriteLine(invalidAnswer);
                                         }
                                     }        
                                 }
@@ -778,7 +785,7 @@ namespace Game
                         }
                         else
                         {
-                            Console.WriteLine("It's difficult to see the details in the dim light. Perhaps there's something that can help you illuminate the room.");
+                            Console.WriteLine(dimLightMessage);
                         }
                         break;
                     case "NORTH":
@@ -801,7 +808,7 @@ namespace Game
                         }
                         else
                         {
-                            Console.WriteLine("It's difficult to see the details in the dim light. Perhaps there's something that can help you illuminate the room.");
+                            Console.WriteLine(dimLightMessage);
                         }
                         break;
                     case "WEST":
@@ -811,7 +818,7 @@ namespace Game
                         }
                         else
                         {
-                            Console.WriteLine("It's difficult to see the details in the dim light. Perhaps there's something that can help you illuminate the room.");
+                            Console.WriteLine(dimLightMessage);
                         }
                         break;
                     case "EXAMINE PAINTING":
@@ -830,7 +837,7 @@ namespace Game
                         }
                         else
                         {
-                            Console.WriteLine("It's difficult to see the details in the dim light. Perhaps there's something that can help you illuminate the room.");
+                            Console.WriteLine(dimLightMessage);
                         }
                         break;
                     case "EXAMINE SECRET DOOR":
@@ -860,12 +867,12 @@ namespace Game
                             }
                             else
                             {
-                                Console.WriteLine("There appears to be a hidden door, but it remains concealed from your sight. Perhaps you need to find a way to reveal it.");
+                                Console.WriteLine(secretDoorMessage);
                             }
                         }
                         else
                         {
-                            Console.WriteLine("It's difficult to see the details in the dim light. Perhaps there's something that can help you illuminate the room.");
+                            Console.WriteLine(dimLightMessage);
                         }
                         break;
                     case "ENTER SECRET ROOM":
@@ -884,12 +891,12 @@ namespace Game
                             }
                             else
                             {
-                                Console.WriteLine("There appears to be a hidden door, but it remains concealed from your sight. Perhaps you need to find a way to reveal it.");
+                                Console.WriteLine(secretDoorMessage);
                             }
                         }
                         else
                         {
-                            Console.WriteLine("It's difficult to see the details in the dim light. Perhaps there's something that can help you illuminate the room.");
+                            Console.WriteLine(dimLightMessage);
                         }
                         break;
                     case "HELP":
@@ -903,7 +910,7 @@ namespace Game
                         }
                         break;
                     default:
-                        Console.WriteLine("Invalid answer. Please try again.");
+                        Console.WriteLine(invalidAnswer);
                         break;
                 }
             }
