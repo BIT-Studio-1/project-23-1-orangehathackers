@@ -25,6 +25,13 @@ namespace Game
         private static bool torchUsed_Chamber_Of_Shadows = false;
         private static bool artifactPlaced = false;
         private static bool puzzleSolved_Chamber_Of_Shadows = false;
+
+        // Strust for color to be put in text.
+        struct ColorCodes 
+        { 
+
+        }
+
         // Display the game title
         static void GameStart()
         {
@@ -56,6 +63,7 @@ namespace Game
             Console.WriteLine("Press enter to continue");
             Console.ReadLine();
             Console.Clear();
+            CentralChamber();
         }
         // Method for instruction of the game
         static void Help()
@@ -1232,11 +1240,8 @@ namespace Game
         }
         public static void Main(string[] args)
         {
-            //GameStart();
-            //CentralChamber();
-            Library();
+            GameStart();
             CentralChamber();
-            //AltarRoom();
 
             
         }
