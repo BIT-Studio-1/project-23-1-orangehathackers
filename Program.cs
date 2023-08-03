@@ -1145,8 +1145,8 @@ namespace Game
                 }
                 
 
-                Console.WriteLine("Please answer the following math question: ");
-                Console.Write($"{num1} {op} {num2} = ");
+                Console.WriteLine("\nPlease answer the following math question: \n");
+                Console.Write($"{num1} {op} {num2} = \n");
 
                 int Answer;
                 if (int.TryParse(Console.ReadLine(), out Answer))
