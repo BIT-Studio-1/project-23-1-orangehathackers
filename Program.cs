@@ -1119,7 +1119,7 @@ namespace Game
             while (playAgain)
             {
                 int num1 = random.Next(50, 250);
-                int num2 = random.Next(-50, -250);
+                int num2 = random.Next(-250, -50);
                 char[] operatorIndex = {'+', '-', '/', '*'};
                 char op = operatorIndex[random.Next(operatorIndex.Length)];
 
@@ -1129,12 +1129,12 @@ namespace Game
                     correctAnswer = num1 + num2;
                 }
 
-                if(op ==  '-')
+                else if(op ==  '-')
                 {
                     correctAnswer = num1 - num2;
                 }
 
-                if(op == '/')
+                else if(op == '/')
                 {
                     correctAnswer = num1 / num2;
                 }
@@ -1147,16 +1147,21 @@ namespace Game
 
                 Console.WriteLine("Please answer the following math question: ");
                 Console.Write($"{num1} {op} {num2} = ");
+
                 int Answer;
                 if (int.TryParse(Console.ReadLine(), out Answer))
                 {
                     if (Answer == correctAnswer)
                     {
                         Console.WriteLine("Your answer is correct !");
+                        return true;
                     }
                     else
                     {
-                        Console.WriteLine($"Wrong! The correct answer is - {correctAnswer}.");
+                        Console.WriteLine($"Wrong! The correct answer is : {correctAnswer}.");
+                        Console.Write("Do you want to try again? (y/n): ");
+                        string userInput = Console.ReadLine();
+                        playAgain = (userInput.ToLower() == "y");
                     }
                 }
 
@@ -1165,9 +1170,7 @@ namespace Game
                     Console.WriteLine("Invalid answer. Please enter a valid number.");
                 }
 
-                Console.Write("Do you want to try again? (y/n): ");
-                string userInput = Console.ReadLine();
-                playAgain = (userInput.ToLower() == "y");
+                
             }
             Console.WriteLine("Congualution! You've already sovled the equation ! ! !");
             
