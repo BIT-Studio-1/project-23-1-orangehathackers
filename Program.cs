@@ -1079,14 +1079,14 @@ namespace Game
         {
             bool skip = false;
             {
-                int delay = 30;
-                Console.SetCursorPosition(0, 2);
+                int delay = 30;     //change the number stored in delay to speed up or slow down the texts animation
+                Console.SetCursorPosition(0, 2);        //adds the padding to the top of the page
                 foreach (string s in text)
                 {
-                    Console.SetCursorPosition((Console.WindowWidth - s.Length) / 2, Console.CursorTop);
+                    Console.SetCursorPosition((Console.WindowWidth - s.Length) / 2, Console.CursorTop);     //adds padding to the left and right sides of the sentence
                     for (int i = 0; i < s.Length; i++)
                     {
-                        if (Console.KeyAvailable)
+                        if (Console.KeyAvailable)       //if a key is pressed
                         {
                             skip = true;
                         }
