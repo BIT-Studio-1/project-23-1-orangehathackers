@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Numerics;
 using System.Threading;
 
 namespace Game
@@ -1109,8 +1110,9 @@ namespace Game
         }
 
         //Equation Method
-        static bool EquationGame()
+        static void EquationGame()
         {
+            
             // Generate a random math problem
             bool playAgain = true;
             Random random = new Random();
@@ -1118,7 +1120,7 @@ namespace Game
             {
                 int num1 = random.Next(50, 250);
                 int num2 = random.Next(-50, -250);
-                char[] operatorIndex = {'+', '-'};
+                char[] operatorIndex = {'+', '-', '/', '*'};
                 char op = operatorIndex[random.Next(operatorIndex.Length)];
 
                 int correctAnswer;
@@ -1132,6 +1134,7 @@ namespace Game
                     correctAnswer = num1 - num2;
                 }
 
+                Console.WriteLine("Please answer the following math question: ");
                 Console.Write($"{num1} {op} {num2} = ");
                 int Answer;
                 if (int.TryParse(Console.ReadLine(), out Answer))
@@ -1153,9 +1156,9 @@ namespace Game
 
                 Console.Write("Do you want to try again? (y/n): ");
                 string userInput = Console.ReadLine();
-                
-
+                playAgain = (userInput.ToLower() == "y");
             }
+            Console.WriteLine("");
             
             
         }
