@@ -1115,30 +1115,30 @@ namespace Game
             
             // Generate a random math problem
             bool playAgain = true;
+            // Create a Random object to generate random numbers.
             Random random = new Random();
             while (playAgain)
             {
+                // Generate random numbers for the math problem.
                 int num1 = random.Next(50, 250);
                 int num2 = random.Next(-250, -50);
                 char[] operatorIndex = {'+', '-', '/', '*'};
+                // Randomly choose a math operator from the array.
                 char op = operatorIndex[random.Next(operatorIndex.Length)];
 
                 int correctAnswer;
-                if(op == '+') 
+                if (op == '+')
                 {
                     correctAnswer = num1 + num2;
                 }
-
-                else if(op ==  '-')
+                else if (op == '-')
                 {
                     correctAnswer = num1 - num2;
                 }
-
-                else if(op == '/')
+                else if (op == '/')
                 {
                     correctAnswer = num1 / num2;
                 }
-
                 else
                 {
                     correctAnswer = num1 * num2;
@@ -1148,6 +1148,7 @@ namespace Game
                 Console.WriteLine("Please answer the following math question: \n");
                 Console.Write($"{num1} {op} {num2} = ");
 
+                // Get the user's answer and check if it's a valid number.
                 int Answer;
                 if (int.TryParse(Console.ReadLine(), out Answer))
                 {
@@ -1155,10 +1156,12 @@ namespace Game
                     {
                         Console.WriteLine("\nYour answer is correct !");
                         Console.WriteLine("Congualution! You've already sovled the equation ! ! !\n");
+                        // End the current round and return true to play again.
                         return true;
                     }
                     else
                     {
+                        // User's answer is wrong.
                         Console.WriteLine($"\nWrong! The correct answer is : [{correctAnswer}].");
                         Console.Write("Press any key to continue: ");
                         string userInput = Console.ReadLine();
