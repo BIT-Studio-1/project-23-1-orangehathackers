@@ -1166,7 +1166,11 @@ namespace Game
             // Get user input for the memory game
             for (int i = 0; i < userGuess.Length - 1; i++)
             {
-                userGuess[i] = Convert.ToInt32(Console.ReadLine());
+               // Logic to check that user enters a valid number
+                while (!int.TryParse(Console.ReadLine(), out userGuess[i]))
+                {
+                    Console.WriteLine("Invalid input. Please enter a number.");
+                }
             }
 
             // Check if the user's guess matches the generated numbers
