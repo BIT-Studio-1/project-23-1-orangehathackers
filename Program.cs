@@ -451,6 +451,55 @@ namespace Game
                 }
             }
         }
+        static bool libraryGame()
+        {
+            int maxPlayForTheGame = 0, playerScore = 0, libraryKeeperScore = 0;
+            char[] libraryKeeper = { 'R', 'P', 'S' }; // This will hold choices which the librarykeeper will pick.
+            Random rand = new Random();
+
+            for (maxPlayForTheGame = 0; maxPlayForTheGame < 3; maxPlayForTheGame++)
+            {
+                Console.WriteLine("Please enter rock by 'R', scissor by 'S', and paper by 'P'");
+                char playerAnswer = Convert.ToChar(Console.ReadLine().ToUpper());
+                do
+                {
+                    int libraryKeeperChoice = rand.Next(0, libraryKeeper.Length);
+                    char libraryKeeperSelectedAns = libraryKeeper[libraryKeeperChoice];
+                    if (playerAnswer == libraryKeeperSelectedAns)
+                    {
+                        Console.WriteLine("The game draw.");
+                    }
+                    else if (((playerAnswer == 'R') && (libraryKeeperSelectedAns == 'S')) || ((playerAnswer == 'S') && (libraryKeeperSelectedAns == 'P')) || ((playerAnswer == 'P') && (libraryKeeperSelectedAns == 'R')))
+                    {
+                        Console.WriteLine("You won!!!!!");
+                        playerScore++;
+                    }
+                    else
+                    {
+                        Console.WriteLine("The library keeper won");
+                        libraryKeeperScore++;
+                    }
+                    maxPlayForTheGame++;
+
+                } while (playerAnswer == 'R' || playerAnswer == 'P' || playerAnswer == 'S');
+                Console.WriteLine("Wrong answer. Please try again by typing R,P,S");
+            }
+            Console.WriteLine($"The player score {playerScore}");
+            Console.WriteLine($"The Library Keeper score {libraryKeeperScore}");
+            if (playerScore > libraryKeeperScore)
+            {
+                Console.WriteLine("An Oracle's Guidance Orb has been add into your inventory.");
+            }
+            else if (libraryKeeperScore > playerScore)
+            {
+                Console.WriteLine("You have lose to the library keep");
+            }
+            else
+            {
+                Console.WriteLine("What a luck. You and the library keeper didn't score any point.");
+            }
+        }
+        // This is all the helpful command in library room only.
         static void helpLibrary()
         {
             Console.WriteLine("This is all the helpful command in library room");
@@ -574,7 +623,7 @@ namespace Game
                         {
                             if (HasItem("Pendant"))
                             {
-                                Console.WriteLine("You have already taken a pendant.");
+                                Console.WriteLine("The pendant has been successfully added to the inventory");
                             }
                             else
                             {
@@ -590,7 +639,7 @@ namespace Game
                     case "TAKE BOOK":
                         if (torchUsed_Library)
                         {
-                            Console.WriteLine("You have already taken a book.");
+                            Console.WriteLine("The book has been successfully added to the inventory.");
                             AddToInventory("Book");
                         }
                         else if (HasItem("Book"))
@@ -665,48 +714,8 @@ namespace Game
                         }
                         break;
                     case "GAME":
-                        int maxPlay = 3, playerScore = 0, libraryKeeperScore = 0;
-                        char[] libraryKeeper = { 'R', 'P', 'S' };
-                        Random rand = new Random();
-                        int libraryKeeperChoice = rand.Next(0, libraryKeeper.Length);
-                        char libraryKeeperSelectedAns = libraryKeeper[libraryKeeperChoice];
-                        Console.WriteLine("Please enter rock by 'R', scissor by 'S', and paper by 'P'");
-                        char playerAnswer = Convert.ToChar(Console.ReadLine().ToUpper());
-
-                        for (int playNumber = 1; playNumber <= maxPlay; playNumber++)
-                        {
-                            if (playerAnswer == libraryKeeperSelectedAns)
-                            {
-                                Console.WriteLine("The game draw.");
-                            }
-                            else if (((playerAnswer == 'R') && (libraryKeeperSelectedAns == 'S')) || ((playerAnswer == 'S') && (libraryKeeperSelectedAns == 'P')) || ((playerAnswer == 'P') && (libraryKeeperSelectedAns == 'R')))
-                            {
-                                Console.WriteLine("You won!!!!!");
-                                playerScore++;
-                            }
-                            else if (((libraryKeeperSelectedAns == 'R') && (playerAnswer == 'S')) || ((playerAnswer == 'S') && (libraryKeeperSelectedAns == 'P')) || ((playerAnswer == 'P') && (libraryKeeperSelectedAns == 'R')))
-                            {
-                                Console.WriteLine("The library keeper won");
-                                libraryKeeperScore++;
-                            }
-                            else
-                            {
-                                Console.WriteLine("Wrong answer. Please try again");
-                            }
-                        }
-                        if (playerScore > libraryKeeperScore)
-                        {
-                            AddToInventory("Oracle's Guidance Orb");
-                            Console.WriteLine("An Oracle's Guidance Orb has been add into your inventory.");
-                        }
-                        else if (libraryKeeperScore > playerScore)
-                        {
-                            Console.WriteLine("You have lose to the library keep");
-                        }
-                        else
-                        {
-                            Console.WriteLine("What a luck. You and the library keeper didn't score any point.");
-                        }
+                        libraryGame();
+                        break;
                     default:
                         Console.WriteLine("Invalid answer. Please try again.");
                         break;
