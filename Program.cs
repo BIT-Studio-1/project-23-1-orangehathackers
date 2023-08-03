@@ -1145,7 +1145,7 @@ namespace Game
                 }
                 
 
-                Console.WriteLine("\nPlease answer the following math question: \n");
+                Console.WriteLine("Please answer the following math question: \n");
                 Console.Write($"{num1} {op} {num2} = ");
 
                 int Answer;
@@ -1154,15 +1154,17 @@ namespace Game
                     if (Answer == correctAnswer)
                     {
                         Console.WriteLine("\nYour answer is correct !");
+                        Console.WriteLine("Congualution! You've already sovled the equation ! ! !\n");
                         return true;
                     }
                     else
                     {
                         Console.WriteLine($"\nWrong! The correct answer is : [{correctAnswer}].");
-                        Console.Write("Do you want to try again? (y/n): ");
+                        Console.Write("Press any key to continue: ");
                         string userInput = Console.ReadLine();
-                        playAgain = (userInput.ToLower() == "y");
+                        playAgain = (userInput.ToLower() == "");
                         Console.Clear();
+                        
                     }
                 }
 
