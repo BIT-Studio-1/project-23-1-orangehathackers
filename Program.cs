@@ -28,33 +28,35 @@ namespace Game
         // Display the game title
         static void GameStart()
         {
-            Console.WriteLine("========================================================================================================================");
-            Console.WriteLine("");
-            Console.WriteLine("  _______ _             _____                    _      ____   __   ______ _   _____                      _       ");
-            Thread.Sleep(500);
-            Console.WriteLine(" |__   __| |           / ____|                  | |    / __ \\ / _| |  ____| | |  __ \\                    | |      ");
-            Thread.Sleep(500);
-            Console.WriteLine("    | |  | |__   ___  | (___   ___  ___ _ __ ___| |_  | |  | | |_  | |__  | | | |  | | ___  _ __ __ _  __| | ___  ");
-            Thread.Sleep(500);
-            Console.WriteLine("    | |  | '_ \\ / _ \\  \\___ \\ / _ \\/ __| '__/ _ \\ __| | |  | |  _| |  __| | | | |  | |/ _ \\| '__/ _` |/ _` |/ _ \\ ");
-            Thread.Sleep(500);
-            Console.WriteLine("    | |  | | | |  __/  ____) |  __/ (__| | |  __/ |_  | |__| | |   | |____| | | |__| | (_) | | | (_| | (_| | (_) |");
-            Thread.Sleep(500);
-            Console.WriteLine("    |_|  |_| |_|\\___| |_____/ \\___|\\___|_|  \\___|\\__|  \\____/|_|   |______|_| |_____/ \\___/|_|  \\__,_|\\__,_|\\___/ ");
-            Thread.Sleep(500);
-            Console.WriteLine("");
-            Console.WriteLine("");
-            Console.WriteLine("========================================================================================================================");
-            Console.WriteLine("");
-            Console.WriteLine("Press enter to continue: ");
-            Console.ReadLine();
-            Console.Clear();
-            string[] text = { "You are an archaeologist exploring an ancient excavation site.",
-            "Your mission is to find a long-lost artifact of great power.",
-            "Prepare yourself for an adventure filled with puzzles and mysteries!",
+            int delay = 50;
+            bool skip = false;
+            string[] splash = { "========================================================================================================================",
             "",
-            "Press enter to continue"};
-            Animate(text);
+            "  _______ _             _____                    _      ____   __   ______ _   _____                      _       ",
+            " |__   __| |           / ____|                  | |    / __ \\ / _| |  ____| | |  __ \\                    | |      ",
+            "    | |  | |__   ___  | (___   ___  ___ _ __ ___| |_  | |  | | |_  | |__  | | | |  | | ___  _ __ __ _  __| | ___  ",
+            "    | |  | '_ \\ / _ \\  \\___ \\ / _ \\/ __| '__/ _ \\ __| | |  | |  _| |  __| | | | |  | |/ _ \\| '__/ _` |/ _` |/ _ \\ ",
+            "    | |  | | | |  __/  ____) |  __/ (__| | |  __/ |_  | |__| | |   | |____| | | |__| | (_) | | | (_| | (_| | (_) |",
+            "    |_|  |_| |_|\\___| |_____/ \\___|\\___|_|  \\___|\\__|  \\____/|_|   |______|_| |_____/ \\___/|_|  \\__,_|\\__,_|\\___/ ",
+            "",
+            "",
+            "========================================================================================================================",
+            "",
+            "Press enter to continue: "};
+            foreach (string s in splash)
+            {
+                Console.WriteLine(s);
+                Thread.Sleep(delay);
+            }
+            Console.Clear();
+            {
+                string[] text = { "You are an archaeologist exploring an ancient excavation site.",
+                "Your mission is to find a long-lost artifact of great power.",
+                "Prepare yourself for an adventure filled with puzzles and mysteries!",
+                "",
+                "Press enter to continue"};
+                Animate(text);
+            }
             Console.ReadLine();
             Console.Clear();
         }
@@ -1102,9 +1104,10 @@ namespace Game
                     }
                     Console.WriteLine();
                 }
-        
+                Console.ReadLine();
+                Console.SetCursorPosition((40), Console.CursorTop);
             }
-            Console.ReadLine();
+            
         }
 
 
