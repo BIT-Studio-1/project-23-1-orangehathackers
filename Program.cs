@@ -1110,7 +1110,7 @@ namespace Game
         }
 
         //Equation Method
-        static void EquationGame()
+        static bool EquationGame()
         {
             
             // Generate a random math problem
@@ -1129,10 +1129,21 @@ namespace Game
                     correctAnswer = num1 + num2;
                 }
 
-                else
+                if(op ==  '-')
                 {
                     correctAnswer = num1 - num2;
                 }
+
+                if(op == '/')
+                {
+                    correctAnswer = num1 / num2;
+                }
+
+                else
+                {
+                    correctAnswer = num1 * num2;
+                }
+                
 
                 Console.WriteLine("Please answer the following math question: ");
                 Console.Write($"{num1} {op} {num2} = ");
@@ -1158,9 +1169,9 @@ namespace Game
                 string userInput = Console.ReadLine();
                 playAgain = (userInput.ToLower() == "y");
             }
-            Console.WriteLine("");
+            Console.WriteLine("Congualution! You've already sovled the equation ! ! !");
             
-            
+            return playAgain;
         }
 
 
