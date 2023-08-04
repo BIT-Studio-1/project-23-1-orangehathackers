@@ -6,15 +6,13 @@ using System.Threading;
 namespace Game
 {
     internal class Program
+
     {
         // An array to store the inventory items
         private static string[] inventory = new string[5];
 
         // Variable to keep track of the number of items in the inventory
         private static int inventoryCount = 0;
-
-        private const string GREEN = "\u001b[32m"; // ANSI escape codes for setting green color
-        private const string RESET = "\u001b[0m"; //ANSI escape codes for resetting the color
 
         // Flags to track various game states and puzzle progress
         private static bool pedestalActivated_Central_Chamber = false;
@@ -631,13 +629,13 @@ namespace Game
             Console.Clear();
             string[] roomDesc = { "You are now in the chamber of shadow.",
                                   "As you cautiously step into the Chamber of Shadows, the air grows heavy and oppressive.",
-                                  "Dim, flickering lights barely illuminate the" +GREEN+ "obscure corners" +RESET+ "of the room, casting eerie shadows that seem to dance and writhe along the walls.",
+                                  $"Dim, flickering lights barely illuminate the {ColorCodes.B}obscure corners{ColorCodes.Reset} of the room, casting eerie shadows that seem to dance and writhe along the walls.",
                                   "The darkness shrouds the chamber, leaving much to the imagination and evoking an unsettling sense of the unknown.",
                                   " ",
-                                  "Please enter" +GREEN+ "Help" +RESET+ "for list of commands to be used in the Chamber Of Shadows."
+                                  $"Please enter {ColorCodes.B}Help{ColorCodes.Reset} for list of commands to be used in the Chamber Of Shadows."
                                 };
             string dimLightMessage = "It's difficult to see the details in the dim light. Perhaps there's something that can help you illuminate the room.";
-            string secretDoorMessage = "There appears to be a" +GREEN+ "hidden door," +RESET+ " but it remains concealed from your sight. Perhaps you need to find a way to reveal it.";
+            string secretDoorMessage = $"There appears to be a {ColorCodes.B}hidden door{ColorCodes.Reset}, but it remains concealed from your sight. Perhaps you need to find a way to reveal it.";
             string invalidAnswer = "Invalid Answer.Please try again.";
 
             // Display room description
@@ -663,16 +661,16 @@ namespace Game
                         }
                         else
                         {
-                            Console.WriteLine("In the far corner, stands a" +GREEN+ "locked cabinet," +RESET+ "its contents hidden from prying eyes.");
+                            Console.WriteLine($"In the far corner, stands a {ColorCodes.B}locked cabinet{ColorCodes.Reset}, its contents hidden from prying eyes.");
                             Console.WriteLine("Whispers of untold treasures or crucial clues linger in the air, enticing your curiosity.");
-                            Console.WriteLine("In the center of the room, an ancient and" +GREEN+ "mysterious painting" + RESET+ "hangs on the wall, its colors faded but its details hauntingly vivid.");
+                            Console.WriteLine($"In the center of the room, an ancient and {ColorCodes.R}mysterious painting{ColorCodes.Reset} hangs on the wall, its colors faded but its details hauntingly vivid.");
                         }
                         break;
                     case "USE TORCH":
                         if (HasItem("Torch"))
                         {
                             Console.WriteLine("As the player ignites the torch,");
-                            Console.WriteLine("the flickering flames cast dancing shadows that begin to reveal the" +GREEN+ "hidden details" +RESET+ "of the room, shrouded in darkness no more.");
+                            Console.WriteLine($"the flickering flames cast dancing shadows that begin to reveal the {ColorCodes.B}hidden details{ColorCodes.Reset} of the room, shrouded in darkness no more.");
                             torchUsed_Chamber_Of_Shadows = true;
                         }
                         else
@@ -685,14 +683,14 @@ namespace Game
                         {
                             if (HasItem("Key"))
                             {
-                                Console.WriteLine("In the heart of the cabinet, an" +GREEN+ "enigmatic mechanism" +RESET+ "catches your attention, its intricate design hinting at a greater purpose.");
-                                Console.WriteLine("A small slot within the mechanism awaits the" +GREEN+ "placement of a mysterious artifact," +RESET+ "teasing its significance.");
-                                Console.WriteLine("Beyond this intricate contraption lies a" +GREEN+ "concealed door," +RESET+ "promising a path to the unknown.");
+                                Console.WriteLine($"In the heart of the cabinet, an {ColorCodes.R}enigmatic mechanism{ColorCodes.Reset} catches your attention, its intricate design hinting at a greater purpose.");
+                                Console.WriteLine($"A small slot within the mechanism awaits the {ColorCodes.R}placement of a mysterious artifact{ColorCodes.Reset}, teasing its significance.");
+                                Console.WriteLine($"Beyond this intricate contraption lies a {ColorCodes.B}concealed door{ColorCodes.Reset}, promising a path to the unknown.");
                                 
                             }
                             else
                             {
-                                Console.WriteLine("You don't have the" +GREEN+ "key " +RESET+ "to unlock the chest.");
+                                Console.WriteLine($"You don't have the {ColorCodes.R}key{ColorCodes.Reset} to unlock the chest.");
                             }
                         }
                         else
@@ -704,7 +702,7 @@ namespace Game
                         if (torchUsed_Chamber_Of_Shadows)
                         {
                             Console.WriteLine("The cabinet stands tall and imposing against the chamber's wall,");
-                            Console.WriteLine("its surface adorned with intricate carvings, hinting at the" +GREEN+ "mysteries concealed within."+RESET);
+                            Console.WriteLine($"its surface adorned with intricate carvings, hinting at the {ColorCodes.B}mysteries concealed within{ColorCodes.Reset}.");
                         }
                         else
                         {
@@ -718,13 +716,13 @@ namespace Game
                             {
                                 artifactPlaced = true;
                                 Console.WriteLine("As the artifact is carefully placed on the mechanism,");
-                                Console.WriteLine(GREEN+"the door to the far EAST of the chamber" +RESET+ "begins to shimmer with an ethereal glow," +GREEN+ "revealing a doorway" +RESET+ "to the final room.");
+                                Console.WriteLine($"{ColorCodes.B}the door to the far EAST of the chamber{ColorCodes.Reset} begins to shimmer with an ethereal glow, {ColorCodes.B}revealing a doorway{ColorCodes.Reset} to the final room.");
                                 Console.WriteLine("The door itself is made of ancient, weathered wood, adorned with mysterious symbols and engravings that seem to shift and rearrange as if alive.");
-                                Console.WriteLine("To" +GREEN+ "unlock the door" +RESET+ "and gain access to the final room, a" +GREEN+ "complex puzzle" +RESET+ "awaits the player.");
+                                Console.WriteLine($"To {ColorCodes.B}unlock the door{ColorCodes.Reset} and gain access to the final room, a {ColorCodes.B}complex puzzle{ColorCodes.Reset} awaits the player.");
                             }
                             else
                             {
-                                Console.WriteLine("You do not have the" +GREEN+ "artifact" +RESET+ "to place on the mechanism.");
+                                Console.WriteLine($"You do not have the {ColorCodes.B}artifact{ColorCodes.Reset} to place on the mechanism.");
                             }
                         }
                         else
@@ -739,7 +737,7 @@ namespace Game
                             {
                                 if (!puzzleSolved_Chamber_Of_Shadows)
                                 {
-                                    Console.WriteLine(GREEN+ "The Tome of Forgotten Knowledge\" holds the key to unlocking the door to the final room."+RESET);
+                                    Console.WriteLine($"{ColorCodes.R}The Tome of Forgotten Knowledge\" holds the key to unlocking the door to the final room{ColorCodes.Reset}.");
                                     Console.WriteLine("PUZZLE:");
                                     Console.WriteLine("Of wisdom's embrace, seek the guardian's gaze,");
                                     Console.WriteLine("A scholar's delight, a learned mind's blaze.");
@@ -760,12 +758,12 @@ namespace Game
                                             {
                                                 Console.WriteLine("In the realm of twilight's embrace, a creature of feathered grace dwells,");
                                                 Console.WriteLine("casting its mystic aura upon the land.");
-                                                Console.WriteLine("Embrace the essence of this" +GREEN+ "nocturnal sentinel" +RESET+ "to illuminate the path towards the answer you seek.");
+                                                Console.WriteLine($"Embrace the essence of this {ColorCodes.B}nocturnal sentinel{ColorCodes.Reset} to illuminate the path towards the answer you seek.");
                                             }
                                             else
                                             {
                                                 Console.WriteLine("Within the depths of my vast knowledge,");
-                                                Console.WriteLine("the" +GREEN+ "book" +RESET+ "that contains the sought-after" +GREEN+ "hint" +RESET+ "eludes my grasp,");
+                                                Console.WriteLine($"the {ColorCodes.R}book{ColorCodes.Reset} that contains the sought-after {ColorCodes.B}hint{ColorCodes.Reset} eludes my grasp,");
                                                 Console.WriteLine("leaving me unable to provide you with its wisdom.");
                                             }
                                         }
@@ -783,7 +781,7 @@ namespace Game
                             }
                             else
                             {
-                                Console.WriteLine("Activate the" +GREEN+ "mechanism" +RESET+ "to access the puzzle.");
+                                Console.WriteLine($"Activate the {ColorCodes.B}mechanism{ColorCodes.Reset} to access the puzzle.");
                             }
                         }
                         else
@@ -836,7 +834,7 @@ namespace Game
                             if (!secretDoorDiscovered)
                             {
                                 Console.WriteLine("As you closely examine the ancient painting on the wall, you notice a faint outline around it.");
-                                Console.WriteLine("With a gentle push, the painting slides aside, revealing a" +GREEN+ "hidden door" +RESET+ "behind it!");
+                                Console.WriteLine($"With a gentle push, the painting slides aside, revealing a {ColorCodes.B}hidden door{ColorCodes.Reset} behind it!");
                                 secretDoorDiscovered = true;
                             }
                             else
@@ -857,7 +855,7 @@ namespace Game
                                 if (!secretDoorUnlocked)
                                 {
                                     Console.WriteLine("You approach the secret door and run your fingers along its intricate engravings.");
-                                    Console.WriteLine("The engravings seem to depict a pattern of glowing symbols, a" +GREEN+ "memory game" +RESET+ "to unlock the door.");
+                                    Console.WriteLine($"The engravings seem to depict a pattern of glowing symbols, a {ColorCodes.B}memory game{ColorCodes.Reset} to unlock the door.");
                                     Console.WriteLine("Do you dare to challenge the ancient memory puzzle? (YES/NO)");
                                     string input = Console.ReadLine().ToUpper();
                                     if (input[0] == 'Y')
@@ -895,7 +893,7 @@ namespace Game
                                 }
                                 else
                                 {
-                                    Console.WriteLine("As you approach the hidden door, you find it" +GREEN+ "securely locked," +RESET+ "its ancient mechanism awaiting the touch of a worthy hand to" +GREEN+ "unlock its mysteries."+RESET);
+                                    Console.WriteLine($"As you approach the hidden door, you find it {ColorCodes.B}securely locked{ColorCodes.Reset}, its ancient mechanism awaiting the touch of a worthy hand to {ColorCodes.B}unlock its mysteries{ColorCodes.Reset}.");
                                 }
                             }
                             else
@@ -909,7 +907,7 @@ namespace Game
                         }
                         break;
                     case "HELP":
-                        Help_COS();
+                        Help();
                         break;
                     case "INVENTORY":
                         Console.WriteLine("You have the following items in your inventory:");
@@ -1146,16 +1144,6 @@ namespace Game
                 }
             }
         }
-        // Method to display help commands for Chamber of Shadows
-        static void Help_COS()
-        {
-            Console.WriteLine("Please use the following commands to navigate and interact with the room environment.");
-            string[] commands = {GREEN+"-Look", "-Use Torch", "-Examine Cabinet", "-Use Key On Cabinet", "-Place Artifact On Mechanism", "-Solve Puzzle", "Examine Painting","Examine Secret Door", "Enter Secret Room", "-North", "-South", "-East", "-West", "-Inventory"+RESET};
-            foreach(string command in commands)
-            {
-                Console.WriteLine(command);
-            }
-        }
         // Method to handle the memory game puzzle
         static bool MemoryGamePuzzle()
         {
@@ -1177,7 +1165,7 @@ namespace Game
             }
             Thread.Sleep(3000);
             Console.Clear();
-            Console.WriteLine("Enter the sequence of numbers in" +GREEN+ "the order" +RESET+ "that it was displayed.");
+            Console.WriteLine($"Enter the sequence of numbers in {ColorCodes.B}the order{ColorCodes.Reset} that it was displayed.");
 
             // Get user input for the memory game
             for (int i = 0; i < userGuess.Length - 1; i++)
