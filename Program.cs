@@ -53,22 +53,84 @@ namespace Game
 
             Console.WriteLine("You are an archaeologist exploring an ancient excavation site.");
             Console.WriteLine("Your mission is to find a long-lost artifact of great power.");
-            Console.WriteLine("Prepare yourself for an adventure filled with puzzles and mysteries!\n");
+            Console.WriteLine("Prepare yourself for an adventure filled with puzzles and mysteries!");
             Console.WriteLine("Press enter to continue");
             Console.ReadLine();
             Console.Clear();
         }
         // Method for instruction of the game
-        static void Help()
-        {                                                                                                                                                                                                        
-            Console.WriteLine("Instructions");
-            Console.WriteLine("Enter commands to navigate between rooms and interact with the environment.");
-            Console.WriteLine("Use 'north', 'south', 'east' and 'west' to move in those respective directions.");
-            Console.WriteLine("Use words like 'examine', 'use', 'look', 'solve', 'climb', 'take' to interact with the items and environment.");
-            Console.WriteLine("Explore each room throughly to find items and solve puzzles.");
-            Console.WriteLine("Collect useful items to help you progress in the game.");
-            Console.WriteLine("Your ultimate goal is to discover the hidden artifact and claim it for yourself.");
-            Console.WriteLine("Good Luck!!!!!");
+        static void Help(string room)
+        {
+            string help = "Please use the following commands to navigate and interact with the room environment.";
+            switch (room)
+            {
+                case "Chamber_Of_Shadows": // Display commands that can be used in Chamber of Shadows
+                    {
+                        Console.WriteLine(help);
+                        string[] commands = { "-Look", "-Use Torch", "-Examine Cabinet", "-Use Key On Cabinet", "-Place Artifact On Mechanism", "-Solve Puzzle", "Examine Painting", "Examine Secret Door", "Enter Secret Room", "-Storyline", "-North", "-South", "-East", "-West", "-Inventory" };
+                        foreach (string command in commands)
+                        {
+                            Console.WriteLine(command);
+                        }
+                    }
+                    break;
+                case "Central_Chamber": // Display commands that can be used in Central Chamber
+                    {
+                        Console.WriteLine(help);
+                        string[] commands = { "-Look", "-Examine Pedestal", "Use Key On Pedestal", "-Solve Puzzle", "-Storyline", "-North", "-South", "-East", "-West", "-Inventory" };
+                        foreach (string command in commands)
+                        {
+                            Console.WriteLine(command);
+                        }
+                    }
+                    break;
+                case "Puzzle_Room": // Display commands that can be used in Puzzle Room
+                    {
+                        Console.WriteLine(help);
+                        string[] commands = { "-Solve Puzzle", "-Bow", "-North", "-South", "-Storyline", "-East", "-West", "-Inventory" };
+                        foreach (string command in commands)
+                        {
+                            Console.WriteLine(command);
+                        }
+                    }
+                    break;
+                case "Library":  // // Display commands that can be used in Library
+                    {
+                        Console.WriteLine(help);
+                        string[] commands = { "-Solve Puzzle", "climb", "-Use Torch", "Take Pendant", "-Take Book", "-Use Book", "-Take Bottle", "-Use Bottle", "-Storyline", "-Game", "-North", "-South", "-East", "-West", "-Inventory" };
+                        foreach (string command in commands)
+                        {
+                            Console.WriteLine(command);
+                        }
+                    }
+                    break;
+
+                case "Treasure_Vault": // Display commands that can be used in Treasure Vault
+                    {
+                        Console.WriteLine(help);
+                        string[] commands = { "-Look", "-Examine Chest", "Use Key On Chest", "-Examine Pedestal", "-Pull Lever", "-Examine Crystal", "-Examine Flickering", "-Take Torch", "-Examine Mystic Orb", "-Take Mystic Orb", "-Use Mystic Orb", "-Examine Enchanted Amulet", "-Take Enchanted Amulet", "-Use Enchanted Amulet", "-Examine Chrono Hourglass", "Take Chrono Hourglass", "-Take Chrono Hourglass", "Examine Luminous Crystal", "Take Luminous Crystal", "UseLuminous Crystal", "-Storyline", "-North", "-South", "-East", "-West", "-Inventory" };
+                        foreach (string command in commands)
+                        {
+                            Console.WriteLine(command);
+                        }
+                    }
+                    break;
+
+                case "Altar_Room":  // // Display commands that can be used in Altar Room
+                    {
+                        Console.WriteLine(help);
+                        string[] commands = { "-Place", "-Storyline", "-North", "-South", "-East", "-West", "-Inventory" };
+                        foreach (string command in commands)
+                        {
+                            Console.WriteLine(command);
+                        }
+                    }
+                    break;
+
+                default:
+                    break;
+            }
+            
         }
         // Method to add an item to the player's inventory
         static void AddToInventory(string item)
