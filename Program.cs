@@ -67,7 +67,7 @@ namespace Game
                 case "Chamber_Of_Shadows": // Display commands that can be used in Chamber of Shadows
                     {
                         Console.WriteLine(help);
-                        string[] commands = { "-Look", "-Use Torch", "-Examine Cabinet", "-Use Key On Cabinet", "-Place Artifact On Mechanism", "-Solve Puzzle", "Examine Painting", "Examine Secret Door", "Enter Secret Room", "-Storyline", "-North", "-South", "-East", "-West", "-Inventory" };
+                        string[] commands = { "-Look", "-Use Torch", "-Examine Cabinet", "-Use Key On Cabinet", "-Place Artifact On Mechanism", "-Solve Puzzle", "-Examine Painting", "-Examine Secret Door", "-Enter Secret Room", "-Storyline", "-North", "-South", "-East", "-West", "-Inventory" };
                         foreach (string command in commands)
                         {
                             Console.WriteLine(command);
@@ -77,7 +77,7 @@ namespace Game
                 case "Central_Chamber": // Display commands that can be used in Central Chamber
                     {
                         Console.WriteLine(help);
-                        string[] commands = { "-Look", "-Examine Pedestal", "Use Key On Pedestal", "-Solve Puzzle", "-Storyline", "-North", "-South", "-East", "-West", "-Inventory" };
+                        string[] commands = { "-Look", "-Examine Pedestal", "-Use Key On Pedestal", "-Solve Puzzle", "-Storyline", "-North", "-South", "-East", "-West", "-Inventory" };
                         foreach (string command in commands)
                         {
                             Console.WriteLine(command);
@@ -97,7 +97,7 @@ namespace Game
                 case "Library":  // // Display commands that can be used in Library
                     {
                         Console.WriteLine(help);
-                        string[] commands = { "-Solve Puzzle", "climb", "-Use Torch", "Take Pendant", "-Take Book", "-Use Book", "-Take Bottle", "-Use Bottle", "-Storyline", "-Game", "-North", "-South", "-East", "-West", "-Inventory" };
+                        string[] commands = { "-Solve Puzzle", "-Climb", "-Use Torch", "-Take Pendant", "-Take Book", "-Use Book", "-Take Bottle", "-Use Bottle", "-Storyline", "-Game", "-North", "-South", "-East", "-West", "-Inventory" };
                         foreach (string command in commands)
                         {
                             Console.WriteLine(command);
@@ -108,7 +108,7 @@ namespace Game
                 case "Treasure_Vault": // Display commands that can be used in Treasure Vault
                     {
                         Console.WriteLine(help);
-                        string[] commands = { "-Look", "-Examine Chest", "Use Key On Chest", "-Examine Pedestal", "-Pull Lever", "-Examine Crystal", "-Examine Flickering", "-Take Torch", "-Examine Mystic Orb", "-Take Mystic Orb", "-Use Mystic Orb", "-Examine Enchanted Amulet", "-Take Enchanted Amulet", "-Use Enchanted Amulet", "-Examine Chrono Hourglass", "Take Chrono Hourglass", "-Take Chrono Hourglass", "Examine Luminous Crystal", "Take Luminous Crystal", "UseLuminous Crystal", "-Storyline", "-North", "-South", "-East", "-West", "-Inventory" };
+                        string[] commands = { "-Look", "-Examine Chest", "-Use Key On Chest", "-Examine Pedestal", "-Pull Lever", "-Examine Crystal", "-Examine Flickering", "-Take Torch", "-Examine Mystic Orb", "-Take Mystic Orb", "-Use Mystic Orb", "-Examine Enchanted Amulet", "-Take Enchanted Amulet", "-Use Enchanted Amulet", "-Examine Chrono Hourglass", "-Take Chrono Hourglass", "-Take Chrono Hourglass", "-Examine Luminous Crystal", "-Take Luminous Crystal", "-UseLuminous Crystal", "-Storyline", "-North", "-South", "-East", "-West", "-Inventory" };
                         foreach (string command in commands)
                         {
                             Console.WriteLine(command);
