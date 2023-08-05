@@ -1231,10 +1231,12 @@ namespace Game
                 }
             }
         }
+        // Method housing common input commands that are use thoruout the whole of the codes switches
         static void CondencedHelp(string input, string room)
         {
-            switch (input)
+            switch (input) 
             {
+                // Case for "NORTH" with if else looks to distinguish what room they are in
                 case "NORTH":
                  if (room == "CentralChamber")
                     {
@@ -1258,6 +1260,8 @@ namespace Game
                         Console.WriteLine("       You can not go to north from here. Please try again");
                     }
                     break;
+                // Case for "EAST" with if else looks to distinguish what room they are in
+
                 case "EAST":
                     if (room == "CentralChamber") // CentralChamber east
                     {
@@ -1272,7 +1276,7 @@ namespace Game
                         {
                             Console.WriteLine("       The door to the Treasure Vault is sealed. First solve all the puzzles to gain access.");
                         }
-                    } else if (room == "library") // Librery East
+                    } else if (room == "library") // Library  East
                     {
                         ChamberOfShadow();
                     }  else if(room == "ChamberOfShadow") // Chamber of shadows east
@@ -1300,10 +1304,12 @@ namespace Game
 
                     }
                     break;
+                // Case for "WEST" with if else looks to distinguish what room they are in
+
                 case "WEST":
                     if (room =="PuzzleRoom")
                     {
-
+                        CentralChamber();
                     } else if (room =="ChamberOfShadow")
                     {
                         if (torchUsed_Chamber_Of_Shadows)
@@ -1327,6 +1333,8 @@ namespace Game
                         Console.WriteLine("       You can not go to west from here. Please try again");
                     }
                     break;
+                // Case for "SOUTH" with if else looks to distinguish what room they are in
+
                 case "SOUTH":
                     if (room == "ChamberOfShadow")
                     {
@@ -1336,9 +1344,11 @@ namespace Game
                         Console.WriteLine("       You can not go to south from here. Please try again");
                     }
                     break;
+                    // Calls the help method
                 case "HELP":
                     Help();
                     break;
+                    // shows the inventory in its entierty 
                 case "INVENTORY":
                     Console.WriteLine("You have the following items in your inventory:");
                     for (int i = 0; i < inventoryCount; i++)
