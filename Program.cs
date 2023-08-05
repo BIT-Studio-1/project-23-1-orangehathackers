@@ -26,6 +26,16 @@ namespace Game
         private static bool torchUsed_Chamber_Of_Shadows = false;
         private static bool artifactPlaced = false;
         private static bool puzzleSolved_Chamber_Of_Shadows = false;
+
+        // Strust for color to be put in text.
+        struct ColorCodes 
+        {
+            public const string R = "\x1b[31m"; // Red denotes important items 
+            public const string G = "\x1b[32m"; // Green cosmetic gimic items
+            public const string B = "\x1b[34m"; // Blue used for hidden rooms and secret side quests lines
+            public const string Reset = "\x1b[0m"; // At the other side of color so the res of the text remains unafected
+        }
+
         // Display the game title
         static void GameStart()
         {
@@ -57,6 +67,7 @@ namespace Game
             Console.WriteLine("Press enter to continue");
             Console.ReadLine();
             Console.Clear();
+            CentralChamber();
         }
         // Method for instruction of the game
         static void Help()
@@ -1254,12 +1265,15 @@ namespace Game
         }
         public static void Main(string[] args)
         {
+
+
             //GameStart();
             //CentralChamber();
             //Library();
             //CentralChamber();
             AltarRoom();
             EquationGame();
+
 
             
         }
