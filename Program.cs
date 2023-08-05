@@ -3,6 +3,7 @@ using System.ComponentModel.Design;
 using System.Linq;
 using System.Numerics;
 using System.Threading;
+using Internal;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace Game
@@ -453,42 +454,45 @@ namespace Game
         }
         static bool libraryGame()
         {
-            int maxPlayForTheGame = 0, playerScore = 0, libraryKeeperScore = 0;
-            char[] libraryKeeper = { 'R', 'P', 'S' }; // This will hold choices which the librarykeeper will pick.
+            int playerScore = 0;
+            int libraryKeeperScore = 0;
             Random rand = new Random();
-
-            for (maxPlayForTheGame = 0; maxPlayForTheGame < 3; maxPlayForTheGame++)
+            char[] select = { 'R', 'P', 'S' };
+            for (int i = 0; i < 3; i++)
             {
-                Console.WriteLine("Please enter rock by 'R', scissor by 'S', and paper by 'P'");
-                char playerAnswer = Convert.ToChar(Console.ReadLine().ToUpper());
-                do
+                int index = rand.Next(0, 3);
+                char libraryKeeperChoice = select[index];
+                Console.Write("\nPlease enter Rock, Paper, Scissor by pressing 'R', 'P', 'S':");
+                char playerChoice = Convert.ToChar(Console.ReadLine().ToUpper());
+                while (playerChoice != 'R' && playerChoice != 'P' && playerChoice != 'S')
                 {
-                    int libraryKeeperChoice = rand.Next(0, libraryKeeper.Length);
-                    char libraryKeeperSelectedAns = libraryKeeper[libraryKeeperChoice];
-                    if (playerAnswer == libraryKeeperSelectedAns)
-                    {
-                        Console.WriteLine("The game draw.");
-                    }
-                    else if (((playerAnswer == 'R') && (libraryKeeperSelectedAns == 'S')) || ((playerAnswer == 'S') && (libraryKeeperSelectedAns == 'P')) || ((playerAnswer == 'P') && (libraryKeeperSelectedAns == 'R')))
-                    {
-                        Console.WriteLine("You won!!!!!");
-                        playerScore++;
-                    }
-                    else
-                    {
-                        Console.WriteLine("The library keeper won");
-                        libraryKeeperScore++;
-                    }
-                    maxPlayForTheGame++;
-
-                } while (playerAnswer == 'R' || playerAnswer == 'P' || playerAnswer == 'S');
-                Console.WriteLine("Wrong answer. Please try again by typing R,P,S");
+                    Console.Write("Invalid Selection. Please enter your answer again: ");
+                    playerChoice = Convert.ToChar(Console.ReadLine().ToUpper());
+                }
+                Console.WriteLine($"Library Keeper chose: {libraryKeeperChoice}");
+                Console.WriteLine($"Player Chose: {playerChoice}");
+                if (libraryKeeperChoice == playerChoice)
+                {
+                    Console.WriteLine("The game is a draw.");
+                }
+                else if (playerChoice == 'R' && libraryKeeperChoice == 'S' || playerChoice == 'P' && libraryKeeperChoice == 'R' || playerChoice == 'S' && libraryKeeperChoice == 'P')
+                {
+                    Console.WriteLine("Player Wins");
+                    playerScore++;
+                }
+                else
+                {
+                    Console.WriteLine("Library Keeper Wins.");
+                    libraryKeeperScore++;
+                }
             }
-            Console.WriteLine($"The player score {playerScore}");
-            Console.WriteLine($"The Library Keeper score {libraryKeeperScore}");
+            Console.WriteLine($"\nPlayer Score: {playerScore}");
+            Console.WriteLine($"Library Keeper Score: {libraryKeeperScore}");
+            Console.ReadLine();
             if (playerScore > libraryKeeperScore)
             {
                 Console.WriteLine("An Oracle's Guidance Orb has been add into your inventory.");
+                AddToInventory("Oracle's Guidance Orb");
             }
             else if (libraryKeeperScore > playerScore)
             {
@@ -583,13 +587,13 @@ namespace Game
                                     Console.WriteLine("Inside the wooden chest, you find an old book laying on the bottom.");
 
                                     // Check if the player already has a book.
-                                    if (HasItem("Book"))
+                                    if (HasItem("Book Of Totem"))
                                     {
                                         Console.WriteLine("You have already taken a book.");
                                     }
                                     else
                                     {
-                                        Console.WriteLine("The book is added to the inventory.");
+                                        Console.WriteLine("The Book Of Totem has been succesfully added into your inventory.");
                                         AddToInventory("Book");
                                     }
                                 }
