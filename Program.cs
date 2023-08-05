@@ -1231,137 +1231,157 @@ namespace Game
                 }
             }
         }
-        // Method housing common input commands that are use thoruout the whole of the codes switches
+        // Method housing common input commands that are used throughout the code's switches
         static void CondencedHelp(string input, string room)
         {
-            switch (input) 
+            // Switch-case for processing user's input
+            switch (input)
             {
-                // Case for "NORTH" with if else looks to distinguish what room they are in
+                // Case for "NORTH" with if-else statements to distinguish which room the user is currently in
                 case "NORTH":
-                 if (room == "CentralChamber")
+                    if (room == "CentralChamber") // Checking if user is in CentralChamber
                     {
-                        if (HasItem("Key"))
+                        if (HasItem("Key")) // If user has the Key item
                         {
-                            if (pedestalActivated_Central_Chamber)
+                            if (pedestalActivated_Central_Chamber) // If the pedestal in CentralChamber is activated
                             {
-                                ChamberOfShadow();
+                                ChamberOfShadow(); // Move user to ChamberOfShadow
                             }
                             else
                             {
+                                // Notify user about the need to place the key on the pedestal
                                 Console.WriteLine("       The door to the north is sealed. You need to find a key and place it on the pedestal.");
                             }
                         }
                         else
                         {
+                            // Notify user about the need to activate the pedestal
                             Console.WriteLine("       The door to the north is sealed. You need to activate the pedestal first.");
                         }
-                    } else
+                    }
+                    else
                     {
+                        // If user is not in CentralChamber, going north is not possible
                         Console.WriteLine("       You can not go to north from here. Please try again");
                     }
                     break;
-                // Case for "EAST" with if else looks to distinguish what room they are in
 
+                // Case for "EAST" with if-else statements to distinguish what room the user is currently in
                 case "EAST":
-                    if (room == "CentralChamber") // CentralChamber east
+                    if (room == "CentralChamber") // If user is in CentralChamber, they move east to PuzzleRoom
                     {
                         PuzzleRoom();
-                    } else if (room == "PuzzleRoom") // Puzzleroom east
+                    }
+                    else if (room == "PuzzleRoom") // If user is in PuzzleRoom
                     {
-                        if (puzzleSolved_Puzzle_Room)
+                        if (puzzleSolved_Puzzle_Room) // If puzzle in PuzzleRoom is solved
                         {
-                            TreasureVault();
+                            TreasureVault(); // Move user to TreasureVault
                         }
                         else
                         {
+                            // Notify user about the need to solve the puzzle to gain access to the Treasure Vault
                             Console.WriteLine("       The door to the Treasure Vault is sealed. First solve all the puzzles to gain access.");
                         }
-                    } else if (room == "library") // Library  East
+                    }
+                    else if (room == "library") // If user is in Library, they move east to ChamberOfShadow
                     {
                         ChamberOfShadow();
-                    }  else if(room == "ChamberOfShadow") // Chamber of shadows east
+                    }
+                    else if (room == "ChamberOfShadow") // If user is in ChamberOfShadow
                     {
-                        if (torchUsed_Chamber_Of_Shadows)
+                        if (torchUsed_Chamber_Of_Shadows) // If torch is used in Chamber of Shadows
                         {
-                            if (puzzleSolved_Chamber_Of_Shadows)
+                            if (puzzleSolved_Chamber_Of_Shadows) // If puzzle in Chamber of Shadows is solved
                             {
-                                AltarRoom();
+                                AltarRoom(); // Move user to AltarRoom
                             }
                             else
                             {
+                                // Notify user about the locked door
                                 Console.WriteLine("       The access to the door is locked. You cannot go further.");
                             }
                         }
                         else
                         {
+                            // Notify user about the need for light in the room
                             Console.WriteLine("       It's difficult to see the details in the dim light. Perhaps there's something that can help you illuminate the room.");
                         }
-                    } else
+                    }
+                    else
                     {
+                        // If user is not in any of these rooms, going east is not possible
                         Console.WriteLine("       You can not go to east from here. Please try again");
                     }
-                    {
-
-                    }
                     break;
-                // Case for "WEST" with if else looks to distinguish what room they are in
 
+                // Case for "WEST" with if-else statements to distinguish what room the user is currently in
                 case "WEST":
-                    if (room =="PuzzleRoom")
+                    if (room == "PuzzleRoom") // If user is in PuzzleRoom, they move west to CentralChamber
                     {
                         CentralChamber();
-                    } else if (room =="ChamberOfShadow")
+                    }
+                    else if (room == "ChamberOfShadow") // If user is in ChamberOfShadow
                     {
-                        if (torchUsed_Chamber_Of_Shadows)
+                        if (torchUsed_Chamber_Of_Shadows) // If torch is used in Chamber of Shadows
                         {
-                            Library();
+                            Library(); // Move user to Library
                         }
                         else
                         {
+                            // Notify user about the need for light in the room
                             Console.WriteLine("It's difficult to see the details in the dim light. Perhaps there's something that can help you illuminate the room.");
                         }
-                        break;
-                    }else if (room == "TreasureVault")
+                    }
+                    else if (room == "TreasureVault") // If user is in TreasureVault, they move west to PuzzleRoom
                     {
                         PuzzleRoom();
-                    } else if (room == "AltarRoom")
+                    }
+                    else if (room == "AltarRoom") // If user is in AltarRoom, they move west to ChamberOfShadow
                     {
                         ChamberOfShadow();
                     }
                     else
                     {
+                        // If user is not in any of these rooms, going west is not possible
                         Console.WriteLine("       You can not go to west from here. Please try again");
                     }
                     break;
-                // Case for "SOUTH" with if else looks to distinguish what room they are in
 
+                // Case for "SOUTH" with if-else statements to distinguish what room the user is currently in
                 case "SOUTH":
-                    if (room == "ChamberOfShadow")
+                    if (room == "ChamberOfShadow") // If user is in ChamberOfShadow, they move south to CentralChamber
                     {
                         CentralChamber();
-                    } else
+                    }
+                    else
                     {
+                        // If user is not in ChamberOfShadow, going south is not possible
                         Console.WriteLine("       You can not go to south from here. Please try again");
                     }
                     break;
-                    // Calls the help method
+
+                // Case for "HELP", this calls the Help() function which probably displays game instructions
                 case "HELP":
                     Help();
                     break;
-                    // shows the inventory in its entierty 
+
+                // Case for "INVENTORY", this shows all the items in the user's inventory
                 case "INVENTORY":
                     Console.WriteLine("You have the following items in your inventory:");
-                    for (int i = 0; i < inventoryCount; i++)
+                    for (int i = 0; i < inventoryCount; i++) // Loop through the items in the inventory
                     {
-                        Console.WriteLine(inventory[i]);
+                        Console.WriteLine(inventory[i]); // Print each item
                     }
                     break;
 
+                // Default case, this is used when the input doesn't match any of the previous cases
                 default:
                     Console.WriteLine("Invalid command. Please try again.");
                     break;
             }
         }
+
 
         public static void Main(string[] args)
         {
