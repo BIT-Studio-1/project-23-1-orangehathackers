@@ -40,7 +40,7 @@ namespace Game
         // Display the game title
         static void GameStart()
         {
-            int delay = 50;
+            int delay = 200;
             bool skip = false;
             string[] splash = { "========================================================================================================================",
             "",
@@ -57,9 +57,22 @@ namespace Game
             "Press enter to continue: "};
             foreach (string s in splash)
             {
-                Console.WriteLine(s);
-                Thread.Sleep(delay);
+                if (Console.KeyAvailable)
+                {
+                    skip = true;
+                }
+                if (skip == false)
+                {
+                    Console.WriteLine(s);
+                    Thread.Sleep(delay);
+                }
+                else
+                {
+                    Console.WriteLine(s);
+                }
             }
+            Console.ReadKey(intercept: true);       //if a key is pressed this line will absorb it so it doesn't interact with the readline after
+            Console.ReadLine();
             Console.Clear();
             {
                 string[] text = { "You are an archaeologist exploring an ancient excavation site.",
@@ -71,7 +84,6 @@ namespace Game
             }
             Console.ReadLine();
             Console.Clear();
-            CentralChamber();
         }
         // Method for instruction of the game
         static void Help()
