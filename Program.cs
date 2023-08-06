@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Numerics;
 using System.Threading;
 
 namespace Game
@@ -26,41 +27,55 @@ namespace Game
         private static bool torchUsed_Chamber_Of_Shadows = false;
         private static bool artifactPlaced = false;
         private static bool puzzleSolved_Chamber_Of_Shadows = false;
+
+        // Strust for color to be put in text.
+        struct ColorCodes 
+        {
+            public const string R = "\x1b[31m"; // Red denotes important items 
+            public const string G = "\x1b[32m"; // Green cosmetic gimic items
+            public const string B = "\x1b[34m"; // Blue used for hidden rooms and secret side quests lines
+            public const string Reset = "\x1b[0m"; // At the other side of color so the res of the text remains unafected
+        }
+
         // Display the game title
         static void GameStart()
         {
-            Console.WriteLine("========================================================================================================================");
-            Console.WriteLine("");
-            Console.WriteLine("  _______ _             _____                    _      ____   __   ______ _   _____                      _       ");
-            Thread.Sleep(500);
-            Console.WriteLine(" |__   __| |           / ____|                  | |    / __ \\ / _| |  ____| | |  __ \\                    | |      ");
-            Thread.Sleep(500);
-            Console.WriteLine("    | |  | |__   ___  | (___   ___  ___ _ __ ___| |_  | |  | | |_  | |__  | | | |  | | ___  _ __ __ _  __| | ___  ");
-            Thread.Sleep(500);
-            Console.WriteLine("    | |  | '_ \\ / _ \\  \\___ \\ / _ \\/ __| '__/ _ \\ __| | |  | |  _| |  __| | | | |  | |/ _ \\| '__/ _` |/ _` |/ _ \\ ");
-            Thread.Sleep(500);
-            Console.WriteLine("    | |  | | | |  __/  ____) |  __/ (__| | |  __/ |_  | |__| | |   | |____| | | |__| | (_) | | | (_| | (_| | (_) |");
-            Thread.Sleep(500);
-            Console.WriteLine("    |_|  |_| |_|\\___| |_____/ \\___|\\___|_|  \\___|\\__|  \\____/|_|   |______|_| |_____/ \\___/|_|  \\__,_|\\__,_|\\___/ ");
-            Thread.Sleep(500);
-            Console.WriteLine("");
-            Console.WriteLine("");
-            Console.WriteLine("========================================================================================================================");
-            Console.WriteLine("");
-            Console.WriteLine("Press enter to continue: ");
+            int delay = 50;
+            bool skip = false;
+            string[] splash = { "========================================================================================================================",
+            "",
+            "  _______ _             _____                    _      ____   __   ______ _   _____                      _       ",
+            " |__   __| |           / ____|                  | |    / __ \\ / _| |  ____| | |  __ \\                    | |      ",
+            "    | |  | |__   ___  | (___   ___  ___ _ __ ___| |_  | |  | | |_  | |__  | | | |  | | ___  _ __ __ _  __| | ___  ",
+            "    | |  | '_ \\ / _ \\  \\___ \\ / _ \\/ __| '__/ _ \\ __| | |  | |  _| |  __| | | | |  | |/ _ \\| '__/ _` |/ _` |/ _ \\ ",
+            "    | |  | | | |  __/  ____) |  __/ (__| | |  __/ |_  | |__| | |   | |____| | | |__| | (_) | | | (_| | (_| | (_) |",
+            "    |_|  |_| |_|\\___| |_____/ \\___|\\___|_|  \\___|\\__|  \\____/|_|   |______|_| |_____/ \\___/|_|  \\__,_|\\__,_|\\___/ ",
+            "",
+            "",
+            "========================================================================================================================",
+            "",
+            "Press enter to continue: "};
+            foreach (string s in splash)
+            {
+                Console.WriteLine(s);
+                Thread.Sleep(delay);
+            }
+            Console.Clear();
+            {
+                string[] text = { "You are an archaeologist exploring an ancient excavation site.",
+                "Your mission is to find a long-lost artifact of great power.",
+                "Prepare yourself for an adventure filled with puzzles and mysteries!",
+                "",
+                "Press enter to continue"};
+                Animate(text);
+            }
             Console.ReadLine();
             Console.Clear();
-
-            Console.WriteLine("You are an archaeologist exploring an ancient excavation site.");
-            Console.WriteLine("Your mission is to find a long-lost artifact of great power.");
-            Console.WriteLine("Prepare yourself for an adventure filled with puzzles and mysteries!\n");
-            Console.WriteLine("Press enter to continue");
-            Console.ReadLine();
-            Console.Clear();
+            CentralChamber();
         }
         // Method for instruction of the game
         static void Help()
-        {                                                                                                                                                                                                        
+        {
             Console.WriteLine("Instructions");
             Console.WriteLine("Enter commands to navigate between rooms and interact with the environment.");
             Console.WriteLine("Use 'north', 'south', 'east' and 'west' to move in those respective directions.");
@@ -115,7 +130,7 @@ namespace Game
                 Console.Write("-->: ");
 
                 string userInput = Console.ReadLine().ToUpper();
-                
+
 
                 // Handle different player commands using a switch statement.
                 switch (userInput)
@@ -222,7 +237,7 @@ namespace Game
                         Console.WriteLine("Invalid command. Please try again.");
                         break;
                 }
-            } 
+            }
         }
 
         // Puzzle Room is a method representing the puzzle room in the excavation site.
@@ -632,7 +647,7 @@ namespace Game
                             Console.WriteLine("The room is too dark. You can't see anything.");
                         }
                         break;
-                    case "USE BOTTLE": 
+                    case "USE BOTTLE":
                         if (HasItem("bottle"))
                         {
                             Console.WriteLine("You spray the bottle and the water turns into confetti");
@@ -662,13 +677,13 @@ namespace Game
             Console.WriteLine("As you cautiously step into the Chamber of Shadows, the air grows heavy and oppressive.");
             Console.WriteLine("Dim, flickering lights barely illuminate the obscure corners of the room, casting eerie shadows that seem to dance and writhe along the walls.");
             Console.WriteLine("The darkness shrouds the chamber, leaving much to the imagination and evoking an unsettling sense of the unknown.");
-            
+
             string userAnswer = "";
             string puzzleAnswer = "OWL";
             // Infinite loop for handling player commands
             while (true)
             {
-                
+
                 Console.WriteLine("- Look");
                 Console.WriteLine("- Use Torch");
                 Console.WriteLine("- Use Key On Cabinet");
@@ -710,7 +725,7 @@ namespace Game
                                 Console.WriteLine("In the heart of the cabinet, an enigmatic mechanism catches your attention, its intricate design hinting at a greater purpose.");
                                 Console.WriteLine("A small slot within the mechanism awaits the placement of a mysterious artifact, teasing its significance.");
                                 Console.WriteLine("Beyond this intricate contraption lies a concealed door, promising a path to the unknown.");
-                                
+
                             }
                             else
                             {
@@ -720,7 +735,7 @@ namespace Game
                         else
                         {
                             Console.WriteLine("It's difficult to see the details in the dim light. Perhaps there's something that can help you illuminate the room.");
-                        } 
+                        }
                         break;
                     case "EXAMINE CABINET":
                         if (torchUsed_Chamber_Of_Shadows)
@@ -766,7 +781,7 @@ namespace Game
                                     while (!puzzleSolved_Chamber_Of_Shadows)
                                     {
                                         userAnswer = Console.ReadLine().ToUpper();
-                                        if (userAnswer ==  puzzleAnswer)
+                                        if (userAnswer == puzzleAnswer)
                                         {
                                             puzzleSolved_Chamber_Of_Shadows = true;
                                             Console.WriteLine("Behold! The once impenetrable barrier has yielded to your unwavering determination,");
@@ -791,13 +806,13 @@ namespace Game
                                         {
                                             Console.WriteLine("Invalid Answer. Please try again.");
                                         }
-                                    }        
+                                    }
                                 }
                                 else
                                 {
                                     Console.WriteLine("The puzzle is already solved.");
                                 }
-                                
+
                             }
                             else
                             {
@@ -860,7 +875,7 @@ namespace Game
                             Console.WriteLine("The room is too dark. You can't see anything.");
                         }
                         break;
-                        case "USE DAGGER":
+                    case "USE DAGGER":
                         if (HasItem("dagger"))
                         {
                             Console.WriteLine("You twirl the dagger thinking your self so cool");
@@ -1109,57 +1124,78 @@ namespace Game
             }
         }
 
+        //Equation Method
         static bool EquationGame()
         {
+            
             // Generate a random math problem
+            bool playAgain = true;
+            // Create a Random object to generate random numbers.
             Random random = new Random();
-            int num1 = random.Next(-20, 21);
-            int num2 = random.Next(-20, 21);
-            int operatorIndex = random.Next(0, 4);
-            char op = '?';
-            int answer = 0;
-
-            switch (operatorIndex)
+            while (playAgain)
             {
-                case 0:
-                    op = '+';
-                    answer = num1 + num2;
-                    break;
-                case 1:
-                    op = '-';
-                    answer = num1 - num2;
-                    break;
-                case 2:
-                    op = '*';
-                    answer = num1 * num2;
-                    break;
-                case 3:
-                    op = '/';
-                    num1 = num2 * random.Next(-10, 11);
-                    answer = num1 / num2;
-                    break;
-                case 4:
-                    op = '%';
-                    num1 = num2 * random.Next(-10, 11);
-                    answer = num1 % num2;
-                    break;
-            }
+                // Generate random numbers for the math problem.
+                int num1 = random.Next(50, 250);
+                int num2 = random.Next(-250, -50);
+                char[] operatorIndex = {'+', '-', '/', '*'};
+                // Randomly choose a math operator from the array.
+                char op = operatorIndex[random.Next(operatorIndex.Length)];
 
-            // Display the math problem and prompt the player to enter the answer
-            Console.Write($"{num1} {op} {num2} = ");
-            int guess = int.Parse(Console.ReadLine());
+                int correctAnswer;
+                if (op == '+')
+                {
+                    correctAnswer = num1 + num2;
+                }
+                else if (op == '-')
+                {
+                    correctAnswer = num1 - num2;
+                }
+                else if (op == '/')
+                {
+                    correctAnswer = num1 / num2;
+                }
+                else
+                {
+                    correctAnswer = num1 * num2;
+                }
+                
 
-            // Check if the answer is correct
-            if (guess == answer)
-            {
-                Console.WriteLine("Congratulations! You've solved the puzzle!");
-                return true;
+                Console.WriteLine("Please answer the following math question: \n");
+                Console.Write($"{num1} {op} {num2} = ");
+
+                // Get the user's answer and check if it's a valid number.
+                int Answer;
+                if (int.TryParse(Console.ReadLine(), out Answer))
+                {
+                    if (Answer == correctAnswer)
+                    {
+                        Console.WriteLine("\nYour answer is correct !");
+                        Console.WriteLine("Congualution! You've already sovled the equation ! ! !\n");
+                        // End the current round and return true to play again.
+                        return true;
+                    }
+                    else
+                    {
+                        // User's answer is wrong.
+                        Console.WriteLine($"\nWrong! The correct answer is : [{correctAnswer}].");
+                        Console.Write("Press any key to continue: ");
+                        string userInput = Console.ReadLine();
+                        playAgain = (userInput.ToLower() == "");
+                        Console.Clear();
+                        
+                    }
+                }
+
+                else
+                {
+                    Console.WriteLine("Invalid answer. Please enter a valid number.");
+                }
+
+                
             }
-            else
-            {
-                Console.WriteLine("Sorry, that's incorrect. You failed to solve the puzzle.");
-                return false;
-            }
+            Console.WriteLine("Congualution! You've already sovled the equation ! ! !");
+            
+            return playAgain;
         }
 
 
@@ -1186,7 +1222,7 @@ namespace Game
                     return;
                 }
 
-                 switch (userInput)
+                switch (userInput)
                 {
 
                     case "PLACE":
@@ -1231,6 +1267,7 @@ namespace Game
                 }
             }
         }
+
         // Method housing common input commands that are used throughout the code's switches
         static void CondencedHelp(string input, string room)
         {
@@ -1380,18 +1417,47 @@ namespace Game
                     Console.WriteLine("Invalid command. Please try again.");
                     break;
             }
+
+        }
+        static void Animate(string[] text)        //method that takes text and prints it 
+        {
+            bool skip = false;
+            {
+                int delay = 30;     //change the number stored in delay to speed up or slow down the texts animation
+                Console.SetCursorPosition(0, 2);        //adds the padding to the top of the page
+                foreach (string s in text)
+                {
+                    Console.SetCursorPosition((Console.WindowWidth - s.Length) / 2, Console.CursorTop);     //adds padding to the left and right sides of the sentence
+                    for (int i = 0; i < s.Length; i++)
+                    {
+                        if (Console.KeyAvailable)       //if a key is pressed
+                        {
+                            skip = true;
+                        }
+                        if (skip == false)
+                        {
+                            Console.Write(s[i]);
+                            Thread.Sleep(delay);
+                        }
+                        else
+                        {
+                            Console.Write(s[i]);
+                        }
+                    }
+                    Console.WriteLine();
+                }
+                Console.ReadLine();
+                Console.SetCursorPosition((40), Console.CursorTop);
+            }
+            
+
         }
 
 
         public static void Main(string[] args)
         {
-            //GameStart();
-            //CentralChamber();
-            Library();
+            GameStart();
             CentralChamber();
-            //AltarRoom();
-
-            
         }
     }
 }
