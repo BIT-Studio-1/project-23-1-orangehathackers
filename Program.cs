@@ -1265,17 +1265,8 @@ namespace Game
         }
         public static void Main(string[] args)
         {
-
-
-            //GameStart();
-            //CentralChamber();
-            //Library();
-            //CentralChamber();
-            AltarRoom();
-            EquationGame();
-
-
-            
+            GameStart();
+            CentralChamber();
         }
     }
 }
