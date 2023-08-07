@@ -489,18 +489,25 @@ namespace Game
             Console.WriteLine($"\nPlayer Score: {playerScore}");
             Console.WriteLine($"Library Keeper Score: {libraryKeeperScore}");
             Console.ReadLine();
-            if (playerScore > libraryKeeperScore)
+            if (HasItem("Oracle's Guidance Orb"))
             {
-                Console.WriteLine("An Oracle's Guidance Orb has been add into your inventory.");
-                AddToInventory("Oracle's Guidance Orb");
-            }
-            else if (libraryKeeperScore > playerScore)
-            {
-                Console.WriteLine("You have lose to the library keep");
+                if (playerScore > libraryKeeperScore)
+                {
+                    Console.WriteLine("An Oracle's Guidance Orb has been add into your inventory.");
+                    AddToInventory("Oracle's Guidance Orb");
+                }
+                else if (libraryKeeperScore > playerScore)
+                {
+                    Console.WriteLine("You have lose to the library keep");
+                }
+                else
+                {
+                    Console.WriteLine("What a luck. You and the library keeper didn't score any point.");
+                }
             }
             else
             {
-                Console.WriteLine("What a luck. You and the library keeper didn't score any point.");
+                Console.WriteLine("You have already obtain an orb in your inventory.");
             }
         }
         // This is all the helpful command in library room only.
@@ -640,6 +647,25 @@ namespace Game
                             Console.WriteLine("The room is too dark. Maybe you have something to light up the room.");
                         }
                         break;
+                    case "USE ORB";
+                        if (HasItem("Oracle's Guidance Orb"))
+                        {
+                            string[] orbMessage = {
+                                "In a forgotten land, an excavation team delved into ancient ruins, unearthing cryptic texts.",
+                                "As players, they deciphered enigmatic riddles and dodged traps, revealing the secrets of a long-lost civilization.",
+                                "The game sparked an archeological renaissance, igniting passion for history and unraveling mysteries buried in the sands of time."
+                            }
+
+                            foreach (string orbMessages in orbMessage)
+                            {
+                                Console.WriteLine("       " + orbMessages);
+                                Thread.Sleep(500);
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("You doesn't have an orb in your inventory.");
+                        }
                     case "TAKE BOOK":
                         if (torchUsed_Library)
                         {
