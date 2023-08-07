@@ -942,19 +942,16 @@ namespace Game
                 }
             }
         }
-
         //Altar Room Method
         static void AltarRoom()
         {
             Console.Clear();
             string[] messages = {"You come across a door and on it is an equations", "seems as if you must answer it to open the door", "There are doors to the east and west\n"};
-
             foreach(string message in messages)
             {
                 Console.WriteLine("" + message);
                 Thread.Sleep(1000);
             }
-
             bool gotCorrect = EquationGame();
             while (true)
             {
@@ -964,17 +961,13 @@ namespace Game
                     Console.WriteLine("You look around the decaying room and see old run down table in the middle of the room");
                     Console.WriteLine("The table has small indents the shape of different items almost as if you are mean to place them in there\n");
                 }
-
                 Console.WriteLine("Please enter an action: ");
                 Console.Write("---> ");
-
-
                 string userInput = Console.ReadLine().ToUpper();
                 if (userInput == "BACK")
                 {
                     return;
                 }
-
                 switch (userInput)
                 {
                     case "STORYLINE":
@@ -982,7 +975,9 @@ namespace Game
                             foreach(string message in messages)
                             {
                                 string text = message;
-                                //Animate(text);
+                                Console.WriteLine("You are now in the Altar room.");
+                                Console.WriteLine("You look around the decaying room and see old run down table in the middle of the room");
+                                Console.WriteLine("The table has small indents the shape of different items almost as if you are mean to place them in there\n"); ;
                                 Thread.Sleep(2000);
                             }
                         }
@@ -1008,34 +1003,33 @@ namespace Game
                             }
                         }
                         break;
-
                     case "NORTH":
                         Console.WriteLine("You can not go to north from here. Please try again");
                         break;
-
                     case "SOUTH":
                         Console.WriteLine("You can not go to south from here. Please try again");
                         break;
-
                     case "EAST":
                         Console.WriteLine("You can not go to east from here. Please try again");
                         break;
-
                     case "WEST":
                         ChamberOfShadow();
                         break;
-
                     case "HELP":
                         Help();
                         break;
-
+                    case "INVENTORY":
+                        Console.WriteLine("You have the following items in your inventory:");
+                        for (int i = 0; i < inventoryCount; i++)
+                        {
+                            Console.WriteLine(inventory[i]);
+                        }
+                        break;
                     default:
                         Console.WriteLine("Invalid answer. Please try again.");
                         break;
                 }
-
             }
-
         }
         public static void Main(string[] args)
         {
