@@ -883,12 +883,17 @@ namespace Game
                                     {
                                         string[] text = { "You approach the secret door and run your fingers along its intricate engravings.",
                                                         $"The engravings seem to depict a pattern of glowing symbols, a {ColorCodes.B}memory game{ColorCodes.Reset} to unlock the door.",
-                                                        "Do you dare to challenge the ancient memory puzzle? (YES/NO)"
+                                                        "Do you dare to challenge the ancient memory puzzle? (Y/N)"
                                                       };
                                         Animate(text);
                                     }
-                                    string input = Console.ReadLine().ToUpper();
-                                    if (input[0] == 'Y')
+                                    char input = Convert.ToChar(Console.ReadLine().ToUpper());
+                                    while (input != 'Y' && input != 'N')
+                                    {
+                                        Console.Write("Invalid Input. You can only type (Y/N). Please enter again: ");
+                                        input = Convert.ToChar(Console.ReadLine().ToUpper());
+                                    }
+                                    if (input == 'Y')
                                     {
                                         secretDoorUnlocked = MemoryGamePuzzle();
                                     }
