@@ -8,6 +8,7 @@ using static System.Net.Mime.MediaTypeNames;
 namespace Game
 {
     internal class Program
+
     {
         // An array to store the inventory items
         private static string[] inventory = new string[5];
@@ -29,6 +30,10 @@ namespace Game
         private static bool artifactPlaced = false;
         private static bool puzzleSolved_Chamber_Of_Shadows = false;
 
+        private static bool secretDoorDiscovered = false;
+        private static bool secretDoorUnlocked = false;
+
+
         // Strust for color to be put in text.
         struct ColorCodes 
         {
@@ -37,6 +42,7 @@ namespace Game
             public const string B = "\x1b[34m"; // Blue used for hidden rooms and secret side quests lines
             public const string Reset = "\x1b[0m"; // At the other side of color so the res of the text remains unafected
         }
+
 
         // Display the game title
         static void GameStart()
@@ -828,44 +834,61 @@ namespace Game
         static void ChamberOfShadow()
         {
             Console.Clear();
-            Console.WriteLine("You are now in the chamber of shadow.");
-            Console.WriteLine("As you cautiously step into the Chamber of Shadows, the air grows heavy and oppressive.");
-            Console.WriteLine("Dim, flickering lights barely illuminate the obscure corners of the room, casting eerie shadows that seem to dance and writhe along the walls.");
-            Console.WriteLine("The darkness shrouds the chamber, leaving much to the imagination and evoking an unsettling sense of the unknown.");
-            string userAnswer = "";
+
+            string[] roomDesc = { "You are now in the chamber of shadow.",
+                                  "As you cautiously step into the Chamber of Shadows, the air grows heavy and oppressive.",
+                                  $"Dim, flickering lights barely illuminate the {ColorCodes.B}obscure corners{ColorCodes.Reset} of the room, casting eerie shadows that seem to dance and writhe along the walls.",
+                                  "The darkness shrouds the chamber, leaving much to the imagination and evoking an unsettling sense of the unknown.",
+                                  " ",
+                                  $"Please enter {ColorCodes.B}Help{ColorCodes.Reset} for list of commands to be used in the Chamber Of Shadows."
+                                };
+            string[] dimLightMessage = { "It's difficult to see the details in the dim light. Perhaps there's something that can help you illuminate the room." };
+            string[] secretDoorMessage = { $"There appears to be a {ColorCodes.B}hidden door{ColorCodes.Reset}, but it remains concealed from your sight. Perhaps you need to find a way to reveal it." };
+            string[] invalidAnswer = { "Invalid Answer.Please try again." };
+
+            // Call to Animate method to display the room description
+            Animate(roomDesc);
+
+            string userAnswer;
+
             string puzzleAnswer = "OWL";
+
             // Infinite loop for handling player commands
             while (true)
             {
-                Console.WriteLine("- Look");
-                Console.WriteLine("- Use Torch");
-                Console.WriteLine("- Use Key On Cabinet");
-                Console.WriteLine("- Examine Cabinet");
-                Console.Write("Please enter a command: ");
+
+                Console.Write("\nPlease enter a command: ");
+
                 string userInput = Console.ReadLine().ToUpper();
                 switch (userInput)
                 {
                     case "LOOK":
                         if (!torchUsed_Chamber_Of_Shadows)
                         {
-                            Console.WriteLine("It's difficult to see the details in the dim light. Perhaps there's something that can help you illuminate the room.");
+                            Animate(dimLightMessage);
                         }
                         else
                         {
-                            Console.WriteLine("In the far corner, stands a locked cabinet, its contents hidden from prying eyes.");
-                            Console.WriteLine("Whispers of untold treasures or crucial clues linger in the air, enticing your curiosity.");
+                            string[] text = { $"In the far corner, stands a {ColorCodes.B}locked cabinet{ColorCodes.Reset}, its contents hidden from prying eyes.",
+                                              "Whispers of untold treasures or crucial clues linger in the air, enticing your curiosity.",
+                                              $"In the center of the room, an ancient and {ColorCodes.R}mysterious painting{ColorCodes.Reset} hangs on the wall, its colors faded but its details hauntingly vivid."
+                                            };
+                            Animate(text);
                         }
                         break;
                     case "USE TORCH":
                         if (HasItem("Torch"))
                         {
-                            Console.WriteLine("As the player ignites the torch,");
-                            Console.WriteLine("the flickering flames cast dancing shadows that begin to reveal the hidden details of the room, shrouded in darkness no more.");
+                            string[] text = { "As the player ignites the torch,",
+                                              $"the flickering flames cast dancing shadows that begin to reveal the {ColorCodes.B}hidden details{ColorCodes.Reset} of the room, shrouded in darkness no more."
+                                            };
+                            Animate(text);
                             torchUsed_Chamber_Of_Shadows = true;
                         }
                         else
                         {
-                            Console.WriteLine("You do not have the torch to light the room.");
+                            string[] text = { "You do not have the torch to light the room." };
+                            Animate(text);
                         }
                         break;
                     case "USE KEY ON CABINET":
@@ -873,30 +896,38 @@ namespace Game
                         {
                             if (HasItem("Key"))
                             {
-                                Console.WriteLine("In the heart of the cabinet, an enigmatic mechanism catches your attention, its intricate design hinting at a greater purpose.");
-                                Console.WriteLine("A small slot within the mechanism awaits the placement of a mysterious artifact, teasing its significance.");
-                                Console.WriteLine("Beyond this intricate contraption lies a concealed door, promising a path to the unknown.");
+
+                                string[] text = { $"In the heart of the cabinet, an {ColorCodes.R}enigmatic mechanism{ColorCodes.Reset} catches your attention, its intricate design hinting at a greater purpose.",
+                                                  $"A small slot within the mechanism awaits the {ColorCodes.R}placement of a mysterious artifact{ColorCodes.Reset}, teasing its significance.",
+                                                  $"Beyond this intricate contraption lies a {ColorCodes.B}concealed door{ColorCodes.Reset}, promising a path to the unknown."
+                                                };
+                                Animate(text);
 
                             }
                             else
                             {
-                                Console.WriteLine("You don't have the key to unlock the chest.");
+                                string[] text = { $"You don't have the {ColorCodes.R}key{ColorCodes.Reset} to unlock the chest." };
+                                Animate(text);
                             }
                         }
                         else
                         {
-                            Console.WriteLine("It's difficult to see the details in the dim light. Perhaps there's something that can help you illuminate the room.");
+
+                            Animate(dimLightMessage);
+
                         }
                         break;
                     case "EXAMINE CABINET":
                         if (torchUsed_Chamber_Of_Shadows)
                         {
-                            Console.WriteLine("The cabinet stands tall and imposing against the chamber's wall,");
-                            Console.WriteLine("its surface adorned with intricate carvings, hinting at the mysteries concealed within.");
+                            string[] text = { "The cabinet stands tall and imposing against the chamber's wall,",
+                                              $"its surface adorned with intricate carvings, hinting at the {ColorCodes.B}mysteries concealed within{ColorCodes.Reset}."
+                                            };
+                            Animate(text);
                         }
                         else
                         {
-                            Console.WriteLine("It's difficult to see the details in the dim light. Perhaps there's something that can help you illuminate the room.");
+                            Animate(dimLightMessage);
                         }
                         break;
                     case "PLACE ARTIFACT ON MECHANISM":
@@ -905,15 +936,22 @@ namespace Game
                             if (HasItem("Artifact"))
                             {
                                 artifactPlaced = true;
-                                Console.WriteLine("As the artifact is carefully placed on the mechanism,");
-                                Console.WriteLine("the door to the far EAST of the chamber begins to shimmer with an ethereal glow, revealing a doorway to the final room.");
-                                Console.WriteLine("The door itself is made of ancient, weathered wood, adorned with mysterious symbols and engravings that seem to shift and rearrange as if alive.");
-                                Console.WriteLine("To unlock the door and gain access to the final room, a complex puzzle awaits the player.");
+                                string[] text = { "As the artifact is carefully placed on the mechanism,",
+                                                  $"{ColorCodes.B}the door to the far EAST of the chamber{ColorCodes.Reset} begins to shimmer with an ethereal glow, {ColorCodes.B}revealing a doorway{ColorCodes.Reset} to the final room.",
+                                                  "The door itself is made of ancient, weathered wood, adorned with mysterious symbols and engravings that seem to shift and rearrange as if alive.",
+                                                  $"To {ColorCodes.B}unlock the door{ColorCodes.Reset} and gain access to the final room, a {ColorCodes.B}complex puzzle{ColorCodes.Reset} awaits the player."
+                                                };
+                                Animate(text);
+                            }
+                            else
+                            {
+                                string[] text = { $"You do not have the {ColorCodes.B}artifact{ColorCodes.Reset} to place on the mechanism." };
+                                Animate(text);
                             }
                         }
                         else
                         {
-                            Console.WriteLine("It's difficult to see the details in the dim light. Perhaps there's something that can help you illuminate the room.");
+                            Animate(dimLightMessage);
                         }
                         break;
                     case "SOLVE PUZZLE":
@@ -923,60 +961,76 @@ namespace Game
                             {
                                 if (!puzzleSolved_Chamber_Of_Shadows)
                                 {
-                                    Console.WriteLine("The Tome of Forgotten Knowledge\" holds the key to unlocking the door to the final room.");
-                                    Console.WriteLine("PUZZLE:");
-                                    Console.WriteLine("Of wisdom's embrace, seek the guardian's gaze,");
-                                    Console.WriteLine("A scholar's delight, a learned mind's blaze.");
-                                    Console.WriteLine("Within the pages marked by timeless lore,");
-                                    Console.WriteLine("Find the symbol that opens the door.");
+                                    {
+                                        string[] text = { $"{ColorCodes.R}The Tome of Forgotten Knowledge\" holds the key to unlocking the door to the final room{ColorCodes.Reset}.",
+                                                      "PUZZLE:",
+                                                      "Of wisdom's embrace, seek the guardian's gaze,",
+                                                      "A scholar's delight, a learned mind's blaze.",
+                                                      "Within the pages marked by timeless lore,",
+                                                      "Find the symbol that opens the door."
+                                                    };
+                                        Animate(text);
+                                    }
+
                                     while (!puzzleSolved_Chamber_Of_Shadows)
                                     {
                                         userAnswer = Console.ReadLine().ToUpper();
                                         if (userAnswer == puzzleAnswer)
                                         {
                                             puzzleSolved_Chamber_Of_Shadows = true;
-                                            Console.WriteLine("Behold! The once impenetrable barrier has yielded to your unwavering determination,");
-                                            Console.WriteLine("as the majestic door now stands ajar, beckoning you to enter the realm of finality.");
+                                            string[] text = { "Behold! The once impenetrable barrier has yielded to your unwavering determination,",
+                                                              "as the majestic door now stands ajar, beckoning you to enter the realm of finality."
+                                                            };
+                                            Animate(text);
                                         }
                                         else if (userAnswer == "USE BOOK")
                                         {
                                             if (HasItem("Book"))
                                             {
-                                                Console.WriteLine("In the realm of twilight's embrace, a creature of feathered grace dwells,");
-                                                Console.WriteLine("casting its mystic aura upon the land.");
-                                                Console.WriteLine("Embrace the essence of this nocturnal sentinel to illuminate the path towards the answer you seek.");
+                                                string[] text = { "In the realm of twilight's embrace, a creature of feathered grace dwells,",
+                                                                   "casting its mystic aura upon the land.",
+                                                                   $"Embrace the essence of this {ColorCodes.B}nocturnal sentinel{ColorCodes.Reset} to illuminate the path towards the answer you seek."
+                                                                 };
+                                                Animate(text);
                                             }
                                             else
                                             {
-                                                Console.WriteLine("Within the depths of my vast knowledge,");
-                                                Console.WriteLine("the book that contains the sought-after hint eludes my grasp,");
-                                                Console.WriteLine("leaving me unable to provide you with its wisdom.");
+                                                string[] text = { "Within the depths of my vast knowledge,",
+                                                                   $"the {ColorCodes.R}book{ColorCodes.Reset} that contains the sought-after {ColorCodes.B}hint{ColorCodes.Reset} eludes my grasp,",
+                                                                   "leaving me unable to provide you with its wisdom."
+                                                                 };
+                                                Animate(text);
                                             }
                                         }
                                         else
                                         {
-                                            Console.WriteLine("Invalid Answer. Please try again.");
+                                            Animate(invalidAnswer);
                                         }
                                     }
                                 }
                                 else
                                 {
-                                    Console.WriteLine("The puzzle is already solved.");
+                                    string[] text = { "The puzzle is already solved." };
+                                    Animate(text);
                                 }
 
                             }
                             else
                             {
-                                Console.WriteLine("Activate the mechanism to access the puzzle.");
+                                string[] text = { $"Activate the {ColorCodes.B}mechanism{ColorCodes.Reset} to access the puzzle." };
+                                Animate(text);
                             }
                         }
                         else
                         {
-                            Console.WriteLine("It's difficult to see the details in the dim light. Perhaps there's something that can help you illuminate the room.");
+                            Animate(dimLightMessage);
                         }
                         break;
                     case "NORTH":
-                        Console.WriteLine("You can not go to north from here. Please try again");
+                        {
+                            string[] text = { "You can not go to north from here. Please try again" };
+                            Animate(text);
+                        }
                         break;
                     case "SOUTH":
                         CentralChamber();
@@ -990,12 +1044,13 @@ namespace Game
                             }
                             else
                             {
-                                Console.WriteLine("The access to the door is locked. You cannot go further.");
+                                string[] text = { "The access to the door is locked. You cannot go further." };
+                                Animate(text);
                             }
                         }
                         else
                         {
-                            Console.WriteLine("It's difficult to see the details in the dim light. Perhaps there's something that can help you illuminate the room.");
+                            Animate(dimLightMessage);
                         }
                         break;
                     case "WEST":
@@ -1005,49 +1060,124 @@ namespace Game
                         }
                         else
                         {
-                            Console.WriteLine("It's difficult to see the details in the dim light. Perhaps there's something that can help you illuminate the room.");
+                            Animate(dimLightMessage);
                         }
                         break;
-                    case "DAGGER":
+                    case "STORYLINE":
+                        Animate(roomDesc);
+                        break; 
+                    case "EXAMINE PAINTING":
                         if (torchUsed_Chamber_Of_Shadows)
                         {
-                            if (HasItem("dagger"))
+                            if (!secretDoorDiscovered)
                             {
-                                Console.WriteLine("You have already taken the dagger");
+                                string[] text = { "As you closely examine the ancient painting on the wall, you notice a faint outline around it.",
+                                                    $"With a gentle push, the painting slides aside, revealing a {ColorCodes.B}hidden door{ColorCodes.Reset} behind it!"
+
+                                                  };
+                                Animate(text);
+                                secretDoorDiscovered = true;
                             }
                             else
                             {
-                                Console.WriteLine("You have picked up a dagger with embellished engravings all over the blade");
-                                AddToInventory("dagger");
+                                string[] text = { "You have already discovered the secret door." };
+                                Animate(text);
                             }
                         }
                         else
                         {
-                            Console.WriteLine("The room is too dark. You can't see anything.");
+                            Animate(dimLightMessage);
                         }
                         break;
-                    case "USE DAGGER":
-                        if (HasItem("dagger"))
+
+                    case "EXAMINE SECRET DOOR":
+                        if (torchUsed_Chamber_Of_Shadows)
+
                         {
-                            Console.WriteLine("You twirl the dagger thinking your self so cool");
+                            if (secretDoorDiscovered)
+                            {
+                                if (!secretDoorUnlocked)
+                                {
+                                    {
+                                        string[] text = { "You approach the secret door and run your fingers along its intricate engravings.",
+                                                        $"The engravings seem to depict a pattern of glowing symbols, a {ColorCodes.B}memory game{ColorCodes.Reset} to unlock the door.",
+                                                        "Do you dare to challenge the ancient memory puzzle? (Y/N)"
+                                                      };
+                                        Animate(text);
+                                    }
+                                    char input = Convert.ToChar(Console.ReadLine().ToUpper());
+                                    while (input != 'Y' && input != 'N')
+                                    {
+                                        Console.Write("Invalid Input. You can only type (Y/N). Please enter again: ");
+                                        input = Convert.ToChar(Console.ReadLine().ToUpper());
+                                    }
+                                    if (input == 'Y')
+                                    {
+                                        secretDoorUnlocked = MemoryGamePuzzle();
+                                    }
+                                    else
+                                    {
+                                       string[] text = { "You decide to step back from the mysterious memory puzzle for now." };
+                                       Animate(text);
+                                    }
+                                }
+                                else
+                                {
+                                    string[] text = { "The secret door has already been unlocked." };
+                                    Animate(text);
+                                }
+                            }
+                            else
+                            {
+                                Animate(secretDoorMessage);
+                            }
                         }
                         else
                         {
-                            Console.WriteLine("you do not yet have the dagger");
+                            Animate(dimLightMessage);
+                        }
+                        break;
+                    case "ENTER SECRET ROOM":
+                        if (torchUsed_Chamber_Of_Shadows)
+                        {
+                            if (secretDoorDiscovered)
+                            {
+                                if (secretDoorUnlocked)
+                                {
+                                    AlternateEnding();
+                                }
+                                else
+                                {
+                                    string[] text = { $"As you approach the hidden door, you find it {ColorCodes.B}securely locked{ColorCodes.Reset},",
+                                                        $" its ancient mechanism awaiting the touch of a worthy hand to {ColorCodes.B}unlock its mysteries{ColorCodes.Reset}." };
+                                    Animate(text);
+                                }
+                            }
+                            else
+                            {
+                                Animate(secretDoorMessage);
+                            }
+                        }
+                        else
+                        {
+                            Animate(dimLightMessage);
                         }
                         break;
                     case "HELP":
                         Help();
                         break;
                     case "INVENTORY":
-                        Console.WriteLine("You have the following items in your inventory:");
+                        {
+                            string[] text = { "You have the following items in your inventory:" };
+                            Animate(text);
+                        }
                         for (int i = 0; i < inventoryCount; i++)
                         {
                             Console.WriteLine(inventory[i]);
                         }
                         break;
                     default:
-                        Console.WriteLine("Invalid answer. Please try again.");
+                        Animate(invalidAnswer);
                         break;
                 }
             }
@@ -1464,6 +1594,94 @@ namespace Game
             }
         }
 
+        // Method to handle the memory game puzzle
+        static bool MemoryGamePuzzle()
+        {
+            {
+                string[] text = { "The memory game begins......\n" };
+                Animate(text);
+            }
+            Random rand = new Random();
+            int[] number = new int[7];
+            int[] userGuess = new int[7];
+
+            // Generate random numbers for the memory game
+            for (int i = 0;i<number.Length;i++)
+            {
+                number[i] = rand.Next(10,100);
+            }
+            Console.WriteLine("\n");
+            // Display the numbers to the player
+            for (int i = 0; i < number.Length; i++)
+            {
+                Console.WriteLine($"{number[i]} ");
+            }
+            Thread.Sleep(3000);
+            Console.Clear();
+            {
+                string[] text = { $"Enter the sequence of numbers in {ColorCodes.B}the order{ColorCodes.Reset} that it was displayed." };
+                Animate(text);
+            }
+            // Get user input for the memory game
+            for (int i = 0; i < userGuess.Length; i++)
+            {
+               // Logic to check that user enters a valid number
+                while (!int.TryParse(Console.ReadLine(), out userGuess[i]))
+                {
+                    string[] text = { "Invalid input. Please enter a number." };
+                    Animate(text);
+                }
+            }
+
+            // Check if the user's guess matches the generated numbers
+            for (int i = 0; i < userGuess.Length; i++)
+            {
+                if (userGuess[i] != number[i])
+                {
+                    {
+                        string[] text = { "Unfortunately, your memory fails you as the numbers blur together.",
+                                       "The hidden door remains locked, concealing its secrets for now."
+                                     };
+                        Animate(text);
+                    }
+                    return false;
+                }
+            }
+            {
+                string[] text = { "Congratulations! You successfully unlocked the hidden door." };
+                Animate(text);
+            }
+            return true;
+        }
+
+        //Method to handle the alternate ending of the game
+        static void AlternateEnding()
+        {
+            string[] text = { "You step through the secret door and find yourself in the Chamber of Enlightenment.",
+                              "Before you lies a radiant crystal orb, glowing with ancient wisdom.",
+                              " ",
+                              "You reach out and touch the crystal orb, and a flood of knowledge fills your mind.",
+                              "The secrets of the universe unfold before you, and you become a beacon of enlightenment.",
+                              "You return to the world outside, forever changed by the wisdom you've gained."
+                            };
+            Animate(text);
+
+            // ASCII art to mark the end of the game in the secret room
+            Console.WriteLine(          @"
+               ____  _            _             _____            __ _ _
+              / __ \| |          | |           |  __ \          / _(_) |
+             | |  | | |_   _  ___| |_ ___ _ __ | |  | | _____  _| |_ _| | ___
+             | |  | | | | | |/ _ \ __/ _ \ '_ \| |  | |/ _ \ \/ /  _| | |/ _ \
+             | |__| | | |_| |  __/ ||  __/ | | | |__| |  __/>  <| | | | |  __/
+              \____/|_|\__,_|\___|\__\___|_| |_|_____/ \___/_/\_\_| |_|_|\___|
+            ");
+
+            // End the game here
+            Environment.Exit(0);
+        }
+
+
+
         // Method housing common input commands that are used throughout the code's switches
         static void CondencedHelp(string input, string room)
         {
@@ -1615,6 +1833,7 @@ namespace Game
             }
 
         }
+
         static void Animate(string[] text)        //method that takes text and prints it 
         {
             bool skip = false;
@@ -1646,11 +1865,14 @@ namespace Game
                 Console.SetCursorPosition((40), Console.CursorTop);
             }
         }
+
+
         public static void Main(string[] args)
         {
             GameStart();
             CentralChamber();
         }
+
     }
 }
 
