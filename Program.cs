@@ -953,14 +953,19 @@ namespace Game
                 Thread.Sleep(1000);
             }
             bool gotCorrect = EquationGame();
+            int count = 0;
+                string[] storyLine = { "You are now in the Altar room.", "You look around the decaying room and see old run down table in the middle of the room", "The table has small indents the shape of different items almost as if you are mean to place them in there\n" };
+                if (gotCorrect && count == 0)
+                {
+                count++;
+                    foreach (string storylinetext in storyLine)
+                    {
+                        Console.WriteLine("" + storylinetext);
+                        Thread.Sleep(1000);
+                    }
+                }
             while (true)
             {
-                if (gotCorrect)
-                {
-                    Console.WriteLine("You are now in the Altar room.");
-                    Console.WriteLine("You look around the decaying room and see old run down table in the middle of the room");
-                    Console.WriteLine("The table has small indents the shape of different items almost as if you are mean to place them in there\n");
-                }
                 Console.WriteLine("Please enter an action: ");
                 Console.Write("---> ");
                 string userInput = Console.ReadLine().ToUpper();
@@ -972,13 +977,11 @@ namespace Game
                 {
                     case "STORYLINE":
                         {
-                            foreach(string message in messages)
+                            Console.Clear();
+                            foreach (string storylinetext in storyLine)
                             {
-                                string text = message;
-                                Console.WriteLine("You are now in the Altar room.");
-                                Console.WriteLine("You look around the decaying room and see old run down table in the middle of the room");
-                                Console.WriteLine("The table has small indents the shape of different items almost as if you are mean to place them in there\n"); ;
-                                Thread.Sleep(2000);
+                                Console.WriteLine("" + storylinetext);
+                                Thread.Sleep(1000);
                             }
                         }
                         break;
