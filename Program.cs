@@ -452,85 +452,6 @@ namespace Game
                 }
             }
         }
-        static bool libraryGame()
-        {
-            int playerScore = 0;
-            int libraryKeeperScore = 0;
-            Random rand = new Random();
-            char[] select = { 'R', 'P', 'S' };
-            for (int i = 0; i < 3; i++)
-            {
-                int index = rand.Next(0, 3);
-                char libraryKeeperChoice = select[index];
-                Console.Write("\nPlease enter Rock, Paper, Scissor by pressing 'R', 'P', 'S':");
-                char playerChoice = Convert.ToChar(Console.ReadLine().ToUpper());
-                while (playerChoice != 'R' && playerChoice != 'P' && playerChoice != 'S')
-                {
-                    Console.Write("Invalid Selection. Please enter your answer again: ");
-                    playerChoice = Convert.ToChar(Console.ReadLine().ToUpper());
-                }
-                Console.WriteLine($"Library Keeper chose: {libraryKeeperChoice}");
-                Console.WriteLine($"Player Chose: {playerChoice}");
-                if (libraryKeeperChoice == playerChoice)
-                {
-                    Console.WriteLine("The game is a draw.");
-                }
-                else if (playerChoice == 'R' && libraryKeeperChoice == 'S' || playerChoice == 'P' && libraryKeeperChoice == 'R' || playerChoice == 'S' && libraryKeeperChoice == 'P')
-                {
-                    Console.WriteLine("Player Wins");
-                    playerScore++;
-                }
-                else
-                {
-                    Console.WriteLine("Library Keeper Wins.");
-                    libraryKeeperScore++;
-                }
-            }
-            Console.WriteLine($"\nPlayer Score: {playerScore}");
-            Console.WriteLine($"Library Keeper Score: {libraryKeeperScore}");
-            Console.ReadLine();
-            if (HasItem("Oracle's Guidance Orb"))
-            {
-                if (playerScore > libraryKeeperScore)
-                {
-                    Console.WriteLine("An Oracle's Guidance Orb has been add into your inventory.");
-                    AddToInventory("Oracle's Guidance Orb");
-                }
-                else if (libraryKeeperScore > playerScore)
-                {
-                    Console.WriteLine("You have lose to the library keep");
-                }
-                else
-                {
-                    Console.WriteLine("What a luck. You and the library keeper didn't score any point.");
-                }
-            }
-            else
-            {
-                Console.WriteLine("You have already obtain an orb in your inventory.");
-            }
-        }
-        // This is all the helpful command in library room only.
-        static void helpLibrary()
-        {
-            Console.WriteLine("This is all the helpful command in library room");
-            Console.WriteLine("You can type 'GAME' to win more treasure.");
-            Console.WriteLine($"{ColorCodes.R}- North{ColorCodes.Reset}");
-            Console.WriteLine($"{ColorCodes.R}- South{ColorCodes.Reset}");
-            Console.WriteLine($"{ColorCodes.R}- East{ColorCodes.Reset}");
-            Console.WriteLine($"{ColorCodes.R}- West{ColorCodes.Reset}");
-            Console.WriteLine($"{ColorCodes.R}- Solve Puzzle{ColorCodes.Reset}");
-            Console.WriteLine($"{ColorCodes.R}- Climb{ColorCodes.Reset}");
-            Console.WriteLine($"{ColorCodes.R}- Use Torch{ColorCodes.Reset}");
-            Console.WriteLine($"{ColorCodes.R}- Take Pendant{ColorCodes.Reset}");
-            Console.WriteLine($"{ColorCodes.R}- Take Book{ColorCodes.Reset}");
-            Console.WriteLine($"{ColorCodes.R}- Use Book{ColorCodes.Reset}");
-            Console.WriteLine($"{ColorCodes.R}- Take Bottle{ColorCodes.Reset}");
-            Console.WriteLine($"{ColorCodes.R}- Use Bottle{ColorCodes.Reset}");
-            Console.WriteLine($"{ColorCodes.R}- Inventory{ColorCodes.Reset}");
-            Console.WriteLine($"{ColorCodes.R}- Help{ColorCodes.Reset}");
-            Console.WriteLine($"{ColorCodes.R}- StoryLine{ColorCodes.Reset}");
-        }
         // Library is a method representing the library area in the excavation site.
         static void Library()
         {
@@ -751,6 +672,85 @@ namespace Game
                         break;
                 }
             }
+        }
+        static bool libraryGame() //RPS game in library part
+        {
+            int playerScore = 0;
+            int libraryKeeperScore = 0;
+            Random rand = new Random();
+            char[] select = { 'R', 'P', 'S' };
+            for (int i = 0; i < 3; i++)
+            {
+                int index = rand.Next(0, 3);
+                char libraryKeeperChoice = select[index];
+                Console.Write("\nPlease enter Rock, Paper, Scissor by pressing 'R', 'P', 'S':");
+                char playerChoice = Convert.ToChar(Console.ReadLine().ToUpper());
+                while (playerChoice != 'R' && playerChoice != 'P' && playerChoice != 'S')
+                {
+                    Console.Write("Invalid Selection. Please enter your answer again: ");
+                    playerChoice = Convert.ToChar(Console.ReadLine().ToUpper());
+                }
+                Console.WriteLine($"Library Keeper chose: {libraryKeeperChoice}");
+                Console.WriteLine($"Player Chose: {playerChoice}");
+                if (libraryKeeperChoice == playerChoice)
+                {
+                    Console.WriteLine("The game is a draw.");
+                }
+                else if (playerChoice == 'R' && libraryKeeperChoice == 'S' || playerChoice == 'P' && libraryKeeperChoice == 'R' || playerChoice == 'S' && libraryKeeperChoice == 'P')
+                {
+                    Console.WriteLine("Player Wins");
+                    playerScore++;
+                }
+                else
+                {
+                    Console.WriteLine("Library Keeper Wins.");
+                    libraryKeeperScore++;
+                }
+            }
+            Console.WriteLine($"\nPlayer Score: {playerScore}");
+            Console.WriteLine($"Library Keeper Score: {libraryKeeperScore}");
+            Console.ReadLine();
+            if (!HasItem("Oracle's Guidance Orb"))
+            {
+                if (playerScore > libraryKeeperScore)
+                {
+                    Console.WriteLine("An Oracle's Guidance Orb has been add into your inventory.");
+                    AddToInventory("Oracle's Guidance Orb");
+                }
+                else if (libraryKeeperScore > playerScore)
+                {
+                    Console.WriteLine("You have lose to the library keep");
+                }
+                else
+                {
+                    Console.WriteLine("What a luck. You and the library keeper didn't score any point.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("You have already obtain an orb in your inventory.");
+            }
+        }
+        // This is all the helpful command in library room only.
+        static void helpLibrary()
+        {
+            Console.WriteLine("This is all the helpful command in library room");
+            Console.WriteLine("You can type 'GAME' to win more treasure.");
+            Console.WriteLine($"{ColorCodes.R}- North{ColorCodes.Reset}");
+            Console.WriteLine($"{ColorCodes.R}- South{ColorCodes.Reset}");
+            Console.WriteLine($"{ColorCodes.R}- East{ColorCodes.Reset}");
+            Console.WriteLine($"{ColorCodes.R}- West{ColorCodes.Reset}");
+            Console.WriteLine($"{ColorCodes.R}- Solve Puzzle{ColorCodes.Reset}");
+            Console.WriteLine($"{ColorCodes.R}- Climb{ColorCodes.Reset}");
+            Console.WriteLine($"{ColorCodes.R}- Use Torch{ColorCodes.Reset}");
+            Console.WriteLine($"{ColorCodes.R}- Take Pendant{ColorCodes.Reset}");
+            Console.WriteLine($"{ColorCodes.R}- Take Book{ColorCodes.Reset}");
+            Console.WriteLine($"{ColorCodes.R}- Use Book{ColorCodes.Reset}");
+            Console.WriteLine($"{ColorCodes.R}- Take Bottle{ColorCodes.Reset}");
+            Console.WriteLine($"{ColorCodes.R}- Use Bottle{ColorCodes.Reset}");
+            Console.WriteLine($"{ColorCodes.R}- Inventory{ColorCodes.Reset}");
+            Console.WriteLine($"{ColorCodes.R}- Help{ColorCodes.Reset}");
+            Console.WriteLine($"{ColorCodes.R}- StoryLine{ColorCodes.Reset}");
         }
         // ChamberOfShadow is a method representing the chamber of shadow area in the excavation site.
         static void ChamberOfShadow()
