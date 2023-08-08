@@ -87,8 +87,9 @@ namespace Game
             Console.Clear();
         }
         // Method for instruction of the game
-        static void Help()
-        {
+        static void Help(
+        { 
+
             Console.WriteLine("Instructions");
             Console.WriteLine("Enter commands to navigate between rooms and interact with the environment.");
             Console.WriteLine("Use 'north', 'south', 'east' and 'west' to move in those respective directions.");
@@ -485,6 +486,7 @@ namespace Game
                 }
             }
         }
+
         static void BowAndArrow()
         {
             Console.WriteLine("Welcome to the Bow and Arrow Game!");
@@ -517,14 +519,26 @@ namespace Game
             }
         }
 
+
         // Library is a method representing the library area in the excavation site.
         static void Library()
         {
             string puzzleAnswerTreasure = "TREASURE HUNT";
             Console.Clear();
-            Console.WriteLine("Stepping into the library, you are surrounded by shelves filled with dusty tomes and scrolls. The air is thick with the scent of ancient parchment. Sunlight filters through stained glass windows, illuminating a large desk at the center of the room. On it lies a game for you to win.");
-            Console.WriteLine("On the right, you see a ladder leading into the tunnel.");
-            Console.WriteLine("There is a puzzle for you to solve.");
+
+            string[] messages = {
+                "Stepping into the library, you are surrounded by shelves filled with dusty tomes and scrolls.",
+                "The air is thick with the scent of ancient parchment.",
+                "Sunlight filters through stained glass windows, illuminating a large desk at the center of the room.",
+                "On it lies a puzzle for you to solve.",
+                "On the right, you see a ladder leading into the tunnel.",
+                "You have look straight into the middle, and discover a book laying on a floor."
+            };
+            foreach (string message in messages)
+            {
+                Console.WriteLine("       " + message);
+                Thread.Sleep(500);
+            }
 
             // Infinite loop for handling player commands in the Library.
             while (true)
@@ -548,7 +562,11 @@ namespace Game
                         Console.WriteLine("You cannot go west from here. Please try again.");
                         break;
                     case "HELP":
-                        Help();
+                        helpLibrary();
+                        Console.WriteLine("Press enter to continue");
+                        Thread.Sleep(100);
+                        Console.ReadLine();
+                        Console.Clear();
                         break;
                     case "SOLVE PUZZLE":
                         if (!puzzleSolved_Library)
@@ -567,13 +585,13 @@ namespace Game
                                     Console.WriteLine("Inside the wooden chest, you find an old book laying on the bottom.");
 
                                     // Check if the player already has a book.
-                                    if (HasItem("Book"))
+                                    if (HasItem("Book Of Totem"))
                                     {
                                         Console.WriteLine("You have already taken a book.");
                                     }
                                     else
                                     {
-                                        Console.WriteLine("The book is added to the inventory.");
+                                        Console.WriteLine("The Book Of Totem has been succesfully added into your inventory.");
                                         AddToInventory("Book");
                                     }
                                 }
@@ -607,7 +625,7 @@ namespace Game
                         {
                             if (HasItem("Pendant"))
                             {
-                                Console.WriteLine("You have already taken a pendant.");
+                                Console.WriteLine("The pendant has been successfully added to the inventory");
                             }
                             else
                             {
@@ -620,16 +638,55 @@ namespace Game
                             Console.WriteLine("The room is too dark. Maybe you have something to light up the room.");
                         }
                         break;
+                    case "USE ORB";
+                        if (HasItem("Oracle's Guidance Orb"))
+                        {
+                            string[] orbMessage = {
+                                "In a forgotten land, an excavation team delved into ancient ruins, unearthing cryptic texts.",
+                                "As players, they deciphered enigmatic riddles and dodged traps, revealing the secrets of a long-lost civilization.",
+                                "The game sparked an archeological renaissance, igniting passion for history and unraveling mysteries buried in the sands of time."
+                            }
+
+                            foreach (string orbMessages in orbMessage)
+                            {
+                                Console.WriteLine("       " + orbMessages);
+                                Thread.Sleep(500);
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("You doesn't have an orb in your inventory.");
+                        }
                     case "TAKE BOOK":
-                        Console.WriteLine("You have taken a book.");
-                        AddToInventory("Book");
+                        if (torchUsed_Library)
+                        {
+                            Console.WriteLine("The book has been successfully added to the inventory.");
+                            AddToInventory("Book");
+                        }
+                        else if (HasItem("Book"))
+                        {
+                            Console.WriteLine("You have already taken a book");
+                        }
+                        else
+                        {
+                            Console.WriteLine("You need to use a torch to investigate the book shelf");
+                        }
                         break;
                     case "USE BOOK":
                         if (HasItem("Book"))
                         {
-                            Console.WriteLine("In the heart of a scorching desert, an excavation site emerged. Digging through layers of time, the team unearthed remnants of an ancient civilization.");
-                            Console.WriteLine("Fragments of pottery whispered tales of forgotten traditions, while weathered hieroglyphs held untold secrets. Among the dust and sand, they discovered a long-buried temple, revealing the lost splendor of a civilization lost to the ages.");
-                            Console.WriteLine("The archaeologists marveled at their discovery, knowing that they had become custodians of a timeless legacy, ready to share its wonders with the world.");
+                            string[] useBook = {
+                                    "In the heart of a scorching desert, an excavation site emerged.",
+                                    "Digging through layers of time, the team unearthed remnants of an ancient civilization.",
+                                    "Fragments of pottery whispered tales of forgotten traditions, while weathered hieroglyphs held untold secrets.",
+                                    "Among the dust and sand, they discovered a long-buried temple, revealing the lost splendor of a civilization lost to the ages.",
+                                    "The archaeologists marveled at their discovery, knowing that they had become custodians of a timeless legacy, ready to share its wonders with the world."
+                            };
+                            foreach (string useBooks in useBook)
+                            {
+                                Console.WriteLine("       " + useBooks);
+                                System.Threading.Thread.Sleep(500);
+                            }
                         }
                         else
                         {
@@ -670,11 +727,102 @@ namespace Game
                             Console.WriteLine(inventory[i]);
                         }
                         break;
+
+                    case "STORYLINE":
+                        foreach (string message in messages)
+                        {
+                            Console.WriteLine("       " + message);
+                            System.Threading.Thread.Sleep(500);
+                        }
+                        break;
+                    case "GAME":
+                        libraryGame();
+                        break;
+
                     default:
                         Console.WriteLine("Invalid answer. Please try again.");
                         break;
                 }
             }
+        }
+        static bool libraryGame() //RPS game in library part
+        {
+            int playerScore = 0;
+            int libraryKeeperScore = 0;
+            Random rand = new Random();
+            char[] select = { 'R', 'P', 'S' };
+            for (int i = 0; i < 3; i++)
+            {
+                int index = rand.Next(0, 3);
+                char libraryKeeperChoice = select[index];
+                Console.Write("\nPlease enter Rock, Paper, Scissor by pressing 'R', 'P', 'S':");
+                char playerChoice = Convert.ToChar(Console.ReadLine().ToUpper());
+                while (playerChoice != 'R' && playerChoice != 'P' && playerChoice != 'S')
+                {
+                    Console.Write("Invalid Selection. Please enter your answer again: ");
+                    playerChoice = Convert.ToChar(Console.ReadLine().ToUpper());
+                }
+                Console.WriteLine($"Library Keeper chose: {libraryKeeperChoice}");
+                Console.WriteLine($"Player Chose: {playerChoice}");
+                if (libraryKeeperChoice == playerChoice)
+                {
+                    Console.WriteLine("The game is a draw.");
+                }
+                else if (playerChoice == 'R' && libraryKeeperChoice == 'S' || playerChoice == 'P' && libraryKeeperChoice == 'R' || playerChoice == 'S' && libraryKeeperChoice == 'P')
+                {
+                    Console.WriteLine("Player Wins");
+                    playerScore++;
+                }
+                else
+                {
+                    Console.WriteLine("Library Keeper Wins.");
+                    libraryKeeperScore++;
+                }
+            }
+            Console.WriteLine($"\nPlayer Score: {playerScore}");
+            Console.WriteLine($"Library Keeper Score: {libraryKeeperScore}");
+            Console.ReadLine();
+            if (!HasItem("Oracle's Guidance Orb"))
+            {
+                if (playerScore > libraryKeeperScore)
+                {
+                    Console.WriteLine("An Oracle's Guidance Orb has been add into your inventory.");
+                    AddToInventory("Oracle's Guidance Orb");
+                }
+                else if (libraryKeeperScore > playerScore)
+                {
+                    Console.WriteLine("You have lose to the library keep");
+                }
+                else
+                {
+                    Console.WriteLine("What a luck. You and the library keeper didn't score any point.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("You have already obtain an orb in your inventory.");
+            }
+        }
+        // This is all the helpful command in library room only.
+        static void helpLibrary()
+        {
+            Console.WriteLine("This is all the helpful command in library room");
+            Console.WriteLine("You can type 'GAME' to win more treasure.");
+            Console.WriteLine($"{ColorCodes.R}- North{ColorCodes.Reset}");
+            Console.WriteLine($"{ColorCodes.R}- South{ColorCodes.Reset}");
+            Console.WriteLine($"{ColorCodes.R}- East{ColorCodes.Reset}");
+            Console.WriteLine($"{ColorCodes.R}- West{ColorCodes.Reset}");
+            Console.WriteLine($"{ColorCodes.R}- Solve Puzzle{ColorCodes.Reset}");
+            Console.WriteLine($"{ColorCodes.R}- Climb{ColorCodes.Reset}");
+            Console.WriteLine($"{ColorCodes.R}- Use Torch{ColorCodes.Reset}");
+            Console.WriteLine($"{ColorCodes.R}- Take Pendant{ColorCodes.Reset}");
+            Console.WriteLine($"{ColorCodes.R}- Take Book{ColorCodes.Reset}");
+            Console.WriteLine($"{ColorCodes.R}- Use Book{ColorCodes.Reset}");
+            Console.WriteLine($"{ColorCodes.R}- Take Bottle{ColorCodes.Reset}");
+            Console.WriteLine($"{ColorCodes.R}- Use Bottle{ColorCodes.Reset}");
+            Console.WriteLine($"{ColorCodes.R}- Inventory{ColorCodes.Reset}");
+            Console.WriteLine($"{ColorCodes.R}- Help{ColorCodes.Reset}");
+            Console.WriteLine($"{ColorCodes.R}- StoryLine{ColorCodes.Reset}");
         }
         // ChamberOfShadow is a method representing the chamber of shadow area in the excavation site.
         static void ChamberOfShadow()
