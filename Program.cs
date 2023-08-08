@@ -1,8 +1,9 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Linq;
 using System.Numerics;
 using System.Threading;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Game
 {
@@ -279,12 +280,6 @@ namespace Game
             while (true)
             {
                 Console.Write("Please enter a command: ");
-                Console.Write("Solve Puzzle");
-                Console.Write("- North");
-                Console.Write("- South");
-                Console.Write("- West");
-                Console.Write("- East");
-                Console.Write("- Help");
 
                 string userInput = Console.ReadLine().ToUpper();
 
@@ -528,7 +523,7 @@ namespace Game
             string puzzleAnswerTreasure = "TREASURE HUNT";
             Console.Clear();
             Console.WriteLine("Stepping into the library, you are surrounded by shelves filled with dusty tomes and scrolls. The air is thick with the scent of ancient parchment. Sunlight filters through stained glass windows, illuminating a large desk at the center of the room. On it lies a game for you to win.");
-            Console.WriteLine("On the right, you see a ladder leading into the tunnel. There a book laying on the side of the shelves");
+            Console.WriteLine("On the right, you see a ladder leading into the tunnel.");
             Console.WriteLine("There is a puzzle for you to solve.");
 
             // Infinite loop for handling player commands in the Library.
@@ -689,20 +684,16 @@ namespace Game
             Console.WriteLine("As you cautiously step into the Chamber of Shadows, the air grows heavy and oppressive.");
             Console.WriteLine("Dim, flickering lights barely illuminate the obscure corners of the room, casting eerie shadows that seem to dance and writhe along the walls.");
             Console.WriteLine("The darkness shrouds the chamber, leaving much to the imagination and evoking an unsettling sense of the unknown.");
-
             string userAnswer = "";
             string puzzleAnswer = "OWL";
             // Infinite loop for handling player commands
             while (true)
             {
-
                 Console.WriteLine("- Look");
                 Console.WriteLine("- Use Torch");
                 Console.WriteLine("- Use Key On Cabinet");
                 Console.WriteLine("- Examine Cabinet");
                 Console.Write("Please enter a command: ");
-
-
                 string userInput = Console.ReadLine().ToUpper();
                 switch (userInput)
                 {
@@ -1135,11 +1126,9 @@ namespace Game
                 }
             }
         }
-
         //Equation Method
         static bool EquationGame()
         {
-            
             // Generate a random math problem
             bool playAgain = true;
             // Create a Random object to generate random numbers.
@@ -1152,7 +1141,6 @@ namespace Game
                 char[] operatorIndex = {'+', '-', '/', '*'};
                 // Randomly choose a math operator from the array.
                 char op = operatorIndex[random.Next(operatorIndex.Length)];
-
                 int correctAnswer;
                 if (op == '+')
                 {
@@ -1209,41 +1197,82 @@ namespace Game
             
             return playAgain;
         }
+                // Check if the answer is correct
+                if (guess == answer)
+                {
+                    Console.WriteLine("Congratulations! You've solved the puzzle!");
+                    return true;
+                }
 
-
+                else
+                {
+                    Console.WriteLine($"Sorry, your answer: {guess} is incorrect. \nThe correct answer is {answer}");
+                    Console.WriteLine(" ");
+                    Console.WriteLine("Would you like to try again? Press y for yes and n for no\n");
+                    string tryAgain = Console.ReadLine().ToLower();
+                    if(tryAgain == "y")
+                    {
+                        Console.Clear();
+                        continue;
+                    }
+                    
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+        }
+        //Altar Room Method
         static void AltarRoom()
         {
             Console.Clear();
-            Console.WriteLine("You come across a door and on it is an equations \n seems as if you must answer it to open the door");
-            Console.WriteLine("There are doors to the east and west");
+            string[] messages = {"You come across a door and on it is an equations", "seems as if you must answer it to open the door", "There are doors to the east and west\n"};
+            foreach(string message in messages)
+            {
+                Console.WriteLine("" + message);
+                Thread.Sleep(1000);
+            }
             bool gotCorrect = EquationGame();
+            int count = 0;
+                string[] storyLine = { "You are now in the Altar room.", "You look around the decaying room and see old run down table in the middle of the room", "The table has small indents the shape of different items almost as if you are mean to place them in there\n" };
+                if (gotCorrect && count == 0)
+                {
+                count++;
+                    foreach (string storylinetext in storyLine)
+                    {
+                        Console.WriteLine("" + storylinetext);
+                        Thread.Sleep(1000);
+                    }
+                }
             while (true)
             {
-                if (gotCorrect)
-                {
-                    Console.WriteLine("You are now in the Altar room.");
-                    Console.WriteLine("You look around the decaying room and see old run down table in the middle of the room");
-                    Console.WriteLine("The table has small indents the shape of different items almost as if you are mean to place them in there");
-                }
                 Console.WriteLine("Please enter an action: ");
                 Console.Write("---> ");
-
                 string userInput = Console.ReadLine().ToUpper();
                 if (userInput == "BACK")
                 {
                     return;
                 }
-
                 switch (userInput)
                 {
-
+                    case "STORYLINE":
+                        {
+                            Console.Clear();
+                            foreach (string storylinetext in storyLine)
+                            {
+                                Console.WriteLine("" + storylinetext);
+                                Thread.Sleep(1000);
+                            }
+                        }
+                        break;
                     case "PLACE":
                         if (gotCorrect)
                         {
                             Console.WriteLine("You put your items in the indents on the table");
                             if (Array.Exists(inventory, element => element == "Artifact") && Array.Exists(inventory, element => element == "Key"))
                             {
-                                Console.WriteLine("it seems as if you dont have all the items to go on the table.");
+                                Console.WriteLine("it seems as if you don't have all the items to go on the table.");
                             }
                             else
                             {
@@ -1254,7 +1283,7 @@ namespace Game
                                 Console.WriteLine("adorned with intricate carvings and shimmering gemstones,");
                                 Console.WriteLine("exuding an aura of mystery and ancient power.");
                                 Console.WriteLine("You will never have to work another day in your life");
-                                Console.WriteLine("Congradulations on completing the game!!!!");
+                                Console.WriteLine("Congratulation on completing the game!!!!");
                             }
                         }
                         break;
@@ -1272,6 +1301,13 @@ namespace Game
                         break;
                     case "HELP":
                         Help();
+                        break;
+                    case "INVENTORY":
+                        Console.WriteLine("You have the following items in your inventory:");
+                        for (int i = 0; i < inventoryCount; i++)
+                        {
+                            Console.WriteLine(inventory[i]);
+                        }
                         break;
                     default:
                         Console.WriteLine("Invalid answer. Please try again.");
@@ -1461,11 +1497,7 @@ namespace Game
                 Console.ReadLine();
                 Console.SetCursorPosition((40), Console.CursorTop);
             }
-            
-
         }
-
-
         public static void Main(string[] args)
         {
             GameStart();
